@@ -6,7 +6,7 @@
       <ObjectData Name="Scene" Tag="17" ctype="GameNodeObjectData">
         <Size X="1280.0000" Y="960.0000" />
         <Children>
-          <AbstractNodeData Name="Map_2" ActionTag="603742902" Tag="21" IconVisible="False" LeftMargin="0.0001" TopMargin="256.0000" ctype="GameMapObjectData">
+          <AbstractNodeData Name="Map_2" ActionTag="603742902" Tag="21" IconVisible="False" LeftMargin="0.0001" RightMargin="-0.0001" TopMargin="256.0000" ctype="GameMapObjectData">
             <Size X="1280.0000" Y="704.0000" />
             <AnchorPoint />
             <Position X="0.0001" />

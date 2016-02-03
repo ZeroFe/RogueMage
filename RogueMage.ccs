@@ -1,0 +1,58 @@
+<Solution>
+  <PropertyGroup Name="RogueMage" Version="3.10.0.0" Type="CocosStudio" />
+  <SolutionFolder>
+    <Group ctype="ResourceGroup">
+      <RootFolder Name=".">
+        <Folder Name="Scene">
+          <Folder Name="AchieveScene">
+            <Folder Name="Image">
+              <Image Name="Achieve_Panel.png" />
+              <Image Name="background_achieve.png" />
+              <Image Name="Button_Back.png" />
+            </Folder>
+            <Folder Name="Node">
+              <Project Name="AttributeNode.csd" Type="Node" />
+              <Project Name="SpecialNode.csd" Type="Node" />
+            </Folder>
+            <Project Name="AchieveSceneLayer.csd" Type="Layer" />
+          </Folder>
+          <Folder Name="GameScene">
+            <Folder Name="TileMap">
+              <TmxFile Name="map1.tmx" />
+              <TmxFile Name="map2.tmx" />
+            </Folder>
+            <Project Name="MainScene.csd" Type="Scene" />
+            <Project Name="Scene2.csd" Type="Scene" />
+          </Folder>
+          <Folder Name="SelectScene">
+            <Folder Name="Image">
+              <Image Name="Menu_Achieve_Disable.png" />
+              <Image Name="Menu_Achieve_Normal.png" />
+              <Image Name="Menu_Achieve_Pressed.png" />
+              <Image Name="Menu_Continue_Disable.png" />
+              <Image Name="Menu_Continue_Normal.png" />
+              <Image Name="Menu_Continue_Pressed.png" />
+              <Image Name="Menu_Exit_Disable.png" />
+              <Image Name="Menu_Exit_Normal.png" />
+              <Image Name="Menu_Exit_Pressed.png" />
+              <Image Name="Menu_NewGame_Disable.png" />
+              <Image Name="Menu_NewGame_Normal.png" />
+              <Image Name="Menu_NewGame_Pressed.png" />
+              <Image Name="Menu_Option_Disable.png" />
+              <Image Name="Menu_Option_Normal.png" />
+              <Image Name="Menu_Option_Pressed.png" />
+              <Image Name="Menu_Tutorial_Disable.png" />
+              <Image Name="Menu_Tutorial_Normal.png" />
+              <Image Name="Menu_Tutorial_Pressed.png" />
+            </Folder>
+            <Project Name="SelectSceneLayer.csd" Type="Layer" />
+          </Folder>
+          <Folder Name="StartScene">
+            <Project Name="StartSceneLayer.csd" Type="Layer" />
+          </Folder>
+        </Folder>
+        <TTF Name="ARCADECLASSIC.TTF" />
+      </RootFolder>
+    </Group>
+  </SolutionFolder>
+</Solution>

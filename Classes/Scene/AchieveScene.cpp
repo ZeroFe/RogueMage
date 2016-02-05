@@ -55,8 +55,8 @@ bool AchieveScene::init()
 	{
 		auto pCloneItem = AttributePanel->clone();
 
-		auto Achieve_Name = static_cast<Text*>(AchieveLayer->getChildByName("Achieve_Name"));
-		auto Achieve_Content = static_cast<Text*>(AchieveLayer->getChildByName("Achieve_content"));
+		auto Achieve_Name = static_cast<Text*>(AttributePanel->getChildByName("Achieve_Name"));
+		auto Achieve_Content = static_cast<Text*>(AttributePanel->getChildByName("Achieve_content"));
 
 		string str_name = vecData->name;
 		string str_content = vecData->content;

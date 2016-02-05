@@ -35,8 +35,9 @@
           <FilePathData Path="Scene/SelectScene/SelectSceneLayer.csd" />
           <FilePathData Path="Scene/GameScene/MainScene.csd" />
           <FilePathData Path="Scene/GameScene/Scene2.csd" />
+          <FilePathData Path="Scene/AchieveScene/Node/AttributeNode.csd" />
         </OpenedDocuments>
-        <ActiveDocument Path="Scene/GameScene/MainScene.csd" />
+        <ActiveDocument Path="Scene/AchieveScene/Node/AttributeNode.csd" />
       </Value>
     </Item>
   </Properties>

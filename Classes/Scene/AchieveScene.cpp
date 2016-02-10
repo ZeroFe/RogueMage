@@ -49,7 +49,7 @@ bool AchieveScene::init()
 
 	addChild(AchieveLayer);
 	
-	// 
+	// add Achieve item
 	int nCount = 0;
 	for (auto vecData : vecAchieve)
 	{

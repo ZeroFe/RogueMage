@@ -1,6 +1,7 @@
 #include "SelectScene.h"
 #include "HelloWorldScene.h"
 #include "AchieveScene.h"
+#include "UIPopUP.h"
 #include "cocostudio/CocoStudio.h"
 #include "ui/CocosGUI.h"
 
@@ -30,6 +31,9 @@ bool SelectScene::init()
 
 	initButton();
 
+	popupBoard = Sprite::create("popupBoard");
+	popupBackground = Sprite::create("popupBackground");
+
 	//노티피케이션 추카
 	//CCNotificationCenter::sharedNotificationCenter()->addObserver(this, SEL_CallFuncO(&SelectScene::doNotification), "notification", NULL);
 	//"notification"이라는 메시지가 오면 해당 함수를 실행한다.
@@ -49,7 +53,7 @@ void SelectScene::initButton()
 	Button* MenuButton4 = static_cast<Button*>(SelectLayer->getChildByName("MenuButton4"));
 	Button* MenuButton5 = static_cast<Button*>(SelectLayer->getChildByName("MenuButton5"));
 
-	//MenuButton1->addTouchEventListener(CC_CALLBACK_1(SelectScene::doTutorialScene, this));
+	MenuButton1->addTouchEventListener(CC_CALLBACK_1(SelectScene::doTutorialScene, this));
 	MenuButton2->addTouchEventListener(CC_CALLBACK_1(SelectScene::doStartScene, this));
 	//MenuButton3->addTouchEventListener(CC_CALLBACK_1(SelectScene::doContinueScene, this));
 	MenuButton4->addTouchEventListener(CC_CALLBACK_1(SelectScene::doAchieveScene, this));
@@ -108,6 +112,14 @@ void SelectScene::onMouseMove(Event *event)
 
 void SelectScene::onMouseScroll(Event *event)
 {
+}
+
+void SelectScene::doTutorialScene(Ref* pSender)
+{
+	log("Tutorial");
+
+	auto popup = UIPopupWindow::create(popupBoard, popupBackground);
+	popup->showPopup(this);
 }
 
 void SelectScene::doStartScene(Ref* pSender)

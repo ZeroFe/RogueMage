@@ -5,8 +5,13 @@
 #include "cocostudio/CocoStudio.h"
 #include "ui/CocosGUI.h"
 
+USING_NS_CC;
+
 class SelectScene : public cocos2d::LayerColor
 {
+private:
+	Sprite* popupBoard;
+	Sprite* popupBackground;
 public:
 	static cocos2d::Scene* createScene();
 
@@ -29,6 +34,7 @@ public:
 	void onMouseMove(cocos2d::Event *e);
 	void onMouseScroll(cocos2d::Event *e);
 
+	void doTutorialScene(Ref* pSender);
 	void doStartScene(cocos2d::Ref* pSender);
 	void doContinueScene(cocos2d::Ref* pSender);
 	void doAchieveScene(cocos2d::Ref* pSender);

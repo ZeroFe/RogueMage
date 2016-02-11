@@ -1,12 +1,13 @@
 #include "UIPopup.h"
 
-UIPopupWindow *UIPopupWindow::create(Sprite *sprBackgroundBoard, Sprite *sprBackgroundImg)
+UIPopup *UIPopup::create(Node* popupLayer)
 {
-	UIPopupWindow *pRet = new UIPopupWindow();
+	UIPopup *pRet = new UIPopup();
 	if (pRet && pRet->init())
 	{
-		pRet->setBackgroundBorard(sprBackgroundBoard);
-		pRet->setBackgroundImage(sprBackgroundImg);
+		//pRet->setBackgroundBorard(sprBackgroundBoard);
+		//pRet->setBackgroundImage(sprBackgroundImg);
+		pRet->setPopupLayer(popupLayer);
 		pRet->setTextInit(); //출력할 문자 UI초기화
 
 		pRet->autorelease();
@@ -18,16 +19,17 @@ UIPopupWindow *UIPopupWindow::create(Sprite *sprBackgroundBoard, Sprite *sprBack
 	return pRet;
 }
 
-bool UIPopupWindow::onInit()
+bool UIPopup::onInit()
 {
 	m_nZorderCnt = 1;//추가될 자식객체들에 대한 Zorder를 만들기위해
 	m_sprBg = NULL;
+	pLayer = NULL;
 
 	return true;
 }
 
 
-void UIPopupWindow::onBtnClickCallbackFnc(Ref *pSender, ui::Widget::TouchEventType touchType)
+void UIPopup::onBtnClickCallbackFnc(Ref *pSender, ui::Widget::TouchEventType touchType)
 {
 	// 새로추가되는 버튼에 대한 이벤트핸들러 함수랄까...
 	if (touchType == ui::Widget::TouchEventType::ENDED)
@@ -39,18 +41,29 @@ void UIPopupWindow::onBtnClickCallbackFnc(Ref *pSender, ui::Widget::TouchEventTy
 	}
 }
 
+/*
+set popup Layer and add it
+*/
+void UIPopup::setPopupLayer(Node* popupLayer)
+{
+	if (!popupLayer) return;
+	pLayer = popupLayer;
+	Size size = Director::getInstance()->getWinSize();
+	pLayer->setPosition(size.width / 2, size.height / 2);
+	addChild(pLayer, -100);
+}
 
-void UIPopupWindow::setBackgroundBorard(Sprite  *sprBg)//팝업 아래에 투명이나 머 이런거? 하여간 맨 밑바닥
+void UIPopup::setBackgroundBorard(Sprite  *sprBg)//팝업 아래에 투명이나 머 이런거? 하여간 맨 밑바닥
 {
 	if (!sprBg)return;
 
 	Size size = Director::getInstance()->getWinSize();
 	sprBg->setPosition(size.width / 2, size.height / 2);
-	addChild(sprBg, 1);
+	addChild(sprBg, -100);
 }
 
 
-void UIPopupWindow::setBackgroundImage(Sprite  *sprBg)
+void UIPopup::setBackgroundImage(Sprite  *sprBg)
 {
 	if (m_sprBg)
 	{
@@ -67,16 +80,16 @@ void UIPopupWindow::setBackgroundImage(Sprite  *sprBg)
 
 	Size size = Director::getInstance()->getWinSize();
 	m_sprBg->setPosition(size.width / 2, size.height / 2);
-	addChild(m_sprBg, 2);
+	addChild(m_sprBg, -1);
 }
 
-void UIPopupWindow::setBackgroundImagePosition(const Point& position)
+void UIPopup::setBackgroundImagePosition(const Point& position)
 {
 	if (!m_sprBg)return;
 	m_sprBg->setPosition(position);
 }
 
-void UIPopupWindow::setTextInit() //출력할 문자 UI초기화
+void UIPopup::setTextInit() //출력할 문자 UI초기화
 {
 	Size size = Director::getInstance()->getWinSize();
 
@@ -105,8 +118,22 @@ void UIPopupWindow::setTextInit() //출력할 문자 UI초기화
 
 }
 
+/*
+use Cocos Studio -> popupLayer
+name : find name of button
+tag : set tag of button
+*/
+void UIPopup::setButton(const std::string &name, const int tag)
+{
+	Button* pButton = static_cast<Button*>(pLayer->getChildByName(name));
+	pButton->setTouchEnabled(true);
+	pButton->setTag(tag);
+	pButton->addTouchEventListener(CC_CALLBACK_2(UIPopup::onBtnClickCallbackFnc, this));
+	pButton->setLocalZOrder((int)m_nZorderCnt);
+	m_nZorderCnt++;
+}
 
-void UIPopupWindow::addButton(const char* normalTexture, const char* selectedTexture, const char* disabledTexture, Widget::TextureResType texType, const Point &pos, const std::string& text, const int nTag)
+void UIPopup::addButton(const char* normalTexture, const char* selectedTexture, const char* disabledTexture, Widget::TextureResType texType, const Point &pos, const std::string& text, const int nTag)
 {
 	//팝업창에 버튼을 생성한다.
 	cocos2d::ui::Button *pBtn = cocos2d::ui::Button::create();
@@ -126,54 +153,54 @@ void UIPopupWindow::addButton(const char* normalTexture, const char* selectedTex
 	}
 
 	pBtn->setTag(nTag);
-	// pBtn->addTouchEventListener(this,toucheventselector(UIPopupWindow::onBtnClickCallbackFnc) ); //이부분은 3.0부터 사용하지않도록 권장된다.
-	pBtn->addTouchEventListener(CC_CALLBACK_2(UIPopupWindow::onBtnClickCallbackFnc, this)); //버튼이 클릭시 콜백함수 설정
+	// pBtn->addTouchEventListener(this,toucheventselector(UIPopup::onBtnClickCallbackFnc) ); //이부분은 3.0부터 사용하지않도록 권장된다.
+	pBtn->addTouchEventListener(CC_CALLBACK_2(UIPopup::onBtnClickCallbackFnc, this)); //버튼이 클릭시 콜백함수 설정
 
 	addChild(pBtn, (int)m_nZorderCnt);
 	m_nZorderCnt++;
 }
 
 
-void  UIPopupWindow::setTitleString(const std::string& text)
+void  UIPopup::setTitleString(const std::string& text)
 {
 	m_txtTitle->setString(text);
 }
-void  UIPopupWindow::setMessageString(const std::string& text)
+void  UIPopup::setMessageString(const std::string& text)
 {
 	m_txt->setString(text);
 }
 
-void UIPopupWindow::setFontSize_Title(int size)   //타이틀 폰트 사이즈를 설정한다.
+void UIPopup::setFontSize_Title(int size)   //타이틀 폰트 사이즈를 설정한다.
 {
 	m_txtTitle->setFontSize(size);
 }
-void UIPopupWindow::setColor_Title(const Color3B& color)  //타이틀 폰트 색상 설정
+void UIPopup::setColor_Title(const Color3B& color)  //타이틀 폰트 색상 설정
 {
 	m_txtTitle->setColor(color);
 
 }
-void UIPopupWindow::setPosition_Title(const Point& position)
+void UIPopup::setPosition_Title(const Point& position)
 {
 	m_txtTitle->setPosition(position);
 }
-void UIPopupWindow::setFontName_Title(const std::string& name)
+void UIPopup::setFontName_Title(const std::string& name)
 {
 	m_txtTitle->setFontName(name);
 }
-void UIPopupWindow::setFontSize_Msg(int size)     //메시지의 폰트 사이즈를 설정한다.
+void UIPopup::setFontSize_Msg(int size)     //메시지의 폰트 사이즈를 설정한다.
 {
 	m_txt->setFontSize(size);
 }
-void UIPopupWindow::setColor_Msg(const Color3B& color)    //메시지 폰트 색상 설정
+void UIPopup::setColor_Msg(const Color3B& color)    //메시지 폰트 색상 설정
 {
 	m_txt->setColor(color);
 }
-void UIPopupWindow::setPosition_Msg(const Point& position)
+void UIPopup::setPosition_Msg(const Point& position)
 {
 	m_txt->setPosition(position);
 }
 
-void UIPopupWindow::setFontName_Msg(const std::string& name)
+void UIPopup::setFontName_Msg(const std::string& name)
 {
 	m_txt->setFontName(name);
 }

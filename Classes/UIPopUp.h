@@ -1,17 +1,18 @@
-#ifndef UIPopupWindow_h
-#define UIPopupWindow_h
+#ifndef UIPopup_h
+#define UIPopup_h
 
 #include "ui/cocosgui.h"
 #include "UIPopupBase.h"
 
 using namespace cocos2d::ui;
-class UIPopupWindow : public UI_PopupWindowBase
+class UIPopup : public UIPopupBase
 {
 public:
 
-	static UIPopupWindow* create(Sprite *sprBackgroundBoard, Sprite *sprBackgroundImg); //기본생성시 백그라운드 이미지와  백배경에 반투명 이미지를 설정한다.
+	static UIPopup* create(Node* popupLayer); //기본생성시 백그라운드 이미지와  백배경에 반투명 이미지를 설정한다.
 	virtual bool onInit();
 
+	virtual void setButton(const std::string &name, const int tag);
 	virtual void addButton(const char* normalTexture, const char* selectedTexture, const char* disabledTexture, Widget::TextureResType texType, const Point &pos, const std::string& text, const int nTag); //팝업창에 버튼을 추가한다.
 
 	virtual void onBtnClickCallbackFnc(Ref *pSender, ui::Widget::TouchEventType   touchType);//추가되는 버튼들에 대한 콜백함수 설정
@@ -21,7 +22,7 @@ public:
 	virtual void onTouchMoved(Touch* touch, Event* event) {};
 	virtual void onTouchEnded(Touch* touch, Event* event) {};
 	virtual void onTouchCancelled(Touch* touch, Event* event) {};
-	CREATE_FUNC(UIPopupWindow);    //기본 create()함수 정의
+	CREATE_FUNC(UIPopup);    //기본 create()함수 정의
 public:
 	virtual void setFontSize_Title(int size);   //타이틀 폰트 사이즈를 설정한다.
 	virtual void setColor_Title(const Color3B& color);  //타이틀 폰트 색상 설정
@@ -41,10 +42,12 @@ public:
 	virtual void setBackgroundBorard(Sprite  *sprBg);//팝업 아래에 투명이나 머 이런거? 하여간 맨 밑바닥
 protected:
 	virtual void setBackgroundImage(Sprite  *sprBg);//실제 보여질 박스
+	virtual void setPopupLayer(Node* popupLayer);
 
 	virtual void setTextInit(); //출력할 문자 UI초기화
 protected:
 
+	Node	*pLayer = NULL;
 	Sprite  *m_sprBg;   //백그라운드 이미지
 	Text    *m_txtTitle;    //타이틀
 	Text    *m_txt;         //내용

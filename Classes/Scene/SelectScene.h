@@ -7,11 +7,8 @@
 
 USING_NS_CC;
 
-class SelectScene : public cocos2d::LayerColor
+class SelectScene : public cocos2d::Layer
 {
-private:
-	Sprite* popupBoard;
-	Sprite* popupBackground;
 public:
 	static cocos2d::Scene* createScene();
 
@@ -30,17 +27,18 @@ public:
 	~SelectScene(void);
 
 	void onMouseDown(cocos2d::Event *e);
-	void onMouseUp(cocos2d::Event *e);
-	void onMouseMove(cocos2d::Event *e);
-	void onMouseScroll(cocos2d::Event *e);
+	void onMouseUp(cocos2d::Event *e) {};
+	void onMouseMove(cocos2d::Event *e) {};
+	void onMouseScroll(cocos2d::Event *e) {};
 
 	void doTutorialScene(Ref* pSender);
 	void doStartScene(cocos2d::Ref* pSender);
 	void doContinueScene(cocos2d::Ref* pSender);
 	void doAchieveScene(cocos2d::Ref* pSender);
-	//void doExit(cocos2d::Ref* pSender);
+	void doExit(cocos2d::Ref* pSender);
 	void doClose(Ref* pSender);
 	//void doNotification(cocos2d::CCObject *obj);
+	void popupCallback(Ref* pSender);
 	void menuCloseCallback(Ref* pSender, cocos2d::ui::Widget::TouchEventType type);
 };
 

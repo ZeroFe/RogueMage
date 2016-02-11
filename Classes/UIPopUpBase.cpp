@@ -1,16 +1,16 @@
 #include "UIPopupBase.h"
 
-UI_PopupWindowBase::UI_PopupWindowBase(void)
+UIPopupBase::UIPopupBase(void)
 {
 
 }
 
-UI_PopupWindowBase::~UI_PopupWindowBase(void)
+UIPopupBase::~UIPopupBase(void)
 {
 
 }
 
-bool UI_PopupWindowBase::init()
+bool UIPopupBase::init()
 {
 	if (!Layer::init())
 	{
@@ -26,24 +26,24 @@ bool UI_PopupWindowBase::init()
 	return true;
 }
 
-bool UI_PopupWindowBase::onInit()
+bool UIPopupBase::onInit()
 {
 	return true;
 }
 
-void UI_PopupWindowBase::setCallBackFunc(const HK_PopupCallback& callback)
+void UIPopupBase::setCallBackFunc(const PopupCallback& callback)
 {
 	m_callback = callback; //콜백함수에서 인자가 하나인 콜백 인스턴스 설정
 }
 
 
-void UI_PopupWindowBase::setCallBackFunc2(const HK_PopupCallback2& callback)
+void UIPopupBase::setCallBackFunc2(const PopupCallback2& callback)
 {
 	m_callback2 = callback;//콜백함수에서 인자가 둘인 콜백 인스턴스 설정
 }
 
 
-void UI_PopupWindowBase::showPopup(cocos2d::Layer *pParrentLayer)    //팝업창을 띄운다
+void UIPopupBase::showPopup(cocos2d::Layer *pParrentLayer)    //팝업창을 띄운다
 {
 	//팝업을 생성하고 실제로 화면에 보이개할때 부모 Layer는 이벤트를 못받도록 설정
 	m_ParrentLayer = pParrentLayer;
@@ -62,7 +62,7 @@ void UI_PopupWindowBase::showPopup(cocos2d::Layer *pParrentLayer)    //팝업창을 
 	setTouchEnabled(true);
 }
 
-void UI_PopupWindowBase::closePopup()
+void UIPopupBase::closePopup()
 {
 	//팝업창을 닫고자할때 필히 호출할것
 
@@ -76,7 +76,7 @@ void UI_PopupWindowBase::closePopup()
 	removeFromParent();
 }
 
-void UI_PopupWindowBase::onCallBackFunc()   //콜백 함수 실행
+void UIPopupBase::onCallBackFunc()   //콜백 함수 실행
 {
 	//함수콜백 실행
 	if (m_callback)

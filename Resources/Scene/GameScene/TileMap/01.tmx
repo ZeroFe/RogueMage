@@ -15,14 +15,4 @@
   <object id="6" name="SpawnRigh" x="1214" y="320" width="64" height="64"/>
   <object id="7" name="start" x="608" y="320" width="64" height="64"/>
  </objectgroup>
- <layer name="wall" width="20" height="11">
-  <data encoding="base64" compression="zlib">
-   eJxjYBgaoAeKqaWP2uaNNDAaH+QBAB/RCME=
-  </data>
- </layer>
- <layer name="Damage" width="20" height="11">
-  <data encoding="base64" compression="zlib">
-   eJxjYKAv6MbBptRMaplFC/NGGhjM8UGL9EcKAABD/QaF
-  </data>
- </layer>
 </map>

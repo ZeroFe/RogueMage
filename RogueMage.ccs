@@ -3,6 +3,14 @@
   <SolutionFolder>
     <Group ctype="ResourceGroup">
       <RootFolder Name=".">
+        <Folder Name="Popup">
+          <Folder Name="MenuPopup">
+            <Folder Name="Image">
+              <Image Name="popup_bg.png" />
+            </Folder>
+            <Project Name="MenuPopupLayer.csd" Type="Layer" />
+          </Folder>
+        </Folder>
         <Folder Name="Scene">
           <Folder Name="AchieveScene">
             <Folder Name="Image">

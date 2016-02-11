@@ -21,7 +21,7 @@ Scene* SelectScene::createScene()
 
 bool SelectScene::init()
 {
-	if (!LayerColor::initWithColor(Color4B(0, 0, 0, 255)))
+	if (!Layer::init())
 	{
 		return false;
 	}
@@ -30,9 +30,6 @@ bool SelectScene::init()
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
 	initButton();
-
-	popupBoard = Sprite::create("popupBoard");
-	popupBackground = Sprite::create("popupBackground");
 
 	//노티피케이션 추카
 	//CCNotificationCenter::sharedNotificationCenter()->addObserver(this, SEL_CallFuncO(&SelectScene::doNotification), "notification", NULL);
@@ -60,7 +57,7 @@ void SelectScene::initButton()
 	//MenuButton5->addTouchEventListener(CC_CALLBACK_1(SelectScene::doOptionScene, this));
 
 	Button* exit = static_cast<Button*>(SelectLayer->getChildByName("Exit"));
-	exit->addTouchEventListener(CC_CALLBACK_2(SelectScene::menuCloseCallback, this));
+	exit->addTouchEventListener(CC_CALLBACK_1(SelectScene::doExit, this));
 }
 
 void SelectScene::onEnter()
@@ -102,24 +99,10 @@ void SelectScene::onMouseDown(Event *event)
 	log("Mouse Down");
 }
 
-void SelectScene::onMouseUp(Event *event)
-{
-}
-
-void SelectScene::onMouseMove(Event *event)
-{
-}
-
-void SelectScene::onMouseScroll(Event *event)
-{
-}
-
 void SelectScene::doTutorialScene(Ref* pSender)
 {
 	log("Tutorial");
 
-	auto popup = UIPopupWindow::create(popupBoard, popupBackground);
-	popup->showPopup(this);
 }
 
 void SelectScene::doStartScene(Ref* pSender)
@@ -149,20 +132,44 @@ void SelectScene::doAchieveScene(Ref* pSender)
 	auto pScene = AchieveScene::createScene();
 	Director::getInstance()->replaceScene(pScene);
 }
-/*
+
 void SelectScene::doExit(Ref* pSender)
 {
 	// Call Exit Dialog
 	log("Exit");
-	Scene* pScene = ExitDialog::createScene();
-	this->addChild(pScene, 2000, 2000);
+	auto popup = UIPopup::create(CSLoader::createNode("Popup/MenuPopup/MenuPopupLayer.csb"));
+	popup->setCallBackFunc(CC_CALLBACK_1(SelectScene::popupCallback, this));
+	popup->setButton("btn_ok", 1);
+	popup->setButton("btn_cancel", 2);
+	popup->showPopup(this);
 }
-*/
 
 void SelectScene::doClose(Ref* pSender)
 {
 	Director::getInstance()->popScene();
 	//    Director::getInstance()->popToRootScene();
+}
+
+void SelectScene::popupCallback(Ref* pSender)
+{
+	UIPopup *pPopup = (UIPopup *)pSender; //현재 팝업에 대한 클래스로 캐스팅 
+
+													  // 여기에서 콜백 받을때 어떤 버튼이 클릭됐는지 알수있으면 좋겠죠?
+	int nTag = pPopup->getResult();
+	//혹은 콜백을 다르게 선업하셔도 됩니다. 그건 여러분 몫으로 콜백2 있으니 참고해서 만드심 됍니다
+	if (nTag == 1)
+	{
+		log("1");
+		//닫기 버튼 이다~~
+	}
+	else if (nTag == 2)
+	{
+		log("2");
+		//헬프 버튼이다~~
+	}
+
+
+	pPopup->closePopup(); //팝업을 닫습니다. !! 팝업을 닫을시 필히 호출해주세요 이거 안해주면 팝업창 안사라집니다.  
 }
 
 /*

@@ -11,5 +11,8 @@ namespace resData {
 	enum { SPLASH_IMAGE, MAP0, PARTICLE_CLICK, PARTICLE_BRUSH };
 	extern const char * recources[];
 
+	//∞‘¿” ∏  ≈∆«√∏¥ ∞Ê∑Œ
+	extern int number_of_template;
+	extern const char * mapTemplate[];
 }
 #endif

@@ -18,10 +18,40 @@
           </Folder>
           <Folder Name="GameScene">
             <Folder Name="TileMap">
+              <TmxFile Name="01.tmx" />
+              <TmxFile Name="02.tmx" />
+              <TmxFile Name="03.tmx" />
+              <TmxFile Name="04.tmx" />
+              <TmxFile Name="05.tmx" />
+              <TmxFile Name="06.tmx" />
+              <TmxFile Name="07.tmx" />
+              <TmxFile Name="08.tmx" />
+              <TmxFile Name="09.tmx" />
+              <TmxFile Name="10.tmx" />
+              <TmxFile Name="11.tmx" />
+              <TmxFile Name="12.tmx" />
+              <TmxFile Name="13.tmx" />
+              <TmxFile Name="14.tmx" />
+              <TmxFile Name="15.tmx" />
               <TmxFile Name="map1.tmx" />
               <TmxFile Name="map2.tmx" />
             </Folder>
             <Project Name="MainScene.csd" Type="Scene" />
+            <Project Name="mapTemp01.csd" Type="Scene" />
+            <Project Name="mapTemp02.csd" Type="Scene" />
+            <Project Name="mapTemp03.csd" Type="Scene" />
+            <Project Name="mapTemp04.csd" Type="Scene" />
+            <Project Name="mapTemp05.csd" Type="Scene" />
+            <Project Name="mapTemp06.csd" Type="Scene" />
+            <Project Name="mapTemp07.csd" Type="Scene" />
+            <Project Name="mapTemp08.csd" Type="Scene" />
+            <Project Name="mapTemp09.csd" Type="Scene" />
+            <Project Name="mapTemp10.csd" Type="Scene" />
+            <Project Name="mapTemp11.csd" Type="Scene" />
+            <Project Name="mapTemp12.csd" Type="Scene" />
+            <Project Name="mapTemp13.csd" Type="Scene" />
+            <Project Name="mapTemp14.csd" Type="Scene" />
+            <Project Name="mapTemp15.csd" Type="Scene" />
             <Project Name="Scene2.csd" Type="Scene" />
           </Folder>
           <Folder Name="SelectScene">

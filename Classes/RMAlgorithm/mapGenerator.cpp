@@ -1,7 +1,11 @@
 #include "mapGenerator.h"
+#include "cocos2d.h"
+USING_NS_CC;
+
 
 createMap::Map::Map()
 {
+	rCnt = 0;
 	cnt = 0;
 	bossCnt = 0;
 	table = new char*[MAP_SIZE];
@@ -19,6 +23,7 @@ createMap::Map::Map()
 
 	point = new Spot[ROOM];
 	bossRoom = new Spot[3 + 1];
+	rSpot = new Spot[ROOM];
 }
 
 bool createMap::Map::inTableCheck(Spot spot)
@@ -51,6 +56,8 @@ void createMap::Map::start()
 	cnt++;
 
 	table[start.x][start.y] = START;
+	startx = start.x;
+	starty = start.y;
 
 	int check;
 
@@ -138,6 +145,7 @@ bool createMap::Map::makeRoom(Spot spot, int mode)
 		return false;
 	}
 
+
 	if (table[spot.x][spot.y] == BOSS)
 	{
 		for (int i = 1; i <= bossCnt; i++)
@@ -148,7 +156,7 @@ bool createMap::Map::makeRoom(Spot spot, int mode)
 				break;
 			}
 		}
-
+		rSpot[rCnt++] = spot;
 		table[spot.x][spot.y] = B_ROOM;
 		table[tmp.x][tmp.y] = BOSS;
 	}
@@ -171,18 +179,18 @@ bool createMap::Map::makeRoom(Spot spot, int mode)
 	return true;
 }
 
-void createMap::Map::make()
+void createMap::Map::make(int floor)
 {
-	int rCnt = 0;
+	//int rCnt = 0;
 
 	start();
 
-	while (cnt != ROOM)
+	while (cnt != ROOM - 1)
 	{
 		if (rCnt < R_ROOM&&bossCnt != 0)
 		{
 			if (makeRoom(bossRoom[rand() % (bossCnt + 1)], rand() % 4))
-				rCnt++, cnt++;
+				cnt++;
 		}
 		else
 		{
@@ -196,7 +204,24 @@ void createMap::Map::make()
 	}
 
 
+	//make shop
+	while (!makeRoom(rSpot[rand() % rCnt], rand() % 4));
+
+	table[point[cnt].x][point[cnt].y] = SHOP;
+
+
+	//make secret
+	if (floor % 2 == 0)
+	{
+		while (table[point[cnt].x][point[cnt].y] != N_ROOM)
+		{
+			cnt--;
+		}
+		table[point[cnt].x][point[cnt].y] = SECRET;
+	}
+
 }
+
 
 void createMap::Map::showSpot()
 {
@@ -219,13 +244,32 @@ void createMap::Map::show()
 	}
 }
 
+void createMap::Map::showlog()
+{
+	for (int i = 0; i < MAP_SIZE; i++)
+	{
+		for (int j = 0; j < MAP_SIZE; j++)
+		{
+			log("%2c", table[i][j]);
+		}
+
+		//printf("\n");
+	}
+}
+
+void createMap::Map::copyMap(int **mapData) {
+	for (int i = 0; i < MAP_SIZE; i++)
+		for (int j = 0; j < MAP_SIZE; j++)
+			mapData[i][j] = table[i][j];
+}
+
 
 //int main()
 //{
 //	createMap::Map a;
 //
-//	a.make();
+//	a.make(2);
 //
-//	system("cls");
+//	//system("cls");
 //	a.show();
 //}

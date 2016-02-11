@@ -54,6 +54,9 @@
     <ClCompile Include="..\Classes\UIPopUpBase.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\RMAlgorithm\mapGenerator.cpp">
+      <Filter>src\RMAlgorithm</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -88,6 +91,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\UIPopUpBase.h">
       <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\RMAlgorithm\mapGenerator.h">
+      <Filter>src\RMAlgorithm</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

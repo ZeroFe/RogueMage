@@ -11,7 +11,7 @@
         <iOS_Target Value="RogueMage-mobile" />
         <iOS_BundleID Value="" />
         <Platform Value="None" />
-        <RunPlatform Value="None" />
+        <RunPlatform Value="Windows" />
         <FrameworkVersion Value="cocos2d-x-3.10" />
         <IsDebugKeystore Value="True" />
         <KeystorePassword Value="" />
@@ -31,13 +31,26 @@
     <Item Key="TabsParamsKey">
       <Value ctype="TabsInfo">
         <OpenedDocuments>
-          <FilePathData Path="Scene/StartScene/StartSceneLayer.csd" />
-          <FilePathData Path="Scene/SelectScene/SelectSceneLayer.csd" />
           <FilePathData Path="Scene/GameScene/MainScene.csd" />
+          <FilePathData Path="Scene/GameScene/mapTemp01.csd" />
+          <FilePathData Path="Scene/GameScene/mapTemp02.csd" />
+          <FilePathData Path="Scene/GameScene/mapTemp03.csd" />
+          <FilePathData Path="Scene/GameScene/mapTemp04.csd" />
+          <FilePathData Path="Scene/GameScene/mapTemp05.csd" />
+          <FilePathData Path="Scene/GameScene/mapTemp06.csd" />
+          <FilePathData Path="Scene/GameScene/mapTemp07.csd" />
+          <FilePathData Path="Scene/GameScene/mapTemp08.csd" />
+          <FilePathData Path="Scene/GameScene/mapTemp09.csd" />
+          <FilePathData Path="Scene/GameScene/mapTemp10.csd" />
+          <FilePathData Path="Scene/GameScene/mapTemp11.csd" />
+          <FilePathData Path="Scene/GameScene/mapTemp12.csd" />
+          <FilePathData Path="Scene/GameScene/mapTemp13.csd" />
+          <FilePathData Path="Scene/GameScene/mapTemp14.csd" />
+          <FilePathData Path="Scene/GameScene/mapTemp15.csd" />
+          <FilePathData Path="Scene/StartScene/StartSceneLayer.csd" />
           <FilePathData Path="Scene/GameScene/Scene2.csd" />
-          <FilePathData Path="Scene/AchieveScene/Node/AttributeNode.csd" />
         </OpenedDocuments>
-        <ActiveDocument Path="Scene/AchieveScene/Node/AttributeNode.csd" />
+        <ActiveDocument Path="Scene/GameScene/mapTemp13.csd" />
       </Value>
     </Item>
   </Properties>

@@ -33,7 +33,6 @@ bool StartScene::init()
 	}
 
 	auto StartLayer = CSLoader::createNode("Scene/StartScene/StartSceneLayer.csb");
-
 	addChild(StartLayer);
 
 	credit = static_cast<Label*>(StartLayer->getChildByName("Credit"));

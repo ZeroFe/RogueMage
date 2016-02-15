@@ -155,8 +155,6 @@ xcopy /Y /Q "$(COCOS_X_ROOT)\cocos2d-x-3.10\prebuilt\win32\*.*" "$(OutDir)"
     <ClCompile Include="..\Classes\Scene\AchieveScene.cpp" />
     <ClCompile Include="..\Classes\Scene\SelectScene.cpp" />
     <ClCompile Include="..\Classes\Scene\StartScene.cpp" />
-    <ClCompile Include="..\Classes\UIPopUp.cpp" />
-    <ClCompile Include="..\Classes\UIPopUpBase.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -169,8 +167,6 @@ xcopy /Y /Q "$(COCOS_X_ROOT)\cocos2d-x-3.10\prebuilt\win32\*.*" "$(OutDir)"
     <ClInclude Include="..\Classes\Scene\AchieveScene.h" />
     <ClInclude Include="..\Classes\Scene\SelectScene.h" />
     <ClInclude Include="..\Classes\Scene\StartScene.h" />
-    <ClInclude Include="..\Classes\UIPopUp.h" />
-    <ClInclude Include="..\Classes\UIPopUpBase.h" />
     <ClInclude Include="main.h" />
   </ItemGroup>
   <ItemGroup>

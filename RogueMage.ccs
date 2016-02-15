@@ -6,6 +6,10 @@
         <Folder Name="Popup">
           <Folder Name="MenuPopup">
             <Folder Name="Image">
+              <Image Name="Menu_Close_Normal.png" />
+              <Image Name="Menu_Close_Pressed.png" />
+              <Image Name="Menu_OK_Normal.png" />
+              <Image Name="Menu_OK_Pressed.png" />
               <Image Name="popup_bg.png" />
             </Folder>
             <Project Name="MenuPopupLayer.csd" Type="Layer" />

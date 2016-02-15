@@ -1,7 +1,6 @@
 #include "SelectScene.h"
 #include "HelloWorldScene.h"
 #include "AchieveScene.h"
-#include "UIPopUP.h"
 #include "cocostudio/CocoStudio.h"
 #include "ui/CocosGUI.h"
 
@@ -40,7 +39,7 @@ bool SelectScene::init()
 
 void SelectScene::initButton()
 {
-	auto SelectLayer = CSLoader::createNode("Scene/SelectScene/SelectSceneLayer.csb");
+	SelectLayer = CSLoader::createNode("Scene/SelectScene/SelectSceneLayer.csb");
 
 	addChild(SelectLayer);
 
@@ -137,11 +136,67 @@ void SelectScene::doExit(Ref* pSender)
 {
 	// Call Exit Dialog
 	log("Exit");
-	auto popup = UIPopup::create(CSLoader::createNode("Popup/MenuPopup/MenuPopupLayer.csb"));
-	popup->setCallBackFunc(CC_CALLBACK_1(SelectScene::popupCallback, this));
-	popup->setButton("btn_ok", 1);
-	popup->setButton("btn_cancel", 2);
-	popup->showPopup(this);
+
+	Popup_Call(CSLoader::createNode("Popup/MenuPopup/MenuPopupLayer.csb"));
+	Popup_setButton("btn_ok", 1);
+	Popup_setButton("btn_cancel", 2);
+}
+
+/*
+Call popupLayer and pause SelectLayer
+popupLayer : popupLayer which made Cocos Studio
+*/
+void SelectScene::Popup_Call(Node* popupLayer)
+{
+	if (!popupLayer) return;
+	pLayer = popupLayer;
+	Size size = Director::getInstance()->getWinSize();
+	pLayer->setPosition(size.width / 2, size.height / 2);
+	// Need define popupLayer Zorder variable
+	addChild(pLayer, 100);
+	Director::getInstance()->getEventDispatcher()->pauseEventListenersForTarget(SelectLayer, true);
+}
+
+// Close Popup
+void SelectScene::Popup_Close()
+{
+	removeChild(pLayer, true);
+	Director::getInstance()->getEventDispatcher()->resumeEventListenersForTarget(SelectLayer, true);
+}
+
+void SelectScene::Popup_setButton(const std::string &name, const int tag)
+{
+	Button* pButton = static_cast<Button*>(pLayer->getChildByName(name));
+	pButton->setTag(tag);
+	pButton->addTouchEventListener(CC_CALLBACK_2(SelectScene::Popup_onBtnClickCallbackFnc, this));
+}
+
+void SelectScene::Popup_onBtnClickCallbackFnc(Ref *pSender, ui::Widget::TouchEventType touchType)
+{
+	if (touchType == ui::Widget::TouchEventType::ENDED)
+	{
+		pSelect = ((cocos2d::ui::Button*)pSender)->getTag();    //어떤 버튼인지 체크를 위해 버튼에 추가된 Tag를 맴버변수에서 가지고있도록 한다.
+		CallFuncN *action = CallFuncN::create(CC_CALLBACK_1(SelectScene::Popup_Callback, this));
+		auto replace = Sequence::create(action, nullptr);
+
+		this->runAction(replace);
+	}
+}
+
+void SelectScene::Popup_Callback(Ref* pSender)
+{
+	if (pSelect == 1)
+	{
+		log("1");
+		//닫기 버튼 이다~~
+	}
+	else if (pSelect == 2)
+	{
+		log("2");
+		//헬프 버튼이다~~
+	}
+
+	Popup_Close();
 }
 
 void SelectScene::doClose(Ref* pSender)
@@ -149,49 +204,6 @@ void SelectScene::doClose(Ref* pSender)
 	Director::getInstance()->popScene();
 	//    Director::getInstance()->popToRootScene();
 }
-
-void SelectScene::popupCallback(Ref* pSender)
-{
-	UIPopup *pPopup = (UIPopup *)pSender; //현재 팝업에 대한 클래스로 캐스팅 
-
-													  // 여기에서 콜백 받을때 어떤 버튼이 클릭됐는지 알수있으면 좋겠죠?
-	int nTag = pPopup->getResult();
-	//혹은 콜백을 다르게 선업하셔도 됩니다. 그건 여러분 몫으로 콜백2 있으니 참고해서 만드심 됍니다
-	if (nTag == 1)
-	{
-		log("1");
-		//닫기 버튼 이다~~
-	}
-	else if (nTag == 2)
-	{
-		log("2");
-		//헬프 버튼이다~~
-	}
-
-
-	pPopup->closePopup(); //팝업을 닫습니다. !! 팝업을 닫을시 필히 호출해주세요 이거 안해주면 팝업창 안사라집니다.  
-}
-
-/*
-void SelectScene::doNotification(CCObject *obj)
-{
-	//노티피케이션 받기
-	CCString *pParam = (CCString*)obj;
-	log("notification %s", pParam->getCString());
-
-	if (pParam->intValue() == 1) {
-		log("noti 11");
-		Director::sharedDirector()->resume();			//화면 재시작
-		Director::sharedDirector()->startAnimation();	//메뉴 버튼 활성
-	}
-	else {
-		//CCArray* childs = (CCArray*)this->getChildren();
-		log("noti 00");
-		Director::sharedDirector()->pause();				//화면 정지
-		Director::sharedDirector()->stopAnimation();		//메뉴버튼 비활성
-	}
-}
-*/
 
 void SelectScene::menuCloseCallback(Ref *pSender, ui::Widget::TouchEventType type)
 {

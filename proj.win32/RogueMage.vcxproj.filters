@@ -48,12 +48,6 @@
     <ClCompile Include="..\Classes\HelloWorldScene.cpp">
       <Filter>src\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\UIPopUp.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\UIPopUpBase.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\RMAlgorithm\mapGenerator.cpp">
       <Filter>src\RMAlgorithm</Filter>
     </ClCompile>
@@ -85,12 +79,6 @@
     </ClInclude>
     <ClInclude Include="..\Classes\HelloWorldScene.h">
       <Filter>src\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\UIPopUp.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\UIPopUpBase.h">
-      <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\RMAlgorithm\mapGenerator.h">
       <Filter>src\RMAlgorithm</Filter>

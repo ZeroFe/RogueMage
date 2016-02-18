@@ -9,7 +9,7 @@ USING_NS_CC;
 이동에 따른 애니메이션 정의
 
 */
-class Player {
+class Player {  
 
 private:
 	Sprite* player;

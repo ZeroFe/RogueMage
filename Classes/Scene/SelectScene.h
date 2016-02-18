@@ -24,28 +24,25 @@ public:
 	virtual void onExit();
 	~SelectScene(void);
 
+	// 마우스 리스너 설정
 	void onMouseDown(cocos2d::Event *e);
 	void onMouseUp(cocos2d::Event *e) {};
 	void onMouseMove(cocos2d::Event *e) {};
 	void onMouseScroll(cocos2d::Event *e) {};
 
-	// call Scene function
+	// 각 버튼별 기능 설정(장면전환 및 종료)
 	void doTutorialScene(Ref* pSender);
 	void doStartScene(cocos2d::Ref* pSender);
 	void doContinueScene(cocos2d::Ref* pSender);
 	void doAchieveScene(cocos2d::Ref* pSender);
 	void doExit(cocos2d::Ref* pSender);
 
-	// call Option function
+	// 팝업 관련 함수
 	void Popup_Call(Node* popupLayer);
 	void Popup_Close();
 	void Popup_setButton(const std::string &name, const int tag);
 	void Popup_onBtnClickCallbackFnc(Ref *pSender, ui::Widget::TouchEventType touchType);
 	void Popup_Callback(Ref* pSender);
-
-	void doClose(Ref* pSender);
-	//void doNotification(cocos2d::CCObject *obj);
-	void menuCloseCallback(Ref* pSender, cocos2d::ui::Widget::TouchEventType type);
 
 private:
 	Node *SelectLayer;

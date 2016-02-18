@@ -32,6 +32,7 @@ bool StartScene::init()
 		return false;
 	}
 
+	// 코코스 스튜디오로부터 노드 부르고 추가
 	auto StartLayer = CSLoader::createNode("Scene/StartScene/StartSceneLayer.csb");
 	addChild(StartLayer);
 
@@ -47,7 +48,7 @@ void StartScene::onEnter()
 
 	log("onEnter");
 
-	// set mouselistener
+	// 마우스 리스너 설정
 	auto mouseListener = EventListenerMouse::create();
 	mouseListener->onMouseMove = CC_CALLBACK_1(StartScene::onMouseMove, this);
 	mouseListener->onMouseUp = CC_CALLBACK_1(StartScene::onMouseUp, this);
@@ -61,7 +62,7 @@ void StartScene::onEnter()
 
 	credit->runAction(fade);
 
-	// replace scene
+	// 3초 후 자동 장면 전환
 	CallFuncN *action = CallFuncN::create(CC_CALLBACK_1(StartScene::doPushScene, this));
 	auto replace = Sequence::create(DelayTime::create(3), action, nullptr);
 
@@ -95,21 +96,9 @@ void StartScene::onMouseDown(Event *event)
 	EventMouse* e = (EventMouse*)event;
 	log("Mouse Down");
 
-	// go next scene
+	// 다음 장면으로 이동
 	auto pScene = SelectScene::createScene();
 	Director::getInstance()->replaceScene(pScene);
-}
-
-void StartScene::onMouseUp(Event *event)
-{
-}
-
-void StartScene::onMouseMove(Event *event)
-{
-}
-
-void StartScene::onMouseScroll(Event *event)
-{
 }
 
 void StartScene::doPushScene(Ref* pSender)

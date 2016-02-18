@@ -7,6 +7,11 @@
 USING_NS_CC;
 using namespace ui;
 
+SelectScene::~SelectScene()
+{
+	log("SelectScene :: dealloc");
+}
+
 Scene* SelectScene::createScene()
 {
 	auto scene = Scene::create();
@@ -30,19 +35,17 @@ bool SelectScene::init()
 
 	initButton();
 
-	//노티피케이션 추카
-	//CCNotificationCenter::sharedNotificationCenter()->addObserver(this, SEL_CallFuncO(&SelectScene::doNotification), "notification", NULL);
-	//"notification"이라는 메시지가 오면 해당 함수를 실행한다.
-
 	return true;
 }
 
+// 버튼 설정(리스너 설정)
 void SelectScene::initButton()
 {
 	SelectLayer = CSLoader::createNode("Scene/SelectScene/SelectSceneLayer.csb");
 
 	addChild(SelectLayer);
 
+	// 메뉴 버튼들 찾아서 리스너 설정
 	Button* MenuButton1 = static_cast<Button*>(SelectLayer->getChildByName("MenuButton1"));
 	Button* MenuButton2 = static_cast<Button*>(SelectLayer->getChildByName("MenuButton2"));
 	Button* MenuButton3 = static_cast<Button*>(SelectLayer->getChildByName("MenuButton3"));
@@ -55,6 +58,7 @@ void SelectScene::initButton()
 	MenuButton4->addTouchEventListener(CC_CALLBACK_1(SelectScene::doAchieveScene, this));
 	//MenuButton5->addTouchEventListener(CC_CALLBACK_1(SelectScene::doOptionScene, this));
 
+	// 나가기 버튼 리스너 설정
 	Button* exit = static_cast<Button*>(SelectLayer->getChildByName("Exit"));
 	exit->addTouchEventListener(CC_CALLBACK_1(SelectScene::doExit, this));
 }
@@ -87,23 +91,21 @@ void SelectScene::onExit()
 	log("SelectScene :: onExit");
 }
 
-SelectScene::~SelectScene()
-{
-	log("SelectScene :: dealloc");
-}
-
+// 마우스 리스너 동작 확인
 void SelectScene::onMouseDown(Event *event)
 {
 	EventMouse* e = (EventMouse*)event;
 	log("Mouse Down");
 }
 
+// 튜토리얼
 void SelectScene::doTutorialScene(Ref* pSender)
 {
 	log("Tutorial");
 
 }
 
+// 새 게임 시작
 void SelectScene::doStartScene(Ref* pSender)
 {
 	// Call New Game
@@ -111,9 +113,9 @@ void SelectScene::doStartScene(Ref* pSender)
 
 	auto pScene = HelloWorld::createScene();
 	Director::getInstance()->pushScene(pScene);
-	
 }
 
+// 불러오기
 void SelectScene::doContinueScene(Ref* pSender)
 {
 	// Call last play
@@ -124,6 +126,7 @@ void SelectScene::doContinueScene(Ref* pSender)
 	*/
 }
 
+// 업적
 void SelectScene::doAchieveScene(Ref* pSender)
 {
 	// Call Acheieve Scene
@@ -132,6 +135,7 @@ void SelectScene::doAchieveScene(Ref* pSender)
 	Director::getInstance()->replaceScene(pScene);
 }
 
+// 종료버튼
 void SelectScene::doExit(Ref* pSender)
 {
 	// Call Exit Dialog
@@ -143,8 +147,8 @@ void SelectScene::doExit(Ref* pSender)
 }
 
 /*
-Call popupLayer and pause SelectLayer
-popupLayer : popupLayer which made Cocos Studio
+popupLayer를 불러오고 SelectLayer 정지
+popupLayer : 코코스 스튜디오로 만든 팝업 생성용 레이어(노드)
 */
 void SelectScene::Popup_Call(Node* popupLayer)
 {
@@ -157,13 +161,14 @@ void SelectScene::Popup_Call(Node* popupLayer)
 	Director::getInstance()->getEventDispatcher()->pauseEventListenersForTarget(SelectLayer, true);
 }
 
-// Close Popup
+// 팝업 닫기
 void SelectScene::Popup_Close()
 {
 	removeChild(pLayer, true);
 	Director::getInstance()->getEventDispatcher()->resumeEventListenersForTarget(SelectLayer, true);
 }
 
+// 팝업 버튼 정보 설정
 void SelectScene::Popup_setButton(const std::string &name, const int tag)
 {
 	Button* pButton = static_cast<Button*>(pLayer->getChildByName(name));
@@ -171,6 +176,8 @@ void SelectScene::Popup_setButton(const std::string &name, const int tag)
 	pButton->addTouchEventListener(CC_CALLBACK_2(SelectScene::Popup_onBtnClickCallbackFnc, this));
 }
 
+
+// 팝업 버튼 콜백함수 설정
 void SelectScene::Popup_onBtnClickCallbackFnc(Ref *pSender, ui::Widget::TouchEventType touchType)
 {
 	if (touchType == ui::Widget::TouchEventType::ENDED)
@@ -183,46 +190,22 @@ void SelectScene::Popup_onBtnClickCallbackFnc(Ref *pSender, ui::Widget::TouchEve
 	}
 }
 
+// 팝업 버튼 클릭시 불러오는 함수
 void SelectScene::Popup_Callback(Ref* pSender)
 {
+	// 종료
 	if (pSelect == 1)
 	{
 		log("1");
-		//닫기 버튼 이다~~
+
+		Director::getInstance()->end();
 	}
+	// 취소
 	else if (pSelect == 2)
 	{
 		log("2");
-		//헬프 버튼이다~~
 	}
 
+	// 팝업 닫기
 	Popup_Close();
-}
-
-void SelectScene::doClose(Ref* pSender)
-{
-	Director::getInstance()->popScene();
-	//    Director::getInstance()->popToRootScene();
-}
-
-void SelectScene::menuCloseCallback(Ref *pSender, ui::Widget::TouchEventType type)
-{
-	switch (type)
-	{
-	case ui::Widget::TouchEventType::BEGAN:
-		Director::getInstance()->end();
-		break;
-	case ui::Widget::TouchEventType::MOVED:
-		// TODO
-		break;
-	case ui::Widget::TouchEventType::ENDED:
-		// TODO
-		break;
-	case ui::Widget::TouchEventType::CANCELED:
-		// TODO
-		break;
-	default:
-		// TODO
-		break;
-	}
 }

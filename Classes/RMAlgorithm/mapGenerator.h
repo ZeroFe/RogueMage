@@ -6,6 +6,7 @@
 #define MAP_SIZE 10
 
 #define ROOM 16
+
 #define R_ROOM ROOM/2
 #define BOSS 'B'
 #define N_ROOM 'r'
@@ -24,6 +25,7 @@ namespace createMap {
 		int x;
 		int y;
 	public:
+		//equal 연산자 재정의
 		bool operator ==(const Spot &T) const
 		{
 			return x == T.x&&y == T.y;

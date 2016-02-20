@@ -48,31 +48,28 @@ void createMap::Map::start()
 
 	Spot start;
 
+	//시작 위치는 맵의 중심부에 존재해야한다 -> 완전 중심 x
 	start.x = rand() % (MAP_SIZE / 2) + MAP_SIZE / 4;
 	start.y = rand() % (MAP_SIZE / 2) + MAP_SIZE / 4;
 
+	//첫방의 정보를 저장
 	point[0] = start;
-	bossRoom[0] = start;
-	cnt++;
+	bossRoom[0] = start;//편의상 시작 방은 보스방으로 취급
+	cnt++;//방의 갯수를 늘려준다
 
-	table[start.x][start.y] = START;
+	table[start.x][start.y] = START;//테이블에 시작위치를 채움
 	startx = start.x;
 	starty = start.y;
-
-	int check;
-
-	check = rand() % 4;
-
-
 }
 
 bool createMap::Map::makeRoom(Spot spot, int mode)
 {
+	
 	Spot tmp = spot;
 	Spot temp;
-	mode %= 4;
+	mode %= 4;//4방향 중 하나를 선택
 
-
+	//선택한 방향위치를 찾아준다
 	if (mode == 0)
 	{
 		tmp.x--;
@@ -90,12 +87,14 @@ bool createMap::Map::makeRoom(Spot spot, int mode)
 		tmp.y++;
 	}
 
+	//새로 생성될 방이 비었는지 체크
 	if (roomCheck(tmp))
 		return false;
 
+	//새로 생성된 방이 테이블 위인지 체크
 	if (inTableCheck(tmp))
 	{
-
+		//생성 된 방이 다른 방과 이어지는 지를 체크
 		if (mode != 0)
 		{
 			temp.x = tmp.x + 1;
@@ -145,7 +144,7 @@ bool createMap::Map::makeRoom(Spot spot, int mode)
 		return false;
 	}
 
-
+	//만약 이을려고 했던 방이 보스방이였으면 새로운 방을 보스방으로 대체
 	if (table[spot.x][spot.y] == BOSS)
 	{
 		for (int i = 1; i <= bossCnt; i++)
@@ -179,38 +178,37 @@ bool createMap::Map::makeRoom(Spot spot, int mode)
 	return true;
 }
 
+//맵을 생성
 void createMap::Map::make(int floor)
 {
 	//int rCnt = 0;
 
-	start();
+	start();//시작 위치를 잡아준다
 
+	//방이 생성한다(원하는 것 만큼 -1개
 	while (cnt != ROOM - 1)
 	{
+		//보스룸이 시작점과 가까워 지는 것을 막기위해 rCnt를 이용해 보스룸에 연결되는 방을 먼저 생성한다
 		if (rCnt < R_ROOM&&bossCnt != 0)
 		{
 			if (makeRoom(bossRoom[rand() % (bossCnt + 1)], rand() % 4))
 				cnt++;
 		}
-		else
+		else//R_ROOM만큼 방을 생성한 이후 아무 방옆에 새로운 방을 붙일 수 있게한다
 		{
 			if (makeRoom(point[rand() % cnt], rand() % 4))
 				cnt++;
 		}
-		//system("cls");
-		//std::cout << cnt << std::endl;
-		//show();
-		//showSpot();
 	}
 
 
-	//make shop
+	//상점방을 만든다
 	while (!makeRoom(rSpot[rand() % rCnt], rand() % 4));
 
 	table[point[cnt].x][point[cnt].y] = SHOP;
 
 
-	//make secret
+	//비밀방을 만들어서 테이블 정보를 수정
 	if (floor % 2 == 0)
 	{
 		while (table[point[cnt].x][point[cnt].y] != N_ROOM)

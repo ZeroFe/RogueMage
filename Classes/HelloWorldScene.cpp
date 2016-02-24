@@ -33,21 +33,27 @@ bool HelloWorld::init()
 	{
 		return false;
 	}
-	rootNode = CSLoader::createNode(Global::mapName);
-	map = (TMXTiledMap *)rootNode->getChildByName("gameMap");
-	objects = map->getObjectGroup("Spawnlist");
+	//rootNode = CSLoader::createNode(Global::mapName);
+	srand(time(NULL));
+	rootNode = CSLoader::createNode("Scene/GameScene/mapTemp01.csb");
+	//임시맵용 하나만 불러온다
+	map = (TMXTiledMap *)rootNode->getChildByName("gameMap"); //cocos studio 에서 정의한 TileMap 이름
+	log("map : %p", map);
+	objects = map->getObjectGroup("SpawnList"); //SpawnList Object 그룹 가져옴 (Object 속성일 경우)
+	log("Objects : %p", objects);
 	addChild(rootNode);
 
 
 	//test
 	log("current Position : %d %d", Global::currentPosX, Global::currentPosY);
-	auto pLabel = LabelTTF::create(Global::mapName, "Arial", 34);
-	pLabel->setPosition(Point(240, 360));
+	auto pLabel = LabelTTF::create(Global::mapName, "Arial", 34); //Current Map template name
+	pLabel->setPosition(Point(300, 80));
 	pLabel->setColor(Color3B(255, 255, 255));
 	this->addChild(pLabel);
 
 	//벽 등의 메타데이터 뽑아보기
-	metainfo = map->getLayer("Tile Layer 1");
+	Wall = map->getObjectGroup("Wall");
+	Damage = map->getObjectGroup("Damage");
 
 
 	//1. HUD 생성
@@ -55,12 +61,14 @@ bool HelloWorld::init()
 	HUD->setAnchorPoint(Point(0, 1));
 	HUD->setPosition(Point(0, 960));
 	rootNode->addChild(HUD);
+
 	//2. Player 생성 && Player Object 생성
 	playerSprite = Sprite::create("char/playable.png");
+	playerSprite->setAnchorPoint(Point(0.5, 0));//0.5 0
 	rootNode->addChild(HUD);
 	rootNode->addChild(playerSprite);
 	const char* startPos[] = {
-		"start", "SpawnDown", "SpawnUp", "SpawnLeft", "SpawnRigh"
+		"start", "SpawnDown", "SpawnUp", "SpawnLeft", "SpawnRight"
 	};
 	int x = objects->getObject(startPos[Global::prevEnterPos + 1])["x"].asInt();
 	int y = objects->getObject(startPos[Global::prevEnterPos + 1])["y"].asInt();
@@ -76,7 +84,7 @@ bool HelloWorld::init()
 
 	auto minimap_room_texture = minimap_room->getTexture();
 
-	Point centerPoint(0, 0); //추후에 변동할.
+	Point centerPoint(0, 0); //미니맵을 어디에 표시할 지 결정한다.
 	for (int i = 0; i < 10; i++) {
 		for (int j = 0; j < 10; j++) {
 			if (Global::mapData[i][j] != '\0') {
@@ -84,17 +92,6 @@ bool HelloWorld::init()
 				pTemp->setPosition(Point(centerPoint.x + i * 50, centerPoint.y + j * 29));
 				if (i == Global::currentPosX && j == Global::currentPosY) {
 					pTemp->setColor(Color3B::RED);
-					//pTemp->setOpacity(127);
-
-					//전부 내위치를 기준으로 재조정해라.
-				//	centerPoint.x = hudPos.x + 290 / 2;
-				//	centerPoint.y = hudPos.y + 200 / 2;
-
-					for (int k = 0; k < 10; k++) {
-						for (int t = 0; t < 10; t++) {
-							//pTemp->setPosition(Point(centerPoint.x + k * 50, centerPoint.y + t * 29));
-						}
-					}
 				}
 				minimap_room->addChild(pTemp);
 			}
@@ -103,104 +100,98 @@ bool HelloWorld::init()
 	//4. 플레이어 무빙 설정
 	//player moving init
 	Player *p = playerObj;//변수 길게 쓰기 귀찮아서 추가한 지역 변수
-	p->walkSpeed = 30.0;
-	p->f = 0.8;
-	p->colMove = 1;
-	p->vx = 0;
-	p->vy = 0;
-	p->power = 0.7;
-	Global::key[W] = false;
+	p->walkSpeed = 30.0; //플레이어의 이동 속도
+	p->f = 0.8; //플레이어의 반발력 (힘에 대한)
+	p->colMove = 1; //벽 등의 오브젝트에 충돌시 안 충돌하기 위해 한 프레임당 밀어낼 픽셀
+	p->vx = 0; //velocity X (1f / s) initial Value
+	p->vy = 0; //velocity Y (1f / s) initial Value
+	p->power = 0.7; //the Power of Force
+	Global::key[W] = false; //key 눌림시 True로 스위칭될
 	Global::key[A] = false;
 	Global::key[S] = false;
 	Global::key[D] = false;
 
 	this->schedule(schedule_selector(HelloWorld::enterFrame)); //지속적인 판단 (약 1/60초에 1번 실행됨)
+
+
+
+	//5. 플레이어 공격각도 설정 (8향)
+	attackSpotListBatchNode = SpriteBatchNode::create("char/aim.png", 50);
+	//int squareMaxth = playerSprite->getContentSize().width > playerSprite->getContentSize().height ? playerSprite->getContentSize().width : playerSprite->getContentSize().height;
+	rootNode->addChild(attackSpotListBatchNode);
+	aimTexture = new Texture2D*[8]; //메모리 해제 필요 (new 로 생성했으므로 Garbage - Collection이 자동으로 안 됨)
+	aimSprite = new Sprite*[8]; //메모리 해제 필요
+	for (int i = 0; i < 8; i++) {
+		aimTexture[i] = attackSpotListBatchNode->getTexture();
+		aimSprite[i] = Sprite::createWithTexture(aimTexture[i]);
+		aimSprite[i]->setAnchorPoint(Point(-5, 0));
+		aimSprite[i]->setRotation(i * 45);
+		attackSpotListBatchNode->addChild(aimSprite[i]);
+		aimSprite[i]->setOpacity(127);
+	}
+
+
+	//Enemyes, Objects test
+	//test : 1 한 마리의 적 (bug)
+	//주인공y좌표 - 적y좌표 , 주인공x좌표 - 적y좌표 (원점 기준으로 맞춰주기 위해 탄젠트의 역함수이다)
+	auto enemy1Sprite = Sprite::create("char/enemy.png");
+	enemy1Sprite->setAnchorPoint(Point(0.5, 0));//적 역시 standing 자세를 취하고 있다.
+	enemy1Sprite->setPosition(Point(330, 300));
+	rootNode->addChild(enemy1Sprite);
 	return true;
 }
 
 Point HelloWorld::tileCoordForPosition(Point position) {
+	//이 함수는 어떠한 위치가 주어지면, 타일맵 기준으로 어떤 타일에 있는지 알아보는 함수이다.
 	int x = position.x / map->getTileSize().width;
 	int y = ((map->getMapSize().height * map->getTileSize().height) - position.y) / map->getTileSize().height;
 	return Point(x, y);
 }
 
 void HelloWorld::enterFrame(float dt) {
-	Player *p = playerObj;
-	if (!Global::key[1] && playerObj->vx < -0.0f && playerObj->vx > -0.08f) {
+	//1초에 약 60번 실행되는 지속 판단 함수이다.
+
+	//공격 방향 지정자
+	attackSpotListBatchNode->setPosition(playerSprite->getPosition()); //center of player
+	attackSpotListBatchNode->setPositionY(playerSprite->getPositionY() + playerSprite->getContentSize().height / 2);
+
+
+	Player *p = playerObj; //변수명 줄이기
+	if (!Global::key[A] && playerObj->vx < -0.0f && playerObj->vx > -0.08f) {
 		playerObj->vx = abs(playerObj->vx);
+		//부동소수점 계산오차로 왼쪽 키를 눌렀다 땔 때 캐릭터가 부들거리는 현상을 방지하기위한 추가 코드
 	}
 
-	p->vx *= p->f;
-	p->vy *= p->f;
+	p->vx *= p->f; //반발력만큼 velocity 를 줄여준다.
+	p->vy *= p->f; //마찬가지이다.
 	playerSprite->setPosition(Point(playerSprite->getPositionX() + p->vx, playerSprite->getPositionY() + p->vy));
-	if (Global::key[1]) {
+	//플레이어의 실제적 위치를 조정
+	if (Global::key[A]) {
 		p->vx -= p->power;
+		//해당 키를 누르면 velocity 를 power만큼 조절한다.
 	}
-	if (Global::key[3]) {
+	if (Global::key[D]) {
 		p->vx += p->power;
 	}
-	if (Global::key[0]) {
+	if (Global::key[W]) {
 		p->vy += p->power;
 	}
-	if (Global::key[2]) {
+	if (Global::key[S]) {
 		p->vy -= p->power;
 	}
 
 	//충돌체크 
-	//현재 유저위치의 tile-gid 구하기
-	//int hitType; //Hit 점을 분산하여 체크한다. (캐릭터의 하단중앙, 하단왼쪽, 하단오른쪽 => 벽 체크용)
-				 //중앙점 포함의 경우 : 중앙
-				 //Point tileCoord = this->tileCoordForPosition(player->getPosition());
-	
-	Point pos0 = Point(playerSprite->getPositionX(), playerSprite->getPositionY());
-	Point tileCoord0 = this->tileCoordForPosition(pos0);
-	int tileGid0 = this->metainfo->getTileGIDAt(tileCoord0);
-
-
-	Point pos1 = Point(playerSprite->getPositionX() + playerSprite->getContentSize().width / 3, playerSprite->getPositionY());
-	Point tileCoord1 = this->tileCoordForPosition(pos1);
-	int tileGid1 = this->metainfo->getTileGIDAt(tileCoord1);
-
-	Point pos2 = Point(playerSprite->getPositionX() - playerSprite->getContentSize().width / 3, playerSprite->getPositionY());
-	Point tileCoord2 = this->tileCoordForPosition(pos2);
-	int tileGid2 = this->metainfo->getTileGIDAt(tileCoord2);
-
-
-	if (tileGid0 == 64 || tileGid0 == 65 || tileGid0 == 78 || tileGid0 == 79) {
-		playerSprite->setPositionX(playerSprite->getPositionX() + p->colMove); //정면 왼충돌 (벽이 왼쪽에 있는 경우에 유효)
-		p->vx = 0; //~cont
-		p->vy = 0; //~cont
-		playerSprite->setPositionY(playerSprite->getPositionY() + p->colMove); //정면 아래충돌 (벽이 아래에 있는 경우에 유효)
-		return;
-	} else {
-		playerSprite->setOpacity(255);
-	}
-
-	if (tileGid1 == 64 || tileGid1 == 65 || tileGid1 == 78 || tileGid1 == 79) {
-		playerSprite->setPositionX(playerSprite->getPositionX() - p->colMove); //정면 왼충돌 (벽이 왼쪽에 있는 경우에 유효)
-		p->vx = 0; //~cont
-		p->vy = 0; //~cont
-		playerSprite->setPositionY(playerSprite->getPositionY() - p->colMove); //정면 아래충돌 (벽이 아래에 있는 경우에 유효)
-		return;
-	}
-	else {
-		playerSprite->setOpacity(255);
-	}
-
-	if (tileGid2 == 64 || tileGid2 == 65 || tileGid2 == 78 || tileGid2 == 79) {
-		playerSprite->setPositionX(playerSprite->getPositionX() + p->colMove); //정면 왼충돌 (벽이 왼쪽에 있는 경우에 유효)
-		p->vx = 0; //~cont
-		p->vy = 0; //~cont
-		playerSprite->setPositionY(playerSprite->getPositionY() + p->colMove); //정면 아래충돌 (벽이 아래에 있는 경우에 유효)
-		return;
+	if (colideTestPointAndTile(Point(playerSprite->getPositionX(), playerSprite->getPositionY()), Wall)) {
+		playerSprite->setOpacity(127);
+		//벽과 충돌 시 투명처리했다. (일단)
 	}
 	else {
 		playerSprite->setOpacity(255);
 	}
 }
 
-TransitionScene* HelloWorld::transition(int direction, float t, Scene * s)
-{
+TransitionScene* HelloWorld::transition(int direction, float t, Scene * s) {
+	//장면 전환 효과에 사용되었다. 하지만 이 방식은 HUD도 같이 적용되어 곧 폐기될 예정이다.
 	Director::getInstance()->setDepthTest(false);
 	switch (direction) {
 	case 0:
@@ -215,21 +206,44 @@ TransitionScene* HelloWorld::transition(int direction, float t, Scene * s)
 	return TransitionPageTurn::create(t, s, false);
 }
 
-void HelloWorld::onEnter()
-{
+void HelloWorld::onEnter() {
 	Layer::onEnter();
 	//키보드 입력으로 캐릭터 움직이기
+	auto mouselistener = EventListenerMouse::create();
 	auto keylistener = EventListenerKeyboard::create();
+
+	mouselistener->onMouseMove = CC_CALLBACK_1(HelloWorld::onMouseMove, this);
 	keylistener->onKeyPressed = CC_CALLBACK_2(HelloWorld::onKeyPressed, this);
 	keylistener->onKeyReleased = CC_CALLBACK_2(HelloWorld::onKeyReleased, this);
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(mouselistener, this);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(keylistener, this);
 }
 
 void HelloWorld::onExit()
 {
 	//_eventDispatcher->removeEventListenersForType(EventListener::Type::KEYBOARD);
-	delete playerObj;
+	delete playerObj; //new로 생성한 Object는 수동으로 메모리를 수거해야 한다.
+	delete aimTexture;
+	delete aimSprite;
 	Layer::onExit();
+}
+
+void HelloWorld::onMouseMove(Event *ev) {
+	/*
+	각도 재기 atan2 활용
+	log("mouse Moved");
+	EventMouse* e = (EventMouse*)ev;
+	CCLOG("mouse down %f, %f",e->getLocation().x,e->getLocation().y);
+	*/
+
+	EventMouse *e = (EventMouse*)ev;
+	int mouseX = e->getLocation().x;
+	int mouseY = e->getLocation().y;
+	double angle = atan2(mouseY - playerSprite->getPositionY(), mouseX - playerSprite->getPositionX());
+	angle = angle * 3.1416 / 180.0f;//x degree = x * π / 180 radian
+	playerSprite->setRotation(angle);
+	//aimSprite[i]->setOpacity(127);
+	log("%lf", angle);
 }
 
 void HelloWorld::onKeyPressed(EventKeyboard::KeyCode keyCode, Event * event) {
@@ -303,6 +317,8 @@ void HelloWorld::onKeyReleased(EventKeyboard::KeyCode keyCode, Event * event)
 
 bool HelloWorld::moveable(int direction) {
 	//down, up, left, right
+	//플레이어가 맵을 넘어갈 수 있는지의 여부를 알아보는 함수
+	//인수로 방향을 받는다.
 	int ccx, ccy;
 	if (direction == 0) {
 		ccx = Global::currentPosX;
@@ -327,6 +343,7 @@ bool HelloWorld::moveable(int direction) {
 
 void HelloWorld::moveScene(int direction) {
 	//down, up, left, right
+	//실질적으로 scene을 넘겨준다. (다른 맵으로 넘어간다)
 	int ccx, ccy;
 	if (direction == 0) {
 		ccx = Global::currentPosX;
@@ -359,4 +376,27 @@ void HelloWorld::moveScene(int direction) {
 	playerSprite->setOpacity(0);
 	HUD->setOpacity(0);
 	Director::getInstance()->replaceScene(transition(direction, 0.5, nextScene));
+}
+
+bool HelloWorld::colideTestPointAndTile(Point & player, TMXObjectGroup * tilePos) {
+	//플레이어가 특정 Tile에 있는지 Test한다.
+	auto objList = tilePos->getObjects();
+	for (int i = 0; i < (int)objList.size(); i++) {
+		/*coord 기준은 왼쪽 위가 (0, 0)이다.
+		점과 사각형의 충돌판정 공식
+		플레이어의 x위치가 coord ~ coord + width 이고,
+		플레이어의 y위치가 coord ~ coord + heigh 이면
+		충돌이다.
+		*/
+		auto Object = objList.at(i).asValueMap();
+		auto x = Object["x"].asInt();
+		auto y = Object["y"].asInt();
+		auto width = Object["width"].asInt();
+		auto height = Object["height"].asInt();
+		//log("%d %d %d %d", x, y, width, height);
+		if (player.x > x && player.x < x + width && player.y > y && player.y < y + height) {
+			return true;
+		}
+	}
+	return false;
 }

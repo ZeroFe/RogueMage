@@ -20,6 +20,7 @@ public:
 	CREATE_FUNC(HelloWorld);
 	virtual void onEnter();
 	virtual void onExit();
+	virtual void onMouseMove(Event * ev);
 	virtual void onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event);
 	virtual void onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event);
 
@@ -34,8 +35,19 @@ public:
 	Point HelloWorld::tileCoordForPosition(Point position);
 	void HelloWorld::enterFrame(float dt);
 
-	bool moveable(int direction); //다른 클래스로 통폐합 예정
+	bool moveable(int direction);
 	void moveScene(int direction);
+
+	bool HelloWorld::colideTestPointAndTile(Point& pos, TMXObjectGroup * Wall);
+
+
+
+	//벽 등의 메타데이터 뽑아보기
+	TMXObjectGroup * Wall;
+	TMXObjectGroup * Damage;
+	SpriteBatchNode * attackSpotListBatchNode;
+	Texture2D **aimTexture; //메모리 해제 필요 (new 로 생성했으므로 Garbage - Collection이 자동으로 안 됨)
+	Sprite **aimSprite; //메모리 해제 필요
 
 	enum {W, A, S, D};
 };

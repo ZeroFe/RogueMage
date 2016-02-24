@@ -54,6 +54,9 @@
     <ClCompile Include="UIHUD.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\RMAlgorithm\Markup.cpp">
+      <Filter>src\RMAlgorithm</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -88,6 +91,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\UIHUD.h">
       <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\RMAlgorithm\Markup.h">
+      <Filter>src\RMAlgorithm</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

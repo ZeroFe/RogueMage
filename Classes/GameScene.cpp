@@ -1,4 +1,4 @@
-#include "HelloWorldScene.h"
+#include "GameScene.h"
 #include "cocostudio/CocoStudio.h"
 #include "ui/CocosGUI.h"
 #include "Player.h"
@@ -9,13 +9,13 @@ USING_NS_CC;
 
 using namespace cocostudio::timeline;
 
-Scene* HelloWorld::createScene()
+Scene* GameScene::createScene()
 {
 	// 'scene' is an autorelease object
 	auto scene = Scene::create();
 
 	// 'layer' is an autorelease object
-	auto layer = HelloWorld::create();
+	auto layer = GameScene::create();
 
 	// add layer as a child to scene
 	scene->addChild(layer);
@@ -25,7 +25,7 @@ Scene* HelloWorld::createScene()
 }
 
 // on "init" you need to initialize your instance
-bool HelloWorld::init()
+bool GameScene::init()
 {
 	//////////////////////////////
 	// 1. super init first
@@ -111,7 +111,7 @@ bool HelloWorld::init()
 	Global::key[S] = false;
 	Global::key[D] = false;
 
-	this->schedule(schedule_selector(HelloWorld::enterFrame)); //지속적인 판단 (약 1/60초에 1번 실행됨)
+	this->schedule(schedule_selector(GameScene::enterFrame)); //지속적인 판단 (약 1/60초에 1번 실행됨)
 
 
 
@@ -142,14 +142,14 @@ bool HelloWorld::init()
 	return true;
 }
 
-Point HelloWorld::tileCoordForPosition(Point position) {
+Point GameScene::tileCoordForPosition(Point position) {
 	//이 함수는 어떠한 위치가 주어지면, 타일맵 기준으로 어떤 타일에 있는지 알아보는 함수이다.
 	int x = position.x / map->getTileSize().width;
 	int y = ((map->getMapSize().height * map->getTileSize().height) - position.y) / map->getTileSize().height;
 	return Point(x, y);
 }
 
-void HelloWorld::enterFrame(float dt) {
+void GameScene::enterFrame(float dt) {
 	//1초에 약 60번 실행되는 지속 판단 함수이다.
 
 	//공격 방향 지정자
@@ -191,7 +191,7 @@ void HelloWorld::enterFrame(float dt) {
 	}
 }
 
-TransitionScene* HelloWorld::transition(int direction, float t, Scene * s) {
+TransitionScene* GameScene::transition(int direction, float t, Scene * s) {
 	//장면 전환 효과에 사용되었다. 하지만 이 방식은 HUD도 같이 적용되어 곧 폐기될 예정이다.
 	Director::getInstance()->setDepthTest(false);
 	switch (direction) {
@@ -207,20 +207,20 @@ TransitionScene* HelloWorld::transition(int direction, float t, Scene * s) {
 	return TransitionPageTurn::create(t, s, false);
 }
 
-void HelloWorld::onEnter() {
+void GameScene::onEnter() {
 	Layer::onEnter();
 	//키보드 입력으로 캐릭터 움직이기
 	auto mouselistener = EventListenerMouse::create();
 	auto keylistener = EventListenerKeyboard::create();
 
-	mouselistener->onMouseMove = CC_CALLBACK_1(HelloWorld::onMouseMove, this);
-	keylistener->onKeyPressed = CC_CALLBACK_2(HelloWorld::onKeyPressed, this);
-	keylistener->onKeyReleased = CC_CALLBACK_2(HelloWorld::onKeyReleased, this);
+	mouselistener->onMouseMove = CC_CALLBACK_1(GameScene::onMouseMove, this);
+	keylistener->onKeyPressed = CC_CALLBACK_2(GameScene::onKeyPressed, this);
+	keylistener->onKeyReleased = CC_CALLBACK_2(GameScene::onKeyReleased, this);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(mouselistener, this);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(keylistener, this);
 }
 
-void HelloWorld::onExit()
+void GameScene::onExit()
 {
 	//_eventDispatcher->removeEventListenersForType(EventListener::Type::KEYBOARD);
 	delete playerObj; //new로 생성한 Object는 수동으로 메모리를 수거해야 한다.
@@ -229,7 +229,7 @@ void HelloWorld::onExit()
 	Layer::onExit();
 }
 
-void HelloWorld::onMouseMove(Event *ev) {
+void GameScene::onMouseMove(Event *ev) {
 	EventMouse *e = (EventMouse*)ev;
 	mouseX = e->getLocation().x;
 	mouseY = e->getLocation().y;
@@ -246,7 +246,7 @@ void HelloWorld::onMouseMove(Event *ev) {
 	*/
 }
 
-void HelloWorld::onKeyPressed(EventKeyboard::KeyCode keyCode, Event * event) {
+void GameScene::onKeyPressed(EventKeyboard::KeyCode keyCode, Event * event) {
 	//	enterFrame();
 	playerObj->ActFlip((Scene*)rootNode);
 	switch (keyCode) {
@@ -267,7 +267,7 @@ void HelloWorld::onKeyPressed(EventKeyboard::KeyCode keyCode, Event * event) {
 
 }
 
-void HelloWorld::onKeyReleased(EventKeyboard::KeyCode keyCode, Event * event)
+void GameScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event * event)
 {
 	switch (keyCode) {
 	case EventKeyboard::KeyCode::KEY_W:
@@ -315,7 +315,7 @@ void HelloWorld::onKeyReleased(EventKeyboard::KeyCode keyCode, Event * event)
 }
 
 
-bool HelloWorld::moveable(int direction) {
+bool GameScene::moveable(int direction) {
 	//down, up, left, right
 	//플레이어가 맵을 넘어갈 수 있는지의 여부를 알아보는 함수
 	//인수로 방향을 받는다.
@@ -341,7 +341,7 @@ bool HelloWorld::moveable(int direction) {
 	return false;
 }
 
-void HelloWorld::moveScene(int direction) {
+void GameScene::moveScene(int direction) {
 	//down, up, left, right
 	//실질적으로 scene을 넘겨준다. (다른 맵으로 넘어간다)
 	int ccx, ccy;
@@ -370,7 +370,7 @@ void HelloWorld::moveScene(int direction) {
 	Global::currentPosY = ccy;
 	//장면이동
 	strcpy_s(Global::mapName, 256, resData::mapTemplate[Global::mapTemplate[ccx][ccy]]);
-	auto nextScene = HelloWorld::createScene();
+	auto nextScene = GameScene::createScene();
 	auto trans = TransitionTurnOffTiles::create(0.5, nextScene);
 	srand(time(NULL));
 	playerSprite->setOpacity(0);
@@ -378,7 +378,7 @@ void HelloWorld::moveScene(int direction) {
 	Director::getInstance()->replaceScene(transition(direction, 0.5, nextScene));
 }
 
-bool HelloWorld::colideTestPointAndTile(Point & player, TMXObjectGroup * tilePos) {
+bool GameScene::colideTestPointAndTile(Point & player, TMXObjectGroup * tilePos) {
 	//플레이어가 특정 Tile에 있는지 Test한다.
 	auto objList = tilePos->getObjects();
 	for (int i = 0; i < (int)objList.size(); i++) {

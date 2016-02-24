@@ -2,7 +2,7 @@
 #include "data_recources.h"
 #include "AppDelegate.h"
 #include "Scene/StartScene.h"
-#include "HelloWorldScene.h"
+#include "GameScene.h"
 #include "RMAlgorithm/mapGenerator.h"
 
 USING_NS_CC;

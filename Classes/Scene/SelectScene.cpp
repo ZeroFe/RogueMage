@@ -1,5 +1,5 @@
 #include "SelectScene.h"
-#include "HelloWorldScene.h"
+#include "GameScene.h"
 #include "AchieveScene.h"
 #include "cocostudio/CocoStudio.h"
 #include "ui/CocosGUI.h"
@@ -111,7 +111,7 @@ void SelectScene::doStartScene(Ref* pSender)
 	// Call New Game
 	log("Start Scene");
 
-	auto pScene = HelloWorld::createScene();
+	auto pScene = GameScene::createScene();
 	Director::getInstance()->pushScene(pScene);
 }
 

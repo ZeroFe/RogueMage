@@ -45,11 +45,11 @@
     <ClCompile Include="..\Classes\Scene\AchieveScene.cpp">
       <Filter>src\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\HelloWorldScene.cpp">
-      <Filter>src\Scene</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\RMAlgorithm\mapGenerator.cpp">
       <Filter>src\RMAlgorithm</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameScene.cpp">
+      <Filter>src\Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -77,11 +77,11 @@
     <ClInclude Include="..\Classes\Scene\AchieveScene.h">
       <Filter>src\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\HelloWorldScene.h">
-      <Filter>src\Scene</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\RMAlgorithm\mapGenerator.h">
       <Filter>src\RMAlgorithm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameScene.h">
+      <Filter>src\Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

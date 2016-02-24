@@ -1,11 +1,11 @@
-#ifndef __HELLOWORLD_SCENE_H__
-#define __HELLOWORLD_SCENE_H__
+#ifndef __GAME_SCENE_H__
+#define __GAME_SCENE_H__
 
 #include "cocos2d.h"
 #include "Global.h"
 #include "Player.h"
 USING_NS_CC;
-class HelloWorld : public cocos2d::Layer
+class GameScene : public cocos2d::Layer
 {
 public:
 	// there's no 'id' in cpp, so we recommend returning the class instance pointer
@@ -17,7 +17,7 @@ public:
 	TransitionScene* transition(int direction, float t, Scene* s);
 
 	// implement the "static create()" method manually
-	CREATE_FUNC(HelloWorld);
+	CREATE_FUNC(GameScene);
 	virtual void onEnter();
 	virtual void onExit();
 	virtual void onMouseMove(Event * ev);
@@ -32,13 +32,13 @@ public:
 	Player *playerObj;
 	TMXLayer *metainfo;
 	TMXObjectGroup *objects;
-	Point HelloWorld::tileCoordForPosition(Point position);
-	void HelloWorld::enterFrame(float dt);
+	Point GameScene::tileCoordForPosition(Point position);
+	void GameScene::enterFrame(float dt);
 
 	bool moveable(int direction);
 	void moveScene(int direction);
 
-	bool HelloWorld::colideTestPointAndTile(Point& pos, TMXObjectGroup * Wall);
+	bool GameScene::colideTestPointAndTile(Point& pos, TMXObjectGroup * Wall);
 
 
 
@@ -54,4 +54,4 @@ public:
 	int mouseX, mouseY;
 };
 
-#endif // __HELLOWORLD_SCENE_H__
+#endif // __GameScene_SCENE_H__

@@ -38,14 +38,11 @@ bool GameScene::init()
 	rootNode = CSLoader::createNode("Scene/GameScene/mapTemp01.csb");
 	//임시맵용 하나만 불러온다
 	map = (TMXTiledMap *)rootNode->getChildByName("gameMap"); //cocos studio 에서 정의한 TileMap 이름
-	log("map : %p", map);
 	objects = map->getObjectGroup("SpawnList"); //SpawnList Object 그룹 가져옴 (Object 속성일 경우)
-	log("Objects : %p", objects);
 	addChild(rootNode);
 
 
 	//test
-	log("current Position : %d %d", Global::currentPosX, Global::currentPosY);
 	auto pLabel = LabelTTF::create(Global::mapName, "Arial", 34); //Current Map template name
 	pLabel->setPosition(Point(300, 80));
 	pLabel->setColor(Color3B(255, 255, 255));
@@ -57,15 +54,13 @@ bool GameScene::init()
 
 
 	//1. HUD 생성
-	HUD = Sprite::create("char/hud2.png");
-	HUD->setAnchorPoint(Point(0, 1));
+	HUD = new UI_HUD();
 	HUD->setPosition(Point(0, 960));
-	rootNode->addChild(HUD);
+	this->addChild(HUD->getObject());//주의 : this임
 
 	//2. Player 생성 && Player Object 생성
 	playerSprite = Sprite::create("char/playable.png");
 	playerSprite->setAnchorPoint(Point(0.5, 0));//0.5 0
-	rootNode->addChild(HUD);
 	rootNode->addChild(playerSprite);
 	const char* startPos[] = {
 		"start", "SpawnDown", "SpawnUp", "SpawnLeft", "SpawnRight"
@@ -80,7 +75,8 @@ bool GameScene::init()
 	auto minimap_room = SpriteBatchNode::create("res/50x29map.png", 50);
 	Point hudPos = Point(900, 700);
 	minimap_room->setPosition(hudPos);
-	rootNode->addChild(minimap_room, 0, 1);
+	//rootNode->addChild(minimap_room, 0, 1);
+	this->addChild(minimap_room, 0, 1);
 
 	auto minimap_room_texture = minimap_room->getTexture();
 
@@ -112,8 +108,6 @@ bool GameScene::init()
 	Global::key[D] = false;
 
 	this->schedule(schedule_selector(GameScene::enterFrame)); //지속적인 판단 (약 1/60초에 1번 실행됨)
-
-
 
 	//5. 플레이어 공격각도 설정 (8향)
 	attackSpotListBatchNode = SpriteBatchNode::create("char/aim.png", 50);
@@ -154,7 +148,7 @@ void GameScene::enterFrame(float dt) {
 
 	//공격 방향 지정자
 	attackSpotListBatchNode->setPosition(playerSprite->getPosition()); //center of player
-	attackSpotListBatchNode->setPositionY(playerSprite->getPositionY() + playerSprite->getContentSize().height / 2);
+	attackSpotListBatchNode->setPositionY(playerSprite->getPositionY() + playerSprite->getContentSize().height / 2.0f);
 
 
 	Player *p = playerObj; //변수명 줄이기
@@ -189,6 +183,16 @@ void GameScene::enterFrame(float dt) {
 	else {
 		playerSprite->setOpacity(255);
 	}
+
+
+	//각도 조정
+	//공격할 곳의 타겟을 잡는 역할
+	double playerX = attackSpotListBatchNode->getPositionX();
+	double playerY = Global::screenSizeY - attackSpotListBatchNode->getPositionY();
+	double diffX = mouseX - playerX;
+	double diffY = mouseY - playerY;
+	double angle = atan2(diffY, diffX) * 180 / M_PI;
+	attackSpotListBatchNode->setRotation(angle);
 }
 
 TransitionScene* GameScene::transition(int direction, float t, Scene * s) {
@@ -214,6 +218,7 @@ void GameScene::onEnter() {
 	auto keylistener = EventListenerKeyboard::create();
 
 	mouselistener->onMouseMove = CC_CALLBACK_1(GameScene::onMouseMove, this);
+	mouselistener->onMouseDown = CC_CALLBACK_1(GameScene::onMouseDown, this);
 	keylistener->onKeyPressed = CC_CALLBACK_2(GameScene::onKeyPressed, this);
 	keylistener->onKeyReleased = CC_CALLBACK_2(GameScene::onKeyReleased, this);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(mouselistener, this);
@@ -226,6 +231,7 @@ void GameScene::onExit()
 	delete playerObj; //new로 생성한 Object는 수동으로 메모리를 수거해야 한다.
 	delete aimTexture;
 	delete aimSprite;
+	delete HUD;
 	Layer::onExit();
 }
 
@@ -233,17 +239,11 @@ void GameScene::onMouseMove(Event *ev) {
 	EventMouse *e = (EventMouse*)ev;
 	mouseX = e->getLocation().x;
 	mouseY = e->getLocation().y;
-	//Global::mouseX = mouseX;
-	//Global::mouseY = mouseY;
-	/*
-	int playerX = playerSprite->getPositionX();
-	int playerY = playerSprite->getPositionY();
-	int diffX = mouseX - playerX;
-	int diffY = mouseY - playerY;
-	double angle = abs(atan2(diffY, diffX)) * 180 / 3.1415926535;
-	log("%lf", angle);
-	attackSpotListBatchNode->setRotation(angle);
-	*/
+}
+
+
+void GameScene::onMouseDown(Event *ev) {
+	log("%d %d", mouseX, mouseY);
 }
 
 void GameScene::onKeyPressed(EventKeyboard::KeyCode keyCode, Event * event) {
@@ -368,14 +368,50 @@ void GameScene::moveScene(int direction) {
 	//내위치 갱신
 	Global::currentPosX = ccx;
 	Global::currentPosY = ccy;
-	//장면이동
 	strcpy_s(Global::mapName, 256, resData::mapTemplate[Global::mapTemplate[ccx][ccy]]);
-	auto nextScene = GameScene::createScene();
-	auto trans = TransitionTurnOffTiles::create(0.5, nextScene);
-	srand(time(NULL));
+
+	//다음 장면을 붙여놓는다.
+	auto nextMap = TMXTiledMap::create("Scene/GameScene/TileMap/01.tmx"); //임시 디버그 (1)
+	MoveBy *transAction;
+	log("00");
+	switch (direction) {
+	case 0:
+		log("Herre!");
+		nextMap->setPositionY(-704); //위로 올라감 맵이;
+		transAction = MoveBy::create(0.5, Point(0, 704));
+		break;
+	case 1:
+		nextMap->setPositionY(704); //아래로 올라감 맵이
+		transAction = MoveBy::create(0.5, Point(0, -704));
+		break;
+	case 2:
+		nextMap->setPositionX(-1280); //왼
+		transAction = MoveBy::create(0.5, Point(1280, 0));
+		break;
+	case 3:
+		nextMap->setPositionX(1280); //오
+		transAction = MoveBy::create(0.5, Point(-1280, 0));
+		break;
+	}
+	rootNode->addChild(nextMap, 10, 11);
+	//거기로 애니메이션 한다. (rootNode 와 이동)
+//	rootNode->runAction(transAction);
+	auto Seq = Sequence::create(transAction, CallFunc::create(CC_CALLBACK_0(GameScene::trans, this)), NULL);
+	rootNode->runAction(Seq);
+	//장면이동
+	//auto Sequence = Sequence::create(Actions, CallFunc::create(CC_CALLBACK_0(Player::falseFlip, this)), NULL);
+	//auto nextScene = GameScene::createScene();
+	//auto trans = TransitionTurnOffTiles::create(0.5, nextScene);
+	//srand(time(NULL));
 	playerSprite->setOpacity(0);
-	HUD->setOpacity(0);
-	Director::getInstance()->replaceScene(transition(direction, 0.5, nextScene));
+	//스케쥴러를 중지한다 (게임 상의 정지)
+	this->unschedule(schedule_selector(GameScene::enterFrame));
+	//Director::getInstance()->replaceScene(transition(direction, 0.5, nextScene));
+}
+
+void GameScene::trans() {
+	auto nextScene = GameScene::createScene();
+	Director::getInstance()->replaceScene(nextScene);
 }
 
 bool GameScene::colideTestPointAndTile(Point & player, TMXObjectGroup * tilePos) {

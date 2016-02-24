@@ -4,6 +4,8 @@
 #include "cocos2d.h"
 #include "Global.h"
 #include "Player.h"
+#include "UIHUD.h"
+#include <cmath>
 USING_NS_CC;
 class GameScene : public cocos2d::Layer
 {
@@ -21,19 +23,22 @@ public:
 	virtual void onEnter();
 	virtual void onExit();
 	virtual void onMouseMove(Event * ev);
+	virtual void onMouseDown(Event * ev);
 	virtual void onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event);
 	virtual void onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event);
 
 
 	Node *rootNode;
 	Sprite *playerSprite;
-	Sprite *HUD;
+	UI_HUD *HUD;
 	TMXTiledMap *map;
 	Player *playerObj;
 	TMXLayer *metainfo;
 	TMXObjectGroup *objects;
 	Point GameScene::tileCoordForPosition(Point position);
 	void GameScene::enterFrame(float dt);
+
+	void trans();
 
 	bool moveable(int direction);
 	void moveScene(int direction);

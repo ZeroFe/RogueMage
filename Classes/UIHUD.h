@@ -1,0 +1,26 @@
+#pragma once
+#include "Player.h"
+#include "Global.h"
+#include "data_recources.h"
+
+USING_NS_CC;
+
+class UI_HUD {
+private:
+	Layer	*HUD; //HUD Layer
+	Sprite	*HUD_Background;
+	Sprite	*hpGage;
+	Sprite	*mpGage;
+public:
+	UI_HUD();
+	~UI_HUD();
+	Point getPosition(void);
+	int getPositionX(void);
+	int getPositionY(void);
+	void setPosition(Point& position);
+	void setPositionX(int xPosition);
+	void setPositionY(int yPosition);
+	void setAnchorPoint(Point& Anchorposition);
+	void hud_update(float dt);
+	Layer* getObject(void);
+};

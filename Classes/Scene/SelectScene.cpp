@@ -3,6 +3,9 @@
 #include "AchieveScene.h"
 #include "cocostudio/CocoStudio.h"
 #include "ui/CocosGUI.h"
+#include "Global.h"
+#include "data_recources.h"
+#include "RMAlgorithm/mapGenerator.h"
 
 USING_NS_CC;
 using namespace ui;
@@ -110,6 +113,38 @@ void SelectScene::doStartScene(Ref* pSender)
 {
 	// Call New Game
 	log("Start Scene");
+
+	//랜덤 맵을 만들어 놓는다.
+
+	//0. 필요한 메모리 할당
+
+	for (int i = 0; i < 10; i++) {
+		Global::mapData[i] = new int[10];
+		Global::mapTemplate[i] = new int[10];
+	}
+
+	//1. 5층용 맵 생성 (초기)
+
+	createMap::Map s = createMap::Map::Map();
+	s.make(1);
+	s.copyMap(Global::mapData);
+
+	//2. 템플릿 주입
+	srand(time(NULL));
+	for (int i = 0; i < 10; i++) {
+		for (int j = 0; j < 10; j++) {
+			if (Global::mapData[i][j] != '\0')
+				Global::mapTemplate[i][j] = rand() % resData::number_of_template;
+		}
+	}
+
+	//3. 시작점 글로벌 변수 지정하기
+	//Global::currentPos = Point(s.startx, s.starty);
+	Global::currentPosX = s.startx;
+	Global::currentPosY = s.starty;
+	log("current Position : %d %d", s.startx, s.starty);
+	//4. 맵 이름 주입
+	strcpy_s(Global::mapName, 256, resData::mapTemplate[Global::mapTemplate[s.startx][s.starty]]); //시작 맵
 
 	auto pScene = GameScene::createScene();
 	Director::getInstance()->pushScene(pScene);

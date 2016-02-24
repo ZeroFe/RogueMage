@@ -16,5 +16,4 @@ int **Global::mapTemplate = new int *[10];
 int Global::currentPosX = 0;
 int Global::currentPosY = 0;
 int Global::prevEnterPos = -1;
-
 bool *Global::key = new bool[4];

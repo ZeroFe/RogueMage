@@ -127,7 +127,8 @@ bool HelloWorld::init()
 		aimSprite[i]->setAnchorPoint(Point(-5, 0));
 		aimSprite[i]->setRotation(i * 45);
 		attackSpotListBatchNode->addChild(aimSprite[i]);
-		aimSprite[i]->setOpacity(127);
+		//aimSprite[i]->setOpacity(127);
+		break; //일단 한개만 (dbg)
 	}
 
 
@@ -229,21 +230,20 @@ void HelloWorld::onExit()
 }
 
 void HelloWorld::onMouseMove(Event *ev) {
-	/*
-	각도 재기 atan2 활용
-	log("mouse Moved");
-	EventMouse* e = (EventMouse*)ev;
-	CCLOG("mouse down %f, %f",e->getLocation().x,e->getLocation().y);
-	*/
-
 	EventMouse *e = (EventMouse*)ev;
-	int mouseX = e->getLocation().x;
-	int mouseY = e->getLocation().y;
-	double angle = atan2(mouseY - playerSprite->getPositionY(), mouseX - playerSprite->getPositionX());
-	angle = angle * 3.1416 / 180.0f;//x degree = x * π / 180 radian
-	playerSprite->setRotation(angle);
-	//aimSprite[i]->setOpacity(127);
+	mouseX = e->getLocation().x;
+	mouseY = e->getLocation().y;
+	//Global::mouseX = mouseX;
+	//Global::mouseY = mouseY;
+	/*
+	int playerX = playerSprite->getPositionX();
+	int playerY = playerSprite->getPositionY();
+	int diffX = mouseX - playerX;
+	int diffY = mouseY - playerY;
+	double angle = abs(atan2(diffY, diffX)) * 180 / 3.1415926535;
 	log("%lf", angle);
+	attackSpotListBatchNode->setRotation(angle);
+	*/
 }
 
 void HelloWorld::onKeyPressed(EventKeyboard::KeyCode keyCode, Event * event) {

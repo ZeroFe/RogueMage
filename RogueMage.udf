@@ -28,5 +28,15 @@
         <LastRunType Value="Windows" />
       </Value>
     </Item>
+    <Item Key="TabsParamsKey">
+      <Value ctype="TabsInfo">
+        <OpenedDocuments>
+          <FilePathData Path="Scene/GameScene/mapTemp01.csd" />
+          <FilePathData Path="Scene/GameScene/mapTemp02.csd" />
+          <FilePathData Path="Scene/GameScene/MainScene.csd" />
+        </OpenedDocuments>
+        <ActiveDocument Path="Scene/GameScene/mapTemp01.csd" />
+      </Value>
+    </Item>
   </Properties>
 </UserData>

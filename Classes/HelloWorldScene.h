@@ -50,6 +50,8 @@ public:
 	Sprite **aimSprite; //메모리 해제 필요
 
 	enum {W, A, S, D};
+
+	int mouseX, mouseY;
 };
 
 #endif // __HELLOWORLD_SCENE_H__

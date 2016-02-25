@@ -57,6 +57,9 @@
     <ClCompile Include="..\Classes\RMAlgorithm\Markup.cpp">
       <Filter>src\RMAlgorithm</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\UIPopup.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -94,6 +97,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\RMAlgorithm\Markup.h">
       <Filter>src\RMAlgorithm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\UIPopup.h">
+      <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

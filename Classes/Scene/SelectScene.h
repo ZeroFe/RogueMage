@@ -1,6 +1,7 @@
 #ifndef __SceneTrans__SelectScene__
 #define __SceneTrans__SelectScene__
 
+#include "UIPopup.h"
 #include "cocos2d.h"
 #include "cocostudio/CocoStudio.h"
 #include "ui/CocosGUI.h"
@@ -48,6 +49,8 @@ private:
 	Node *SelectLayer;
 	Node *pLayer;
 	int pSelect;
+
+	UI_Popup* popup;
 };
 
 #endif /* defined(__SceneTrans__SelectScene__) */

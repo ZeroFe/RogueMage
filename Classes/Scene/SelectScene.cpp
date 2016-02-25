@@ -1,6 +1,7 @@
 #include "SelectScene.h"
 #include "GameScene.h"
 #include "AchieveScene.h"
+#include "UIPopup.h"
 #include "cocostudio/CocoStudio.h"
 #include "ui/CocosGUI.h"
 #include "Global.h"
@@ -176,58 +177,20 @@ void SelectScene::doExit(Ref* pSender)
 	// Call Exit Dialog
 	log("Exit");
 
-	Popup_Call(CSLoader::createNode("Popup/MenuPopup/MenuPopupLayer.csb"));
-	Popup_setButton("btn_ok", 1);
-	Popup_setButton("btn_cancel", 2);
-}
-
-/*
-popupLayer를 불러오고 SelectLayer 정지
-popupLayer : 코코스 스튜디오로 만든 팝업 생성용 레이어(노드)
-*/
-void SelectScene::Popup_Call(Node* popupLayer)
-{
-	if (!popupLayer) return;
-	pLayer = popupLayer;
-	Size size = Director::getInstance()->getWinSize();
-	pLayer->setPosition(size.width / 2, size.height / 2);
-	// Need define popupLayer Zorder variable
-	addChild(pLayer, 100);
-	Director::getInstance()->getEventDispatcher()->pauseEventListenersForTarget(SelectLayer, true);
-}
-
-// 팝업 닫기
-void SelectScene::Popup_Close()
-{
-	removeChild(pLayer, true);
-	Director::getInstance()->getEventDispatcher()->resumeEventListenersForTarget(SelectLayer, true);
-}
-
-// 팝업 버튼 정보 설정
-void SelectScene::Popup_setButton(const std::string &name, const int tag)
-{
-	Button* pButton = static_cast<Button*>(pLayer->getChildByName(name));
-	pButton->setTag(tag);
-	pButton->addTouchEventListener(CC_CALLBACK_2(SelectScene::Popup_onBtnClickCallbackFnc, this));
-}
-
-
-// 팝업 버튼 콜백함수 설정
-void SelectScene::Popup_onBtnClickCallbackFnc(Ref *pSender, ui::Widget::TouchEventType touchType)
-{
-	if (touchType == ui::Widget::TouchEventType::ENDED)
-	{
-		pSelect = ((cocos2d::ui::Button*)pSender)->getTag();    //어떤 버튼인지 체크를 위해 버튼에 추가된 Tag를 맴버변수에서 가지고있도록 한다.
-		CallFuncN *action = CallFuncN::create(CC_CALLBACK_1(SelectScene::Popup_Callback, this));
-		auto replace = Sequence::create(action, nullptr);
-
-		this->runAction(replace);
-	}
+	popup = new UI_Popup();
+	popup->setParentLayer(SelectLayer);
+	popup->setPopupLayer(CSLoader::createNode("Popup/MenuPopup/MenuPopupLayer.csb"));
+	popup->setCallbackFunc(CC_CALLBACK_1(SelectScene::Popup_Callback, this));
+	popup->setButton("btn_ok", 1);
+	popup->setButton("btn_cancel", 2);
+	popup->call();
 }
 
 // 팝업 버튼 클릭시 불러오는 함수
 void SelectScene::Popup_Callback(Ref* pSender)
 {
+	pSelect = popup->getBtnTag();
+
 	// 종료
 	if (pSelect == 1)
 	{
@@ -242,5 +205,5 @@ void SelectScene::Popup_Callback(Ref* pSender)
 	}
 
 	// 팝업 닫기
-	Popup_Close();
+	popup->close();
 }

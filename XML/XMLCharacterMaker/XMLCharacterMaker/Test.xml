@@ -1,0 +1,13 @@
+<SETTING>
+<COUNT NUM="3"/>
+</SETTING>
+<CHAR>
+<NAME>asd</NAME>
+<SPRITE>asdasfas</SPRITE>
+<STAT HP="1" MP="2" MRegen="3"/>
+<STAT ATK="4" DEF="5" SPD="6" ASPD="7"/>
+<STORY>
+<LINE>asdfasd</LINE>
+<LINE>asdasd</LINE>
+</STORY>
+</CHAR>

@@ -31,13 +31,14 @@ void UI_HUD::setPosition(Point& position) {
 // minimap 그리기
 void UI_HUD::draw_minimap()
 {
-	auto minimap_room = SpriteBatchNode::create(resData::hudMinimap[0], 50);
+	auto minimap_room = Node::create();
+	//auto minimap_room = SpriteBatchNode::create(resData::hudMinimap[0], 50);
 	Point hudPos = Point(1105 - Global::currentPosX * 64, 840 - Global::currentPosY * 36);
 	minimap_room->setPosition(hudPos);
 	//rootNode->addChild(minimap_room, 0, 1);
 	HUD->addChild(minimap_room, 0, 1);
 
-	auto minimap_room_texture = minimap_room->getTexture();
+	//auto minimap_room_texture = minimap_room->getTexture();
 
 	Point centerPoint(0, 0); //미니맵을 어디에 표시할 지 결정한다.
 	for (int i = 0; i < 10; i++) {
@@ -51,7 +52,20 @@ void UI_HUD::draw_minimap()
 				continue;
 
 			// 미니맵 그리기
-			auto pTemp = Sprite::createWithTexture(minimap_room_texture);
+			std::string mSpr = resData::hudMinimap[0];
+			if (Global::mapData[i][j] == 'B')
+			{
+				mSpr = resData::hudMinimap[2];
+			}
+			if (Global::mapData[i][j] == 'T')
+			{
+				mSpr = resData::hudMinimap[5];
+			}
+			if(Global::mapData[i][j] == 'C')
+			{
+				mSpr = resData::hudMinimap[6];
+			}
+			auto pTemp = Sprite::create(mSpr);
 			pTemp->setPosition(Point(centerPoint.x + i * 64, centerPoint.y + j * 36));
 			if (i == Global::currentPosX && j == Global::currentPosY)
 				pTemp->setColor(Color3B::RED);

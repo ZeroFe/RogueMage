@@ -21,6 +21,9 @@ public:
 	void setPositionX(int xPosition);
 	void setPositionY(int yPosition);
 	void setAnchorPoint(Point& Anchorposition);
+
+	void draw_minimap();
+
 	void hud_update(float dt);
 	Layer* getObject(void);
 };

@@ -14,5 +14,9 @@ namespace resData {
 	//게임 맵 탬플릿 경로
 	extern int number_of_template;
 	extern const char * mapTemplate[];
+
+	// HUD 리소스 파일 경로
+	extern const char * hudResource[];
+	extern const char * hudMinimap[];
 }
 #endif

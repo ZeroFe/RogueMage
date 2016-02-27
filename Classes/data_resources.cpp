@@ -28,3 +28,12 @@ const char * resData::mapTemplate[] = {
 	"Scene/GameScene/mapTemp14.csb",
 	"Scene/GameScene/mapTemp15.csb"
 };
+const char * resData::hudMinimap[] = {
+	"char/hud/minimap/Normal.png",
+	"char/hud/minimap/Dark.png",
+	"char/hud/minimap/Boss1.png",
+	"char/hud/minimap/Boss2.png",
+	"char/hud/minimap/Boss3.png",
+	"char/hud/minimap/Secret.png",
+	"char/hud/minimap/Shop.png"
+};

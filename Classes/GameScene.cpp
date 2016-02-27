@@ -34,8 +34,10 @@ bool GameScene::init()
 		return false;
 	}
 	//rootNode = CSLoader::createNode(Global::mapName);
+	log("GameScene : init");
+
 	srand(time(NULL));
-	rootNode = CSLoader::createNode("Scene/GameScene/mapTemp01.csb");
+	rootNode = CSLoader::createNode(resData::mapTemplate[0]);
 	//임시맵용 하나만 불러온다
 	map = (TMXTiledMap *)rootNode->getChildByName("gameMap"); //cocos studio 에서 정의한 TileMap 이름
 	objects = map->getObjectGroup("SpawnList"); //SpawnList Object 그룹 가져옴 (Object 속성일 경우)
@@ -56,6 +58,7 @@ bool GameScene::init()
 	//1. HUD 생성
 	HUD = new UI_HUD();
 	HUD->setPosition(Point(0, 960));
+	HUD->draw_minimap();
 	this->addChild(HUD->getObject());//주의 : this임
 
 	//2. Player 생성 && Player Object 생성
@@ -72,8 +75,9 @@ bool GameScene::init()
 	playerObj->ActIdle((Scene*)rootNode);
 
 	//3. minimap 그리기
+	/*
 	auto minimap_room = SpriteBatchNode::create("res/50x29map.png", 50);
-	Point hudPos = Point(900, 700);
+	Point hudPos = Point(1100 - Global::currentPosX * 50, 816 - Global::currentPosY * 29);
 	minimap_room->setPosition(hudPos);
 	//rootNode->addChild(minimap_room, 0, 1);
 	this->addChild(minimap_room, 0, 1);
@@ -93,6 +97,7 @@ bool GameScene::init()
 			}
 		}
 	}
+	*/
 	//4. 플레이어 무빙 설정
 	//player moving init
 	Player *p = playerObj;//변수 길게 쓰기 귀찮아서 추가한 지역 변수

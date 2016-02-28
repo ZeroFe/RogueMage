@@ -4,51 +4,20 @@
 #include "Player.h"
 #include "Global.h"
 #include "data_recources.h"
-
 USING_NS_CC;
-
 using namespace cocostudio::timeline;
+Scene* GameScene::createScene(){auto a=Scene::create();a->addChild(GameScene::create());return a;}
+bool GameScene::init() {
+	if (!Layer::init()){return false;}
 
-Scene* GameScene::createScene()
-{
-	// 'scene' is an autorelease object
-	auto scene = Scene::create();
-
-	// 'layer' is an autorelease object
-	auto layer = GameScene::create();
-
-	// add layer as a child to scene
-	scene->addChild(layer);
-
-	// return the scene
-	return scene;
-}
-
-// on "init" you need to initialize your instance
-bool GameScene::init()
-{
-	//////////////////////////////
-	// 1. super init first
-	if (!Layer::init())
-	{
-		return false;
-	}
-	//rootNode = CSLoader::createNode(Global::mapName);
-	srand(time(NULL));
-	rootNode = CSLoader::createNode("Scene/GameScene/mapTemp01.csb");
-	//임시맵용 하나만 불러온다
+	/*rootNode = CSLoader::createNode(Global::mapName); //임시로 막아놓음
+	srand(time(NULL));*/
+	rootNode = CSLoader::createNode(resData::mapTemplate[0]); //Debug : 첫번째 맵만 불러옴
 	map = (TMXTiledMap *)rootNode->getChildByName("gameMap"); //cocos studio 에서 정의한 TileMap 이름
-	objects = map->getObjectGroup("SpawnList"); //SpawnList Object 그룹 가져옴 (Object 속성일 경우)
 	addChild(rootNode);
 
-
-	//test
-	auto pLabel = LabelTTF::create(Global::mapName, "Arial", 34); //Current Map template name
-	pLabel->setPosition(Point(300, 80));
-	pLabel->setColor(Color3B(255, 255, 255));
-	this->addChild(pLabel);
-
-	//벽 등의 메타데이터 뽑아보기
+	//메타데이터를 가져온다.
+	objects = map->getObjectGroup("SpawnList");
 	Wall = map->getObjectGroup("Wall");
 	Damage = map->getObjectGroup("Damage");
 
@@ -59,7 +28,7 @@ bool GameScene::init()
 	this->addChild(HUD->getObject());//주의 : this임
 
 	//2. Player 생성 && Player Object 생성
-	playerSprite = Sprite::create("char/playable.png");
+	playerSprite = Sprite::create(resData::recources[resData::PLAYER_SPRITE]);
 	playerSprite->setAnchorPoint(Point(0.5, 0));//0.5 0
 	rootNode->addChild(playerSprite);
 	const char* startPos[] = {
@@ -69,17 +38,14 @@ bool GameScene::init()
 	int y = objects->getObject(startPos[Global::prevEnterPos + 1])["y"].asInt();
 	playerSprite->setPosition(Point(x, y));
 	playerObj = new Player(playerSprite);
-	playerObj->ActIdle((Scene*)rootNode);
+	playerObj->ActIdle();
 
 	//3. minimap 그리기
-	auto minimap_room = SpriteBatchNode::create("res/50x29map.png", 50);
+	auto minimap_room = SpriteBatchNode::create(resData::recources[resData::MINIMAP_BRICK_NORMAL], 50);
 	Point hudPos = Point(900, 700);
 	minimap_room->setPosition(hudPos);
-	//rootNode->addChild(minimap_room, 0, 1);
 	this->addChild(minimap_room, 0, 1);
-
 	auto minimap_room_texture = minimap_room->getTexture();
-
 	Point centerPoint(0, 0); //미니맵을 어디에 표시할 지 결정한다.
 	for (int i = 0; i < 10; i++) {
 		for (int j = 0; j < 10; j++) {
@@ -93,6 +59,7 @@ bool GameScene::init()
 			}
 		}
 	}
+
 	//4. 플레이어 무빙 설정
 	//player moving init
 	Player *p = playerObj;//변수 길게 쓰기 귀찮아서 추가한 지역 변수
@@ -106,8 +73,6 @@ bool GameScene::init()
 	Global::key[A] = false;
 	Global::key[S] = false;
 	Global::key[D] = false;
-
-	this->schedule(schedule_selector(GameScene::enterFrame)); //지속적인 판단 (약 1/60초에 1번 실행됨)
 
 	//5. 플레이어 공격각도 설정 (8향)
 	attackSpotListBatchNode = SpriteBatchNode::create("char/aim.png", 50);
@@ -125,14 +90,8 @@ bool GameScene::init()
 		break; //일단 한개만 (dbg)
 	}
 
+	this->schedule(schedule_selector(GameScene::enterFrame)); //지속적인 판단 (약 1/60초에 1번 실행됨)
 
-	//Enemyes, Objects test
-	//test : 1 한 마리의 적 (bug)
-	//주인공y좌표 - 적y좌표 , 주인공x좌표 - 적y좌표 (원점 기준으로 맞춰주기 위해 탄젠트의 역함수이다)
-	auto enemy1Sprite = Sprite::create("char/enemy.png");
-	enemy1Sprite->setAnchorPoint(Point(0.5, 0));//적 역시 standing 자세를 취하고 있다.
-	enemy1Sprite->setPosition(Point(330, 300));
-	rootNode->addChild(enemy1Sprite);
 	return true;
 }
 
@@ -145,6 +104,10 @@ Point GameScene::tileCoordForPosition(Point position) {
 
 void GameScene::enterFrame(float dt) {
 	//1초에 약 60번 실행되는 지속 판단 함수이다.
+
+	//플레이어 플립캔슬 관련 (액션)
+	if (!Global::key[A] && !Global::key[D]) //단타시 애니메이션이 멈추는 것을 방지
+		playerObj->eval(); //키가 안눌려있을시 감시
 
 	//공격 방향 지정자
 	attackSpotListBatchNode->setPosition(playerSprite->getPosition()); //center of player
@@ -213,10 +176,8 @@ TransitionScene* GameScene::transition(int direction, float t, Scene * s) {
 
 void GameScene::onEnter() {
 	Layer::onEnter();
-	//키보드 입력으로 캐릭터 움직이기
 	auto mouselistener = EventListenerMouse::create();
 	auto keylistener = EventListenerKeyboard::create();
-
 	mouselistener->onMouseMove = CC_CALLBACK_1(GameScene::onMouseMove, this);
 	mouselistener->onMouseDown = CC_CALLBACK_1(GameScene::onMouseDown, this);
 	keylistener->onKeyPressed = CC_CALLBACK_2(GameScene::onKeyPressed, this);
@@ -247,21 +208,24 @@ void GameScene::onMouseDown(Event *ev) {
 }
 
 void GameScene::onKeyPressed(EventKeyboard::KeyCode keyCode, Event * event) {
-	//	enterFrame();
-	playerObj->ActFlip((Scene*)rootNode);
 	switch (keyCode) {
-		//후에 MAP 자료구조 도입 예정
 	case EventKeyboard::KeyCode::KEY_W:
-		Global::key[W] = true;
+		//if (!Global::key[S])
+			Global::key[W] = true;
 		break;
 	case EventKeyboard::KeyCode::KEY_A:
-		Global::key[A] = true;
+		//if (!Global::key[D])
+			Global::key[A] = true;
+			playerObj->ActFlip(Player::RIGHT);
 		break;
 	case EventKeyboard::KeyCode::KEY_S:
-		Global::key[S] = true;
+		//if (!Global::key[W])
+			Global::key[S] = true;
 		break;
 	case EventKeyboard::KeyCode::KEY_D:
-		Global::key[D] = true;
+		//if (!Global::key[A])
+			Global::key[D] = true;
+			playerObj->ActFlip(Player::LEFT);
 		break;
 	}
 
@@ -283,35 +247,30 @@ void GameScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event * event)
 		Global::key[D] = false;
 		break;
 	}
+
 	//밑내용은 디버그용
 	switch (keyCode) {
 	case EventKeyboard::KeyCode::KEY_DOWN_ARROW:
-		log("down");
 		if (moveable(0)) {
 			moveScene(0);
 		}
 		break;
 	case EventKeyboard::KeyCode::KEY_UP_ARROW:
-		log("up");
 		if (moveable(1)) {
 			moveScene(1);
 		}
 		break;
 	case EventKeyboard::KeyCode::KEY_LEFT_ARROW:
-		log("left");
 		if (moveable(2)) {
 			moveScene(2);
 		}
 		break;
 	case EventKeyboard::KeyCode::KEY_RIGHT_ARROW:
-		log("right");
 		if (moveable(3)) {
 			moveScene(3);
 		}
 		break;
 	}
-	
-	playerObj->ActIdle((Scene*)rootNode);
 }
 
 

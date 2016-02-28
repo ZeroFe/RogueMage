@@ -163,7 +163,7 @@ xcopy /Y /Q "$(COCOS_X_ROOT)\cocos2d-x-3.10\prebuilt\win32\*.*" "$(OutDir)"
     <ClCompile Include="..\Classes\Scene\StartScene.cpp" />
     <ClCompile Include="..\Classes\UIPopup.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="UIHUD.cpp" />
+    <ClCompile Include="..\Classes\UIHUD.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h" />

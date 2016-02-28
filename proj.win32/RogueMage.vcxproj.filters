@@ -57,10 +57,13 @@
     <ClCompile Include="..\Classes\UIPopup.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\UIHUD.h">
+    <ClCompile Include="..\Classes\UIHUD.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\UIHUD.cpp">
+    <ClCompile Include="..\Classes\Character.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Enemy.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
@@ -99,6 +102,13 @@
       <Filter>src\RMAlgorithm</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\UIPopup.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\enemy.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\UIHUD.h" />
+    <ClInclude Include="..\Classes\Character.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

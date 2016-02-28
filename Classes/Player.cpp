@@ -1,10 +1,16 @@
 #include "Player.h"
+#include "Character.h"
 #include "Global.h"
 
 Player::Player(Sprite *pObj) {
 	player = pObj;
 	fliping = false;
 	stz = true; //character 안정화
+
+
+	//능력치설정
+	attack = 100;
+	defense = 50;
 }
 
 Sprite* Player::get() {

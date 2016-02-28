@@ -1,6 +1,6 @@
 #pragma once
 #include "cocos2d.h"
-
+#include "Character.h"
 USING_NS_CC;
 /**
 플레이 가능한 캐릭터이다.
@@ -21,6 +21,10 @@ private:
 	enum { W, A, S, D }; //wasd 키 enum 변수 (0, 1, 2, 3)
 	bool fliping;
 	bool stz; //character 안정화
+
+	//능력치
+	int attack;
+	int defense;
 public:
 	
 	void setflipingFalse(void);
@@ -40,4 +44,7 @@ public:
 	void ActWalk(); //캐릭터를 걷는 모션을 재생한다. (매개 변수를 받으나 사실상 필요하지 않다. NULL 삽입해도 무방)
 	void ActIdle(); //캐릭터를 가만히 있는 모션을 재생한다. (매개 변수를 받으나 사실상 필요하지 않다.)
 	void ActFlip(int direction = LEFT); //캐릭터를 뒤집는 모션을 재생한다. (매개 변수를 받으나 사실상 필요하지 않다.)
+
+	void sendDamage(Vector<Sprite *> enemys, double* damages); //적에게 데미지를 보낸다.
+	void receiveDamage(double joule); //피해를 입는다.
 };

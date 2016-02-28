@@ -11,6 +11,7 @@ private:
 	Sprite	*HUD_Background;
 	Sprite	*hpGage;
 	Sprite	*mpGage;
+	Sprite	*stageGage;
 public:
 	UI_HUD();
 	~UI_HUD();
@@ -22,6 +23,9 @@ public:
 	void setPositionY(int yPosition);
 	void setAnchorPoint(Point& Anchorposition);
 
+	void setHpBar();
+	void setMpBar();
+	void setStageBar();
 	void draw_minimap();
 
 	void hud_update(float dt);

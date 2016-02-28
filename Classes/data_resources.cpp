@@ -28,6 +28,13 @@ const char * resData::mapTemplate[] = {
 	"Scene/GameScene/mapTemp14.csb",
 	"Scene/GameScene/mapTemp15.csb"
 };
+const char * resData::hudResource[] = {
+	"char/hud/background.png",
+	"char/hud/panel.png",
+	"char/hud/hpBar.png",
+	"char/hud/mpBar.png",
+	"char/hud/stageBar.png"
+};
 const char * resData::hudMinimap[] = {
 	"char/hud/minimap/Normal.png",
 	"char/hud/minimap/Dark.png",

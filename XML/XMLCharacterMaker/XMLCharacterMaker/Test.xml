@@ -1,5 +1,5 @@
 <SETTING>
-<COUNT NUM="3"/>
+<COUNT NUM="4"/>
 </SETTING>
 <CHAR>
 <NAME>awqqw</NAME>
@@ -28,5 +28,14 @@
 <STORY>
 <LINE>asd</LINE>
 <LINE>asd</LINE>
+</STORY>
+</CHAR>
+<CHAR>
+<NAME>tester</NAME>
+<SPRITE>adafdasdf</SPRITE>
+<STAT HP="1" MP="2" MRegen="6"/>
+<STAT ATK="34" DEF="2" SPD="3" ASPD="4"/>
+<STORY>
+<LINE>qeqweda</LINE>
 </STORY>
 </CHAR>

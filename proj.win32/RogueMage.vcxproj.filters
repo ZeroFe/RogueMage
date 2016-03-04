@@ -19,6 +19,9 @@
     <Filter Include="src\EventMgr">
       <UniqueIdentifier>{f399e7eb-b1b4-4907-970c-f88ded0fad40}</UniqueIdentifier>
     </Filter>
+    <Filter Include="resource\XML">
+      <UniqueIdentifier>{9f4deeba-9e52-451c-bf19-e2bf8a706473}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -107,8 +110,10 @@
     <ClInclude Include="..\Classes\enemy.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\UIHUD.h" />
     <ClInclude Include="..\Classes\Character.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\UIHUD.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

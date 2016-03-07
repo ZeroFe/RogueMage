@@ -37,6 +37,10 @@ bool SelectScene::init()
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
+	SelectLayer = CSLoader::createNode("Scene/SelectScene/SelectSceneLayer.csb");
+
+	addChild(SelectLayer);
+
 	initButton();
 
 	return true;
@@ -45,10 +49,6 @@ bool SelectScene::init()
 // 버튼 설정(리스너 설정)
 void SelectScene::initButton()
 {
-	SelectLayer = CSLoader::createNode("Scene/SelectScene/SelectSceneLayer.csb");
-
-	addChild(SelectLayer);
-
 	// 메뉴 버튼들 찾아서 리스너 설정
 	Button* MenuButton1 = static_cast<Button*>(SelectLayer->getChildByName("MenuButton1"));
 	Button* MenuButton2 = static_cast<Button*>(SelectLayer->getChildByName("MenuButton2"));
@@ -154,7 +154,6 @@ void SelectScene::doStartScene(Ref* pSender)
 // 불러오기
 void SelectScene::doContinueScene(Ref* pSender)
 {
-	// Call last play
 	log("Continue Scene");
 	/*
 	auto pScene = TestScene2::createScene();
@@ -165,7 +164,6 @@ void SelectScene::doContinueScene(Ref* pSender)
 // 업적
 void SelectScene::doAchieveScene(Ref* pSender)
 {
-	// Call Acheieve Scene
 	log("Achieve Scene");
 	auto pScene = AchieveScene::createScene();
 	Director::getInstance()->replaceScene(pScene);

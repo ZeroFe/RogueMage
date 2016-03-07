@@ -92,6 +92,10 @@
           <Folder Name="StartScene">
             <Project Name="StartSceneLayer.csd" Type="Layer" />
           </Folder>
+          <Folder Name="CharacterScene">
+            <Folder Name="Image" />
+            <Project Name="CharacterLayer.csd" Type="Layer" />
+          </Folder>
         </Folder>
         <TTF Name="ARCADECLASSIC.TTF" />
       </RootFolder>

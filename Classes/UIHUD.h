@@ -9,9 +9,12 @@ class UI_HUD {
 private:
 	Layer	*HUD; //HUD Layer
 	Sprite	*HUD_Background;
+
 	Sprite	*hpGage;
 	Sprite	*mpGage;
 	Sprite	*stageGage;
+
+	Node	*minimap_room;
 public:
 	UI_HUD();
 	~UI_HUD();
@@ -26,7 +29,9 @@ public:
 	void setHpBar();
 	void setMpBar();
 	void setStageBar();
+
 	void draw_minimap();
+	void remove_minimap();
 
 	void hud_update(float dt);
 	Layer* getObject(void);

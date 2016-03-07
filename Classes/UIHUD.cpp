@@ -59,7 +59,7 @@ void UI_HUD::setStageBar()
 // minimap ±×¸®±â
 void UI_HUD::draw_minimap()
 {
-	auto minimap_room = Node::create();
+	minimap_room = Node::create();
 	//auto minimap_room = SpriteBatchNode::create(resData::hudMinimap[0], 50);
 	Point hudPos = Point(1105 - Global::currentPosX * 64, 840 - Global::currentPosY * 36);
 	minimap_room->setPosition(hudPos);
@@ -100,6 +100,12 @@ void UI_HUD::draw_minimap()
 			minimap_room->addChild(pTemp);
 		}
 	}
+}
+
+void UI_HUD::remove_minimap()
+{
+	HUD->removeChild(minimap_room, true);
+	minimap_room->release();
 }
 
 UI_HUD::~UI_HUD() {

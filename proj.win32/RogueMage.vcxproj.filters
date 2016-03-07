@@ -51,14 +51,23 @@
     <ClCompile Include="..\Classes\GameScene.cpp">
       <Filter>src\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="UIHUD.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\RMAlgorithm\Markup.cpp">
       <Filter>src\RMAlgorithm</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\UIPopup.cpp">
       <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\UIHUD.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Character.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Enemy.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Scene\CharacterScene.cpp">
+      <Filter>src\Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -92,14 +101,23 @@
     <ClInclude Include="..\Classes\GameScene.h">
       <Filter>src\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\UIHUD.h">
-      <Filter>src</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\RMAlgorithm\Markup.h">
       <Filter>src\RMAlgorithm</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\UIPopup.h">
       <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\enemy.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Character.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\UIHUD.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Scene\CharacterScene.h">
+      <Filter>src\Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

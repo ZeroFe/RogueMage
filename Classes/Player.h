@@ -1,6 +1,6 @@
 #pragma once
 #include "cocos2d.h"
-
+#include "Character.h"
 USING_NS_CC;
 /**
 플레이 가능한 캐릭터이다.
@@ -8,8 +8,7 @@ USING_NS_CC;
 class Player {
 
 private:
-	Sprite* player; //객체 생성 당시 외부에서 받아오는 player Sprite의 Pointer 저장
-	Sprite* playerSprite; //위와 동일한 객체 (통합 필요)
+	Sprite* player; //플레이어 sprite
 	Texture2D* playerTexture; //플레이어의 Texture (메모리 관리)
 
 	Animation* idle; //가만히 서있는 Animation
@@ -19,19 +18,18 @@ private:
 	RepeatForever* __idle; //애니메이션 반복
 	RepeatForever* __walk; //애니메이션 반복
 	enum { IDLE, WALK, FLIP }; //애니메이션 지정 enum 상수
-	enum { TAG_PLAYER = 100 }; //안 쓰이는 enum상수 (deprecated)
-	int currentAction; //현재 캐릭터가 취하고 있는 Action 종류 (enum 상수 대입)
-	int lookAt;
-	bool fliping; //캐릭터 뒤집히는 모션 정지 방지 (ActIdle 대응)
-	void falseFlip(void); //flip Cancel 관련 함수 (캐릭터가 뒤집히는 과정이 끝나면 플래그 변수를 바꿈)
-	enum {W, A, S, D}; //wasd 키 enum 변수 (0, 1, 2, 3)
+	enum { W, A, S, D }; //wasd 키 enum 변수 (0, 1, 2, 3)
+	bool fliping;
+	bool stz; //character 안정화
 
-
-
-
-
+	//능력치
+	int attack;
+	int defense;
 public:
-
+	
+	void setflipingFalse(void);
+	void eval(void);
+	enum { LEFT, RIGHT };
 	//moving Variable (public is temp)
 	double walkSpeed;
 	double f; //반발력
@@ -40,13 +38,13 @@ public:
 	double vy; //1프레임당 y위치 변화량
 	double power; //캐릭터에 가해질 힘 (이동)
 
-
-
 	//Animation List도 하드코딩
 	Sprite* get();
 	Player(Sprite* player); //플레이어 오브젝트의 생성자이다. Sprite 객체를 외부에서 만들고 그 포인터만을 매개변수로 받는다.
-	Player(const char* filename = "char/character_sprite.png", int size = 0, int width = 0, int height = 0); //디버깅용 over-load함수
-	void ActWalk(Scene* s); //캐릭터를 걷는 모션을 재생한다. (매개 변수를 받으나 사실상 필요하지 않다. NULL 삽입해도 무방)
-	void ActIdle(Scene* s); //캐릭터를 가만히 있는 모션을 재생한다. (매개 변수를 받으나 사실상 필요하지 않다.)
-	void ActFlip(Scene* p); //캐릭터를 뒤집는 모션을 재생한다. (매개 변수를 받으나 사실상 필요하지 않다.)
+	void ActWalk(); //캐릭터를 걷는 모션을 재생한다. (매개 변수를 받으나 사실상 필요하지 않다. NULL 삽입해도 무방)
+	void ActIdle(); //캐릭터를 가만히 있는 모션을 재생한다. (매개 변수를 받으나 사실상 필요하지 않다.)
+	void ActFlip(int direction = LEFT); //캐릭터를 뒤집는 모션을 재생한다. (매개 변수를 받으나 사실상 필요하지 않다.)
+
+	void sendDamage(Vector<Sprite *> enemys, double* damages); //적에게 데미지를 보낸다.
+	void receiveDamage(double joule); //피해를 입는다.
 };

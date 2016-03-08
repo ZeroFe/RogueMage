@@ -11,7 +11,8 @@ const char * resData::recources[] = {
 	"particle/largeBrush.png",
 	"char/playable.png",
 	"res/50x29map.png",
-	"char/enemy.png"
+	"char/enemy.png",
+	"char/spr_walk.png"
 };
 int resData::number_of_template = 15;
 const char * resData::mapTemplate[] = {

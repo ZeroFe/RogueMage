@@ -104,10 +104,13 @@ Point GameScene::tileCoordForPosition(Point position) {
 
 void GameScene::enterFrame(float dt) {
 	//1초에 약 60번 실행되는 지속 판단 함수이다.
+	//평범한 땅의 Gid 는 11이다.
+	//auto layer = map->layerNamed("Background");
+	//Point tilePos = tileCoordForPosition(playerSprite->getPosition());
+	//log("%u", layer->getTileGIDAt(Vec2(tilePos.x, tilePos.y)));
 
-	//플레이어 플립캔슬 관련 (액션)
-	if (!Global::key[A] && !Global::key[D]) //단타시 애니메이션이 멈추는 것을 방지
-		playerObj->eval(); //키가 안눌려있을시 감시
+	//플레이어 객체를 안정화한다.
+	playerObj->stabilization();
 
 	//공격 방향 지정자
 	attackSpotListBatchNode->setPosition(playerSprite->getPosition()); //center of player
@@ -205,6 +208,12 @@ void GameScene::onMouseMove(Event *ev) {
 
 void GameScene::onMouseDown(Event *ev) {
 	log("%d %d", mouseX, mouseY);
+	double playerX = attackSpotListBatchNode->getPositionX();
+	double playerY = Global::screenSizeY - attackSpotListBatchNode->getPositionY();
+	double diffX = mouseX - playerX;
+	double diffY = mouseY - playerY;
+	double angle = atan2(diffY, diffX) * 180 / M_PI;
+	playerObj->basicAttack((Scene*)this, Point(playerSprite->getPositionX(), playerSprite->getPositionY()), angle);
 }
 
 void GameScene::onKeyPressed(EventKeyboard::KeyCode keyCode, Event * event) {

@@ -1,15 +1,21 @@
 #pragma once
 #include "cocos2d.h"
 #include "Character.h"
+#include "data_recources.h"
+#include "Global.h"
+
 USING_NS_CC;
 /**
 플레이 가능한 캐릭터이다.
 */
-class Player {
+class Player : public Layer {
 
 private:
 	Sprite* player; //플레이어 sprite
 	Texture2D* playerTexture; //플레이어의 Texture (메모리 관리)
+
+	SpriteBatchNode * playerWalk; //걷는 플레이어의 sprite & Texture
+	Texture2D * playerWalk_texture2D;
 
 	Animation* idle; //가만히 서있는 Animation
 	Animation* walk; //걷는 Animation
@@ -22,13 +28,18 @@ private:
 	bool fliping;
 	bool stz; //character 안정화
 
+
+	//각종 공격 (Activity Private Func)
+	void basicAttackActivity(float dt);
+
+
 	//능력치
 	int attack;
 	int defense;
 public:
 	
 	void setflipingFalse(void);
-	void eval(void);
+	void stabilization(void);
 	enum { LEFT, RIGHT };
 	//moving Variable (public is temp)
 	double walkSpeed;
@@ -47,4 +58,7 @@ public:
 
 	void sendDamage(Vector<Sprite *> enemys, double* damages); //적에게 데미지를 보낸다.
 	void receiveDamage(double joule); //피해를 입는다.
+
+
+	void basicAttack(Scene* ob, Vec2& startPos, double angle);
 };

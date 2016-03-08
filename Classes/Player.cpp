@@ -6,8 +6,9 @@ Player::Player(Sprite *pObj) {
 	player = pObj;
 	fliping = false;
 	stz = true; //character 안정화
-
-
+	playerTexture = player->getTexture();
+	playerWalk = SpriteBatchNode::create(resData::recources[resData::PLAYER_SPRITE_WALK]);
+	playerWalk_texture2D = playerWalk->getTexture();
 	//능력치설정
 	attack = 100;
 	defense = 50;
@@ -18,14 +19,17 @@ Sprite* Player::get() {
 }
 
 void Player::setflipingFalse(void) {
-	log("call graph");
 	fliping = false;
+	//다했으면 걷기 자세를 취한다.
+	ActWalk();
 }
 
-void Player::eval() {
-	if (!fliping) {
-		if(!stz)
-			ActIdle();
+void Player::stabilization() {
+	if (!Global::key[A] && !Global::key[D]) {
+		if (!fliping) {
+			if (!stz)
+				ActIdle();
+		}
 	}
 }
 
@@ -38,19 +42,51 @@ void Player::ActFlip(int direction) {
 	if (direction == RIGHT)
 		rotateto = -rotateto;
 	auto myAction = ScaleTo::create(0.2f, rotateto, 1.0f, 1.0f); //rotation
-	auto mySkew = SkewTo::create(0.3f, 15.0f, 0.0f);//flip
-	auto Actions = Spawn::create(myAction, mySkew, NULL);
+	//auto mySkew = SkewTo::create(0.3f, 15.0f, 0.0f);//flip
+	//auto Actions = Spawn::create(myAction, mySkew, NULL);
+	//왜곡 효과가 어울리지 않으므로 삭제하였습니다. / 3월 8일
+	auto Actions = Spawn::create(myAction, NULL);
 	auto Sequence = Sequence::create(Actions, CallFunc::create(CC_CALLBACK_0(Player::setflipingFalse, this)), NULL);
 	player->runAction(Sequence);
 }
 
-//플레이어가 이동 중인 자세를 취함 (사용안함)
-void Player::ActWalk(void) { }
+void Player::basicAttack(Scene * ob, Vec2& startPos, double angle) {
+		//특정 위치에서 angle의 각도로 마법 발사
+		//this->schedule(schedule_selector(GameScene::enterFrame)); //지속적인 판단 (약 1/60초에 1번 실행됨)
+		auto rocket = Sprite::create("particle/rocket.png");
+		rocket->setAnchorPoint(Vec2(0, 0.5));
+		rocket->setPosition(startPos);
+		rocket->setRotation(angle);
+		ob->addChild(rocket);
+		rocket->schedule(schedule_selector(Player::basicAttackActivity)); //스케쥴 쓰려고 player 를 Layer에 상속시켰다. (h파일 참고)
+}
+
+void Player::basicAttackActivity(float dt) {
+	log("%f", dt);
+}
+
+//플레이어가 이동 중인 자세를 취함
+void Player::ActWalk(void) {
+	log("Walk Action Runs");
+	Animation *anim = Animation::create();
+	anim->setDelayPerUnit(0.5f);
+	for (int i = 0; i < 4; i++) {
+		for (int j = 0; j < 4; j++) {
+			anim->addSpriteFrameWithTexture(playerWalk_texture2D, Rect(i * 96, j * 96, 96, 96));
+		}
+	}
+	Animate * animCC = Animate::create(anim);
+	animCC->setTag(500); //임의지정
+	player->runAction(animCC);
+}
 
 //플레이어가 가만히 서 있는 자세를 취함
 void Player::ActIdle(void) {
-		stz = true;
+		log("stablize");
+		stz = true;		
 		player->stopAllActions();
+		player->stopActionByTag(500);
+		
 		auto skew1 = SkewTo::create(0.3f, 5.0f, 0.0f);
 		auto skew2 = SkewTo::create(0.3f, -5.0f, 0.0f);
 		auto regression = SkewTo::create(0.3f, 0.0f, 0.0f);

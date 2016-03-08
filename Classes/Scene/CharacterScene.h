@@ -14,7 +14,7 @@ public:
 
 	virtual bool init();
 
-	CREATE_FUNC(CharacterScene);
+
 
 	virtual void onEnter();
 	virtual void onEnterTransitionDidFinish();
@@ -31,6 +31,18 @@ public:
 	void doBackScene(Ref* pSender);
 
 private:
+	CREATE_FUNC(CharacterScene);
+
+	void initCharacter();
+
+	struct Data
+	{
+		std::string name;
+		std::string path;
+		int stat[7];
+	};
+
+	std::vector<Data> vecChar;
 
 };
 

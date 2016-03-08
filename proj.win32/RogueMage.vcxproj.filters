@@ -19,6 +19,9 @@
     <Filter Include="src\EventMgr">
       <UniqueIdentifier>{f399e7eb-b1b4-4907-970c-f88ded0fad40}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\XML">
+      <UniqueIdentifier>{fd26a8cb-5eca-41d7-ac78-1d9cb23ab110}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -69,6 +72,9 @@
     <ClCompile Include="..\Classes\Scene\CharacterScene.cpp">
       <Filter>src\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\XML\pugixml.cpp">
+      <Filter>src\XML</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -118,6 +124,12 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Scene\CharacterScene.h">
       <Filter>src\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\XML\pugiconfig.hpp">
+      <Filter>src\XML</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\XML\pugixml.hpp">
+      <Filter>src\XML</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -1,0 +1,41 @@
+<CHARS>
+  <total>3</total>
+  <CHAR>
+    <NAME>Ilesia</NAME>
+    <SPRITE>asdasdas</SPRITE>
+    <STAT HP="50" MP="50" MRegen="10"/>
+    <STAT ATK="5" DEF="-2" SPD="20" ASPD="15"/>
+    <STORY>
+      <LINE>asdffads</LINE>
+      <LINE>adfsadfs</LINE>
+    </STORY>
+  </CHAR>
+  <CHAR>
+    <NAME>Decentem</NAME>
+    <SPRITE>asdadsasd</SPRITE>
+    <STAT HP="50" MP="120" MRegen="10"/>
+    <STAT ATK="5" DEF="-1" SPD="10" ASPD="10"/>
+    <STORY>
+      <LINE>2sadsad</LINE>
+    </STORY>
+  </CHAR>
+  <CHAR>
+    <NAME>asd</NAME>
+    <SPRITE>cxz</SPRITE>
+    <STAT HP="15" MP="2" MRegen="3"/>
+    <STAT ATK="4" DEF="5" SPD="6" ASPD="7"/>
+    <STORY>
+      <LINE>asd</LINE>
+      <LINE>asd</LINE>
+    </STORY>
+  </CHAR>
+  <CHAR>
+    <NAME>tester</NAME>
+    <SPRITE>adafdasdf</SPRITE>
+    <STAT HP="1" MP="2" MRegen="6"/>
+    <STAT ATK="34" DEF="2" SPD="3" ASPD="4"/>
+    <STORY>
+      <LINE>qeqweda</LINE>
+    </STORY>
+  </CHAR>
+</CHARS>

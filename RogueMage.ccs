@@ -28,6 +28,13 @@
             </Folder>
             <Project Name="AchieveSceneLayer.csd" Type="Layer" />
           </Folder>
+          <Folder Name="CharacterScene">
+            <Folder Name="Image" />
+            <Project Name="CharacterLayer.csd" Type="Layer" />
+            <Folder Name="Node">
+              <Project Name="CharacterNode.csd" Type="Node" />
+            </Folder>
+          </Folder>
           <Folder Name="GameScene">
             <Folder Name="TileMap">
               <TmxFile Name="01.tmx" />
@@ -91,10 +98,6 @@
           </Folder>
           <Folder Name="StartScene">
             <Project Name="StartSceneLayer.csd" Type="Layer" />
-          </Folder>
-          <Folder Name="CharacterScene">
-            <Folder Name="Image" />
-            <Project Name="CharacterLayer.csd" Type="Layer" />
           </Folder>
         </Folder>
         <TTF Name="ARCADECLASSIC.TTF" />

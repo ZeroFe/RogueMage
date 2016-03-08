@@ -1,4 +1,5 @@
 #include "SelectScene.h"
+#include "CharacterScene.h"
 #include "GameScene.h"
 #include "AchieveScene.h"
 #include "UIPopup.h"
@@ -106,7 +107,8 @@ void SelectScene::onMouseDown(Event *event)
 void SelectScene::doTutorialScene(Ref* pSender)
 {
 	log("Tutorial");
-
+	auto pScene = CharacterScene::createScene();
+	Director::getInstance()->replaceScene(pScene);
 }
 
 // 새 게임 시작

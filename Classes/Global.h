@@ -17,4 +17,5 @@ namespace Global {
 	extern int currentPosY;
 	extern int prevEnterPos; //이전에 어느 방향에서 이 맵을 진입하였는지 나타내는 수, 0,1,2,3 의 값을 가지고 아래, 위, 왼쪽, 오른쪽순서
 	extern bool *key; //키눌림 관련
+	extern int fps;
 }

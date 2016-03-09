@@ -213,7 +213,7 @@ void GameScene::onMouseDown(Event *ev) {
 	double diffX = mouseX - playerX;
 	double diffY = mouseY - playerY;
 	double angle = atan2(diffY, diffX) * 180 / M_PI;
-	playerObj->basicAttack((Scene*)this, Point(playerSprite->getPositionX(), playerSprite->getPositionY()), angle);
+	playerObj->basicAttack((Scene*)this, Vec2(playerSprite->getPositionX(), playerSprite->getPositionY()), angle);
 }
 
 void GameScene::onKeyPressed(EventKeyboard::KeyCode keyCode, Event * event) {

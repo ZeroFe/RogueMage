@@ -17,3 +17,4 @@ int Global::currentPosX = 0;
 int Global::currentPosY = 0;
 int Global::prevEnterPos = -1;
 bool *Global::key = new bool[4];
+int Global::fps = 60;

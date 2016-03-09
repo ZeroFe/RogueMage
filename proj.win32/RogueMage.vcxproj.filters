@@ -22,6 +22,12 @@
     <Filter Include="resource\XML">
       <UniqueIdentifier>{9f4deeba-9e52-451c-bf19-e2bf8a706473}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Skill">
+      <UniqueIdentifier>{d3383a16-5f7a-42e9-82e8-f31064c8b6a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Skill\Basic">
+      <UniqueIdentifier>{78aa5e21-dc3d-4355-befc-54273a0728b4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -72,6 +78,9 @@
     <ClCompile Include="..\Classes\particles.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Skill\Basic\Rocket.cpp">
+      <Filter>src\Skill\Basic</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -121,6 +130,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\particles.h">
       <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Skill\Basic\Rocket.h">
+      <Filter>src\Skill\Basic</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

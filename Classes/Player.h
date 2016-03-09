@@ -8,7 +8,7 @@ USING_NS_CC;
 /**
 플레이 가능한 캐릭터이다.
 */
-class Player : public Layer {
+class Player {
 
 private:
 	Sprite* player; //플레이어 sprite

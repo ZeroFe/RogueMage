@@ -1,6 +1,7 @@
 #include "Player.h"
 #include "Character.h"
 #include "Global.h"
+#include "Skill/Basic/Rocket.h"
 
 Player::Player(Sprite *pObj) {
 	player = pObj;
@@ -52,17 +53,11 @@ void Player::ActFlip(int direction) {
 
 void Player::basicAttack(Scene * ob, Vec2& startPos, double angle) {
 		//특정 위치에서 angle의 각도로 마법 발사
-		//this->schedule(schedule_selector(GameScene::enterFrame)); //지속적인 판단 (약 1/60초에 1번 실행됨)
-		auto rocket = Sprite::create("particle/rocket.png");
-		rocket->setAnchorPoint(Vec2(0, 0.5));
-		rocket->setPosition(startPos);
-		rocket->setRotation(angle);
-		ob->addChild(rocket);
-		rocket->schedule(schedule_selector(Player::basicAttackActivity)); //스케쥴 쓰려고 player 를 Layer에 상속시켰다. (h파일 참고)
-}
-
-void Player::basicAttackActivity(float dt) {
-	log("%f", dt);
+		//Debug : Skill/Basic/Rocket 를 기본 스킬로 가정함.
+		
+	Rocket *rocket = new Rocket((Scene*)ob, startPos, angle);
+	
+	rocket->launch();
 }
 
 //플레이어가 이동 중인 자세를 취함

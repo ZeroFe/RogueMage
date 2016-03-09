@@ -56,6 +56,7 @@ void Player::basicAttack(Scene * ob, Vec2& startPos, double angle) {
 		//Debug : Skill/Basic/Rocket 를 기본 스킬로 가정함.
 		
 	Rocket *rocket = new Rocket((Scene*)ob, startPos, angle);
+	//player 의 stat을 전달해 줄 수 있는 무엇인가가 필요하다.
 	
 	rocket->launch();
 }

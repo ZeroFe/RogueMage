@@ -90,6 +90,22 @@ bool GameScene::init() {
 		break; //일단 한개만 (dbg)
 	}
 
+
+
+	//6. 맵에 따라 이벤트 및 적을 배치해 놓는다.
+	//디버그 사항 : 현재는 맵이 하나이므로 모든 경우에 똑같은 적을 똑같이 배치해 놓는다.
+	//적 list 는 vector 로 관리되고 enemy class에는 맵에 따른 초기 위치, 몹의 종류 등등을 정의해 놓는다....
+	//Vector<Enemy *> enemy;
+
+	//적추가 (수동)
+	//Enemy *e1 = new Enemy();
+	//Enemy *e2 = new Enemy();
+	//Enemy *e3 = new Enemy();
+	//enemy.pushBack(e1);
+	//enemy.pushBack(e2);
+	//enemy.pushBack(e3);
+	
+
 	this->schedule(schedule_selector(GameScene::enterFrame)); //지속적인 판단 (약 1/60초에 1번 실행됨)
 
 	return true;

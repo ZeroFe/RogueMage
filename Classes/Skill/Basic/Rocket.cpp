@@ -2,7 +2,9 @@
 #include "cocos2d.h"
 #include "Global.h"
 #include "data_recources.h"
+#include "SimpleAudioEngine.h"
 USING_NS_CC;
+using namespace CocosDenshion;
 
 
 Rocket::Rocket(Scene * ob, Vec2 & startPos, double angle) {
@@ -26,6 +28,7 @@ Rocket::~Rocket() {
 }
 
 void Rocket::launch() {
+	SimpleAudioEngine::getInstance()->playEffect("sound/demo.wav");
 	this->schedule(schedule_selector(Rocket::update2)); //지속적인 판단 (약 1/60초에 1번 실행됨)
 }
 

@@ -79,6 +79,22 @@ bool GameScene::init() {
 		break; //일단 한개만 (dbg)
 	}
 
+
+
+	//6. 맵에 따라 이벤트 및 적을 배치해 놓는다.
+	//디버그 사항 : 현재는 맵이 하나이므로 모든 경우에 똑같은 적을 똑같이 배치해 놓는다.
+	//적 list 는 vector 로 관리되고 enemy class에는 맵에 따른 초기 위치, 몹의 종류 등등을 정의해 놓는다....
+	//Vector<Enemy *> enemy;
+
+	//적추가 (수동)
+	//Enemy *e1 = new Enemy();
+	//Enemy *e2 = new Enemy();
+	//Enemy *e3 = new Enemy();
+	//enemy.pushBack(e1);
+	//enemy.pushBack(e2);
+	//enemy.pushBack(e3);
+	
+
 	this->schedule(schedule_selector(GameScene::enterFrame)); //지속적인 판단 (약 1/60초에 1번 실행됨)
 
 	return true;
@@ -93,10 +109,13 @@ Point GameScene::tileCoordForPosition(Point position) {
 
 void GameScene::enterFrame(float dt) {
 	//1초에 약 60번 실행되는 지속 판단 함수이다.
+	//평범한 땅의 Gid 는 11이다.
+	//auto layer = map->layerNamed("Background");
+	//Point tilePos = tileCoordForPosition(playerSprite->getPosition());
+	//log("%u", layer->getTileGIDAt(Vec2(tilePos.x, tilePos.y)));
 
-	//플레이어 플립캔슬 관련 (액션)
-	if (!Global::key[A] && !Global::key[D]) //단타시 애니메이션이 멈추는 것을 방지
-		playerObj->eval(); //키가 안눌려있을시 감시
+	//플레이어 객체를 안정화한다.
+	playerObj->stabilization();
 
 	//공격 방향 지정자
 	attackSpotListBatchNode->setPosition(playerSprite->getPosition()); //center of player
@@ -194,6 +213,12 @@ void GameScene::onMouseMove(Event *ev) {
 
 void GameScene::onMouseDown(Event *ev) {
 	log("%d %d", mouseX, mouseY);
+	double playerX = attackSpotListBatchNode->getPositionX();
+	double playerY = Global::screenSizeY - attackSpotListBatchNode->getPositionY();
+	double diffX = mouseX - playerX;
+	double diffY = mouseY - playerY;
+	double angle = atan2(diffY, diffX) * 180 / M_PI;
+	playerObj->basicAttack((Scene*)this, Vec2(playerSprite->getPositionX(), playerSprite->getPositionY()), angle);
 }
 
 void GameScene::onKeyPressed(EventKeyboard::KeyCode keyCode, Event * event) {

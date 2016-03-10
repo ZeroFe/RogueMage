@@ -36,7 +36,6 @@ void UI_HUD::setHpBar()
 	hpGage = Sprite::create(resData::hudResource[2]);
 	hpGage->setAnchorPoint(Point(0, 1));
 	hpGage->setPosition(Point(80, 940));
-	hpGage->setScaleX(0.8);
 	HUD->addChild(hpGage, 2);
 }
 

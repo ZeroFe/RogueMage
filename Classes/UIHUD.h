@@ -7,13 +7,20 @@ USING_NS_CC;
 
 class UI_HUD {
 private:
+	// 기본 배경
 	Layer	*HUD; //HUD Layer
 	Sprite	*HUD_Background;
 
+	// hp, mp, 게임 진행도
 	Sprite	*hpGage;
 	Sprite	*mpGage;
 	Sprite	*stageGage;
 
+	// 캐릭터 특성, 추가 특성
+
+	// 부적, 열쇠, 아이템
+
+	// 미니맵
 	Node	*minimap_room;
 public:
 	UI_HUD();

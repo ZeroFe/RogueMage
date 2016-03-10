@@ -1,140 +1,105 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="win32">
-      <UniqueIdentifier>{84a8ebd7-7cf0-47f6-b75e-d441df67da40}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="resource">
-      <UniqueIdentifier>{715254bc-d70b-4ec5-bf29-467dd3ace079}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src">
-      <UniqueIdentifier>{bb6c862e-70e9-49d9-81b7-3829a6f50471}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\Scene">
-      <UniqueIdentifier>{469866a4-f5e1-40c4-bed4-eba33c2c8e71}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\RMAlgorithm">
-      <UniqueIdentifier>{c0cec0fc-406f-490e-ace4-d7629dcc7e29}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\EventMgr">
-      <UniqueIdentifier>{f399e7eb-b1b4-4907-970c-f88ded0fad40}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\XML">
-      <UniqueIdentifier>{fd26a8cb-5eca-41d7-ac78-1d9cb23ab110}</UniqueIdentifier>
-    </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>win32</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\AppDelegate.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Scene\SelectScene.cpp">
-      <Filter>src\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Scene\StartScene.cpp">
-      <Filter>src\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\data_resources.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\global.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Player.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
+    <ClCompile Include="..\Classes\UIPopup.cpp" />
+    <ClCompile Include="..\Classes\UIHUD.cpp" />
+    <ClCompile Include="..\Classes\AppDelegate.cpp" />
+    <ClCompile Include="..\Classes\Character.cpp" />
+    <ClCompile Include="..\Classes\data_resources.cpp" />
+    <ClCompile Include="..\Classes\Enemy.cpp" />
+    <ClCompile Include="..\Classes\GameScene.cpp" />
+    <ClCompile Include="..\Classes\global.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="..\Classes\particles.cpp" />
+    <ClCompile Include="..\Classes\Player.cpp" />
     <ClCompile Include="..\Classes\Scene\AchieveScene.cpp">
-      <Filter>src\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\RMAlgorithm\mapGenerator.cpp">
-      <Filter>src\RMAlgorithm</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\GameScene.cpp">
-      <Filter>src\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\RMAlgorithm\Markup.cpp">
-      <Filter>src\RMAlgorithm</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\UIPopup.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\UIHUD.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Character.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Enemy.cpp">
-      <Filter>src</Filter>
+      <Filter>Scene</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Scene\CharacterScene.cpp">
-      <Filter>src\Scene</Filter>
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Scene\SelectScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Scene\StartScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Skill\Basic\Rocket.cpp">
+      <Filter>Skill\Basic</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\XML\pugixml.cpp">
-      <Filter>src\XML</Filter>
+      <Filter>XML</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\RMAlgorithm\mapGenerator.cpp">
+      <Filter>RMAlgorithm</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\RMAlgorithm\Markup.cpp">
+      <Filter>RMAlgorithm</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Item.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="main.h">
-      <Filter>win32</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\AppDelegate.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Scene\SelectScene.h">
-      <Filter>src\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Scene\StartScene.h">
-      <Filter>src\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\data_recources.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Global.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Player.h">
-      <Filter>src</Filter>
-    </ClInclude>
+    <ClInclude Include="..\Classes\UIHUD.h" />
+    <ClInclude Include="..\Classes\UIPopup.h" />
+    <ClInclude Include="..\Classes\AppDelegate.h" />
+    <ClInclude Include="..\Classes\Character.h" />
+    <ClInclude Include="..\Classes\data_recources.h" />
+    <ClInclude Include="..\Classes\enemy.h" />
+    <ClInclude Include="..\Classes\GameScene.h" />
+    <ClInclude Include="..\Classes\Global.h" />
+    <ClInclude Include="main.h" />
+    <ClInclude Include="..\Classes\particles.h" />
+    <ClInclude Include="..\Classes\Player.h" />
     <ClInclude Include="..\Classes\Scene\AchieveScene.h">
-      <Filter>src\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\RMAlgorithm\mapGenerator.h">
-      <Filter>src\RMAlgorithm</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\GameScene.h">
-      <Filter>src\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\RMAlgorithm\Markup.h">
-      <Filter>src\RMAlgorithm</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\UIPopup.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\enemy.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Character.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\UIHUD.h">
-      <Filter>src</Filter>
+      <Filter>Scene</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Scene\CharacterScene.h">
-      <Filter>src\Scene</Filter>
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Scene\SelectScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Scene\StartScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Skill\Basic\Rocket.h">
+      <Filter>Skill\Basic</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\XML\pugiconfig.hpp">
-      <Filter>src\XML</Filter>
+      <Filter>XML</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\XML\pugixml.hpp">
-      <Filter>src\XML</Filter>
+      <Filter>XML</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\RMAlgorithm\mapGenerator.h">
+      <Filter>RMAlgorithm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\RMAlgorithm\Markup.h">
+      <Filter>RMAlgorithm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Item.h" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="game.rc">
-      <Filter>resource</Filter>
-    </ResourceCompile>
+    <Filter Include="EventMgr">
+      <UniqueIdentifier>{e77b94db-e524-46dd-bfce-6d7b3fa62a9d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="RMAlgorithm">
+      <UniqueIdentifier>{45269cbc-8bc0-4bbd-8f13-680b39bf50b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene">
+      <UniqueIdentifier>{1881e18e-e911-432e-8c47-564d8606364d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Skill">
+      <UniqueIdentifier>{512fd2ed-16ad-47f9-a0a9-70de655e51f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="XML">
+      <UniqueIdentifier>{ceaf74b0-ac94-45be-9b49-e51e5769b7c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Skill\Basic">
+      <UniqueIdentifier>{8d7d83dd-30c8-4358-b5b4-49195e19c8ee}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="game.rc" />
   </ItemGroup>
 </Project>

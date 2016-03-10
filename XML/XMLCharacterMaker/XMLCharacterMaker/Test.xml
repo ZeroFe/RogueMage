@@ -1,13 +1,41 @@
 <SETTING>
-<COUNT NUM="3"/>
+<COUNT NUM="4"/>
 </SETTING>
 <CHAR>
+<NAME>awqqw</NAME>
+<SPRITE>asdasdas</SPRITE>
+<STAT HP="15" MP="5" MRegen="6"/>
+<STAT ATK="74" DEF="5" SPD="6" ASPD="7"/>
+<STORY>
+<LINE>asdffads</LINE>
+<LINE>adfsadfs</LINE>
+</STORY>
+</CHAR>
+<CHAR>
+<NAME>asddas</NAME>
+<SPRITE>asdadsasd</SPRITE>
+<STAT HP="2" MP="2" MRegen="2"/>
+<STAT ATK="2" DEF="2" SPD="2" ASPD="2"/>
+<STORY>
+<LINE>2sadsad</LINE>
+</STORY>
+</CHAR>
+<CHAR>
 <NAME>asd</NAME>
-<SPRITE>asdasfas</SPRITE>
-<STAT HP="1" MP="2" MRegen="3"/>
+<SPRITE>cxz</SPRITE>
+<STAT HP="15" MP="2" MRegen="3"/>
 <STAT ATK="4" DEF="5" SPD="6" ASPD="7"/>
 <STORY>
-<LINE>asdfasd</LINE>
-<LINE>asdasd</LINE>
+<LINE>asd</LINE>
+<LINE>asd</LINE>
+</STORY>
+</CHAR>
+<CHAR>
+<NAME>tester</NAME>
+<SPRITE>adafdasdf</SPRITE>
+<STAT HP="1" MP="2" MRegen="6"/>
+<STAT ATK="34" DEF="2" SPD="3" ASPD="4"/>
+<STORY>
+<LINE>qeqweda</LINE>
 </STORY>
 </CHAR>

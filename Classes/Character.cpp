@@ -10,6 +10,26 @@ Character::Character(Sprite *pObj) {
 	defense = 50;
 }
 
+/*
+총 공격력 설정
+사용 : Player Class에서 함수 재정의할 것
+ex) total_attack = attack + magic_attack; 으로 수정
+*/
+void Character::setTotalAttack()
+{
+	total_attack = attack;
+}
+
+/*
+총 방어력 설정
+사용 : Player Class에서 함수 재정의할 것
+ex) total_defense = defense + magic_defense; 으로 수정
+*/
+void Character::setTotalDefense()
+{
+	total_defense = defense;
+}
+
 Sprite* Character::get() {
 	return player;
 }

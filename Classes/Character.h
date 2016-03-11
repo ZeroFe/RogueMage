@@ -6,10 +6,10 @@ USING_NS_CC;
 플레이어, 적 등등의 캐릭터 (상속하여 사용할 것)
 */
 class Character {
-
-private:
+protected:
 	Sprite* player;
 	Texture2D* playerTexture;
+
 	Animation* idle;
 	Animation* walk;
 	Animate* _idle;
@@ -20,7 +20,12 @@ private:
 	bool fliping;
 	bool stz;
 
+	// 데미지 계산시 필요한 총 공격력 및 방어력
+	int total_attack;
+	int total_defense;
+
 	/*
+	기본 능력치
 	HP,MP,공격력,방어력,HP회복,MP회복,공속,이속
 	*/
 	int hp;
@@ -44,6 +49,10 @@ public:
 	double power;
 	Sprite* get();
 	Character(Sprite* player); 
+
+	void setTotalAttack();
+	void setTotalDefense();
+
 	void ActWalk();
 	void ActIdle();
 	void ActFlip(int direction = LEFT);

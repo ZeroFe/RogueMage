@@ -37,6 +37,9 @@
       <Filter>RMAlgorithm</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Item.cpp" />
+    <ClCompile Include="..\Classes\EventMgr\UserInput.cpp">
+      <Filter>EventMgr</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\UIHUD.h" />
@@ -78,6 +81,9 @@
       <Filter>RMAlgorithm</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Item.h" />
+    <ClInclude Include="..\Classes\EventMgr\UserInput.h">
+      <Filter>EventMgr</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="EventMgr">

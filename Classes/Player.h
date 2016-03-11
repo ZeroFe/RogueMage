@@ -37,6 +37,22 @@ private:
 	//능력치
 	int attack;
 	int defense;
+
+	/*
+	각종 추가능력치(공격력, 방어력)
+	장비 추가 공격력, 장비 추가 방어력
+	마법 추가 공격력, 마법 추가 방어력
+	포션 추가 공격력, 포션 추가 방어력
+	*/
+	int equip_attack;
+	int equip_defense;
+
+	int magic_attack;
+	int magic_defense;
+
+	int potion_attack;
+	int potion_defense;
+
 public:
 	
 	void setflipingFalse(void);

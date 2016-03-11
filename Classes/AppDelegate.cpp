@@ -10,7 +10,7 @@ USING_NS_CC;
 static cocos2d::Size designResolutionSize = cocos2d::Size(Global::screenSizeX, Global::screenSizeY);
 
 AppDelegate::AppDelegate() {
-
+	//log("%p", &Global::emenyMgr);
 }
 
 AppDelegate::~AppDelegate() {

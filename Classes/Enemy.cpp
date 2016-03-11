@@ -1,9 +1,9 @@
 #include "enemy.h"
 
-Enemy::Enemy() {
+Enemy::Enemy(void) {
 
 }
-
+/*
 void Enemy::add(EnemyObject& enemyObj) {
 	enemy.push_back(enemyObj);
 }
@@ -11,7 +11,7 @@ void Enemy::add(EnemyObject& enemyObj) {
 void Enemy::remove(EnemyObject& who) {
 		enemy.remove(who);
 }
+*/
+Enemy::~Enemy(void) {
 
-Enemy::~Enemy()
-{
 }

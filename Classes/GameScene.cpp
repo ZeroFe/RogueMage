@@ -5,6 +5,8 @@
 #include "Global.h"
 #include "data_recources.h"
 
+#include "EnemyObject.h" //Debug
+
 USING_NS_CC;
 using namespace cocostudio::timeline;
 
@@ -218,7 +220,11 @@ void GameScene::onMouseDown(Event *ev) {
 	double diffX = mouseX - playerX;
 	double diffY = mouseY - playerY;
 	double angle = atan2(diffY, diffX) * 180 / M_PI;
+
 	playerObj->basicAttack((Scene*)this, Vec2(playerSprite->getPositionX() + playerObj->colMove * 30, playerSprite->getPositionY() + playerSprite->getContentSize().height / 2), angle);
+	EnemyObject enemy1;
+	Vec2 ppot = playerSprite->getPosition();
+	enemy1.spawn(ppot, (Scene*)this);
 }
 
 void GameScene::onKeyPressed(EventKeyboard::KeyCode keyCode, Event * event) {

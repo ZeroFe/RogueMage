@@ -33,9 +33,6 @@ Rocket::Rocket(Scene * ob, Vec2 & startPos, double angle) {
 }
 
 Rocket::~Rocket() {
-	log("deleted");
-	for (int i = 0; i < 8; i++)
-		arrow[i]->release();
 }
 
 void Rocket::launch(int _level) {
@@ -59,5 +56,13 @@ void Rocket::update2(float dt) {
 	if (lifecycleTime < 0) {
 		log("stopped");
 		this->unschedule(schedule_selector(Rocket::update2));
+		for (int i = 0; i < 8; i++)
+			ob->removeChild(arrow[i]);
+		ob->removeChild(this);
+		//ob->addChild(this); //이게 없다면 스케쥴러가 동작하지 않는다.
+		//ob->addChild(this->arrow[i]);
+		this->removeFromParentAndCleanup(true);
+		this->removeAllChildrenWithCleanup(true);
+		log("clean?");
 	}
 }

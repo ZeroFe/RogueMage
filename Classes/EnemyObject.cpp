@@ -11,11 +11,11 @@ EnemyObject::EnemyObject(string name, string resource_path, int hp, int mp, int 
 
 void EnemyObject::spawn(Vec2& position, Scene* s) {
 	s->addChild(sprite);
-	s->setPosition(position);
+	sprite->setPosition(position);
 	auto spawn = Sprite::create("char/spawn.png");
 	auto spawn_texture2D = spawn->getTexture();
 	Animation *anim = Animation::create();
-	anim->setDelayPerUnit(0.3f);
+	anim->setDelayPerUnit(0.1f);
 	for (int i = 0; i < 3; i++) {
 		for (int j = 0; j < 2; j++) {
 			anim->addSpriteFrameWithTexture(spawn_texture2D, Rect(j * 166, i * 172, 166, 172));
@@ -27,6 +27,7 @@ void EnemyObject::spawn(Vec2& position, Scene* s) {
 
 void EnemyObject::setPosition(Vec2& point) {
 	position.set(point);
+	sprite->setPosition(position);
 }
 Vec2& EnemyObject::getPosition() {
 	return position;

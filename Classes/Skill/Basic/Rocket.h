@@ -8,7 +8,8 @@ private:
 	Scene* ob;
 	Vec2 startPos;
 	double angle;
-	Sprite* arrow;
+	Sprite* arrow[8];
+	int level;
 	int vx, vy;
 	int speed;
 	int lifecycleTime; //이 수 나누기 60(fps) 만큼이 생존시간, 지난다면 객체 소멸
@@ -16,5 +17,5 @@ private:
 public:
 	Rocket(Scene* ob, Vec2& startPos, double angle);
 	~Rocket();
-	void launch();
+	void launch(int _level = 1);
 };

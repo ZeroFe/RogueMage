@@ -84,6 +84,7 @@
     <ClInclude Include="..\Classes\EventMgr\UserInput.h">
       <Filter>EventMgr</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\EnemyObject.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="EventMgr">

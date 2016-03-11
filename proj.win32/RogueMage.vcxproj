@@ -178,6 +178,7 @@ xcopy /Y /Q "$(COCOS_X_ROOT)\cocos2d-x-3.10\prebuilt\win32\*.*" "$(OutDir)"
     <ClInclude Include="..\Classes\Character.h" />
     <ClInclude Include="..\Classes\data_recources.h" />
     <ClInclude Include="..\Classes\enemy.h" />
+    <ClInclude Include="..\Classes\EnemyObject.h" />
     <ClInclude Include="..\Classes\EventMgr\UserInput.h" />
     <ClInclude Include="..\Classes\Global.h" />
     <ClInclude Include="..\Classes\GameScene.h" />

@@ -1,0 +1,25 @@
+<Items>
+  <Item>
+    <Name>Test</Name>
+    <Kind>0</Kind>
+    <STAT HP="50" MP="50" MRegen="10"/>
+    <STAT ATK="5" DEF="-2" SPD="20" ASPD="15"/>
+  </Item>
+
+  <Item>
+    <Name>Test2</Name>
+    <Kind>1</Kind>
+    <STAT HP="50" MP="50" MRegen="10"/>
+    <STAT ATK="5" DEF="-2" SPD="20" ASPD="15"/>
+    <Magic DMG="10" MP="4"/> 
+  </Item>
+
+  <Item>
+    <Name>Test3</Name>
+    <Kind>2</Kind>
+    <HP fast="4" slow="10" turn="5"/>
+    <MP fast="4" slow="10" turn="5"/>
+    <ATK stat="5" turn="4"/>
+    <DEF stat="5" turn="4"/>
+  </Item>
+</Items>

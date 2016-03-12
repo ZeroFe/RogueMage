@@ -33,7 +33,7 @@
     <PlatformToolset Condition="'$(VisualStudioVersion)' == '12.0' and exists('$(MSBuildProgramFiles32)\Microsoft SDKs\Windows\v7.1A')">v120_xp</PlatformToolset>
     <PlatformToolset Condition="'$(VisualStudioVersion)' == '14.0'">v140</PlatformToolset>
     <PlatformToolset Condition="'$(VisualStudioVersion)' == '14.0' and exists('$(MSBuildProgramFiles32)\Microsoft SDKs\Windows\v7.1A')">v140_xp</PlatformToolset>
-    <UseOfMfc>Dynamic</UseOfMfc>
+    <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -163,7 +163,6 @@ xcopy /Y /Q "$(COCOS_X_ROOT)\cocos2d-x-3.10\prebuilt\win32\*.*" "$(OutDir)"
     <ClCompile Include="..\Classes\particles.cpp" />
     <ClCompile Include="..\Classes\Player.cpp" />
     <ClCompile Include="..\Classes\RMAlgorithm\mapGenerator.cpp" />
-    <ClCompile Include="..\Classes\RMAlgorithm\Markup.cpp" />
     <ClCompile Include="..\Classes\Scene\AchieveScene.cpp" />
     <ClCompile Include="..\Classes\Scene\CharacterScene.cpp" />
     <ClCompile Include="..\Classes\Scene\SelectScene.cpp" />
@@ -187,7 +186,6 @@ xcopy /Y /Q "$(COCOS_X_ROOT)\cocos2d-x-3.10\prebuilt\win32\*.*" "$(OutDir)"
     <ClInclude Include="..\Classes\particles.h" />
     <ClInclude Include="..\Classes\Player.h" />
     <ClInclude Include="..\Classes\RMAlgorithm\mapGenerator.h" />
-    <ClInclude Include="..\Classes\RMAlgorithm\Markup.h" />
     <ClInclude Include="..\Classes\Scene\AchieveScene.h" />
     <ClInclude Include="..\Classes\Scene\CharacterScene.h" />
     <ClInclude Include="..\Classes\Scene\SelectScene.h" />

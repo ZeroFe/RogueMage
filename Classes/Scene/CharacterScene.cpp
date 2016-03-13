@@ -47,14 +47,13 @@ bool CharacterScene::init()
 
 	//CharacterList->removeLastItem();
 
-	int nCount = 0;
 	for (auto vecData : vecChar)
 	{
 		auto pCloneItem = CharacterPanel->clone();
 
-		auto Character_Name = static_cast<Text *>(CharacterPanel->getChildByName("Name"));
-		auto Character_Path = static_cast<Text *>(CharacterPanel->getChildByName("Path"));
-		auto Character_HP = static_cast<Text *>(CharacterPanel->getChildByName("HP"));
+		auto Character_Name = static_cast<Text *>(pCloneItem->getChildByName("Name"));
+		auto Character_Path = static_cast<Text *>(pCloneItem->getChildByName("Path"));
+		auto Character_HP = static_cast<Text *>(pCloneItem->getChildByName("HP"));
 
 
 		//데이터는 짜피 다 읽어오고 그걸 표시하도록 바꿔야하는데 굳이 캐선창에서 표시
@@ -64,8 +63,6 @@ bool CharacterScene::init()
 		Character_Path->setString(StringUtils::toString(vecData.path));
 		Character_HP->setString(StringUtils::toString(vecData.stat[0]));
 		CharacterList->pushBackCustomItem(pCloneItem);
-
-		nCount++;
 	}
 
 	//add 'Back' Button 

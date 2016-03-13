@@ -30,6 +30,8 @@ private:
 private:
 	// 업적 저장 벡터
 	vector<Achieve*> vecAchieve;
+
+	Node *AchieveLayer;
 public:
 	AchieveScene();
 	~AchieveScene();
@@ -43,6 +45,7 @@ private:
 
 	// 업적 데이터 초기화
 	void initAchieveData();
+	void initAchieveList();
 
 	// implement the "static create()" method manually
 	CREATE_FUNC(AchieveScene);

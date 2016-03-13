@@ -33,9 +33,6 @@
     <ClCompile Include="..\Classes\RMAlgorithm\mapGenerator.cpp">
       <Filter>RMAlgorithm</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\RMAlgorithm\Markup.cpp">
-      <Filter>RMAlgorithm</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\Item.cpp" />
     <ClCompile Include="..\Classes\EventMgr\UserInput.cpp">
       <Filter>EventMgr</Filter>
@@ -76,9 +73,6 @@
       <Filter>XML</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\RMAlgorithm\mapGenerator.h">
-      <Filter>RMAlgorithm</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\RMAlgorithm\Markup.h">
       <Filter>RMAlgorithm</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Item.h" />

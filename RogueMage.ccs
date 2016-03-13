@@ -30,10 +30,10 @@
           </Folder>
           <Folder Name="CharacterScene">
             <Folder Name="Image" />
-            <Project Name="CharacterLayer.csd" Type="Layer" />
             <Folder Name="Node">
               <Project Name="CharacterNode.csd" Type="Node" />
             </Folder>
+            <Project Name="CharacterLayer.csd" Type="Layer" />
           </Folder>
           <Folder Name="GameScene">
             <Folder Name="TileMap">

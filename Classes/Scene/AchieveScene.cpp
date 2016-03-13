@@ -40,34 +40,11 @@ bool AchieveScene::init()
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
+	AchieveLayer = CSLoader::createNode("Scene/AchieveScene/AchieveSceneLayer.csb");
+
 	initAchieveData();
-
-	auto AchieveLayer = CSLoader::createNode("Scene/AchieveScene/AchieveSceneLayer.csb");
-	auto AttributeNode = CSLoader::createNode("Scene/AchieveScene/Node/AttributeNode.csb");
-	auto AchieveList = static_cast<ListView*>(AchieveLayer->getChildByName("AchieveList"));
-	auto AttributePanel = static_cast<Layout*>(AttributeNode->getChildByName("Panel"));
-
-	addChild(AchieveLayer);
 	
-	// add Achieve item
-	int nCount = 0;
-	for (auto vecData : vecAchieve)
-	{
-		auto pCloneItem = AttributePanel->clone();
-
-		auto Achieve_Name = static_cast<Text*>(AttributePanel->getChildByName("Achieve_Name"));
-		auto Achieve_Content = static_cast<Text*>(AttributePanel->getChildByName("Achieve_content"));
-
-		string str_name = vecData->name;
-		string str_content = vecData->content;
-
-		Achieve_Name->setString(StringUtils::toString(str_name));
-		Achieve_Content->setString(StringUtils::toString(str_content));
-
-		AchieveList->pushBackCustomItem(pCloneItem);
-
-		nCount++;
-	}
+	initAchieveList();
 
 	//add 'Back' Button 
 	Button* back = static_cast<Button*>(AchieveLayer->getChildByName("Back"));
@@ -86,17 +63,44 @@ void AchieveScene::initAchieveData()
 	achieve = new (std::nothrow)Achieve;
 	if (achieve)
 	{
-		achieve->name = "1";
-		achieve->content = "1";
+		achieve->name = "Achieve";
+		achieve->content = "make Achieve";
 		vecAchieve.push_back(achieve);
 	}
 
 	achieve = new (std::nothrow)Achieve;
 	if (achieve)
 	{
-		achieve->name = "2";
-		achieve->content = "2";
+		achieve->name = "22";
+		achieve->content = "222";
 		vecAchieve.push_back(achieve);
+	}
+}
+
+// 
+void AchieveScene::initAchieveList()
+{
+	auto AttributeNode = CSLoader::createNode("Scene/AchieveScene/Node/AttributeNode.csb");
+	auto AchieveList = static_cast<ListView*>(AchieveLayer->getChildByName("AchieveList"));
+	auto AttributePanel = static_cast<Layout*>(AttributeNode->getChildByName("Panel"));
+
+	addChild(AchieveLayer);
+	
+	// add Achieve item
+	for (auto vecData : vecAchieve)
+	{
+		auto pCloneItem = AttributePanel->clone();
+		
+		auto Achieve_Name = static_cast<Text*>(pCloneItem->getChildByName("Achieve_Name"));
+		auto Achieve_Content = static_cast<Text*>(pCloneItem->getChildByName("Achieve_content"));
+
+		string str_name = vecData->name;
+		string str_content = vecData->content;
+
+		Achieve_Name->setString(StringUtils::toString(str_name));
+		Achieve_Content->setString(StringUtils::toString(str_content));
+		
+		AchieveList->pushBackCustomItem(pCloneItem);
 	}
 }
 

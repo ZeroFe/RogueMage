@@ -31,10 +31,9 @@
     <Item Key="TabsParamsKey">
       <Value ctype="TabsInfo">
         <OpenedDocuments>
-          <FilePathData Path="Scene/AchieveScene/Node/AttributeNode.csd" />
-          <FilePathData Path="Scene/AchieveScene/AchieveSceneLayer.csd" />
+          <FilePathData Path="Scene/CharacterScene/Node/CharacterNode.csd" />
         </OpenedDocuments>
-        <ActiveDocument Path="Scene/AchieveScene/AchieveSceneLayer.csd" />
+        <ActiveDocument Path="Scene/CharacterScene/Node/CharacterNode.csd" />
       </Value>
     </Item>
   </Properties>

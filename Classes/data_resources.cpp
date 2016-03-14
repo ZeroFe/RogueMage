@@ -49,3 +49,6 @@ const char * resData::hudMinimap[] = {
 	"char/hud/minimap/Secret.png",
 	"char/hud/minimap/Shop.png"
 };
+const char * resData::CharIcon[] = {
+	"char/Icon/disentem.png"
+};

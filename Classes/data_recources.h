@@ -18,5 +18,8 @@ namespace resData {
 	// HUD 리소스 파일 경로
 	extern const char * hudResource[];
 	extern const char * hudMinimap[];
+	
+	// CharacterScene 리소스 파일 경로
+	extern const char * CharIcon[];
 }
 #endif

@@ -1,5 +1,6 @@
 #pragma once
 #include "cocos2d.h"
+#include "Player.h"
 #include "enemy.h"
 /*
 전역 변수가 필요하다면 여기를 활용하세요
@@ -22,4 +23,5 @@ namespace Global {
 	extern int fps;
 	//적을 관리하는 싱글톤 객체
 	extern Enemy emenyMgr;
+	//extern Player playerMgr;
 }

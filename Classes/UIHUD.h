@@ -1,5 +1,6 @@
 #pragma once
 #include "Player.h"
+#include "Item.h"
 #include "Global.h"
 #include "data_recources.h"
 
@@ -17,8 +18,17 @@ private:
 	Sprite	*stageGage;
 
 	// 캐릭터 특성, 추가 특성
+	Sprite	*CharAttr;
+	//Sprite	*AddAttr1;
+	//Sprite	*AddAttr1;
 
 	// 부적, 열쇠, 아이템
+	Label	*Charm;
+	Label	*Key;
+	Sprite	*Item1;
+	Sprite	*Item2;
+
+	Item item[3];
 
 	// 미니맵
 	Node	*minimap_room;
@@ -33,10 +43,17 @@ public:
 	void setPositionY(int yPosition);
 	void setAnchorPoint(Point& Anchorposition);
 
+	// HP바, MP바, 스테이지바 초기 설정
 	void setHpBar();
 	void setMpBar();
 	void setStageBar();
 
+	// HP바, MP바, 스테이지바 변경
+	void fixHpBar();
+	void fixMpBar();
+	void fixStageBar();
+
+	// 미니맵 관련
 	void draw_minimap();
 	void remove_minimap();
 

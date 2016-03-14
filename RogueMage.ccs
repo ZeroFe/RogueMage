@@ -29,7 +29,10 @@
             <Project Name="AchieveSceneLayer.csd" Type="Layer" />
           </Folder>
           <Folder Name="CharacterScene">
-            <Folder Name="Image" />
+            <Folder Name="Image">
+              <Image Name="CharButton_normal.png" />
+              <Image Name="CharButton_Pressed.png" />
+            </Folder>
             <Folder Name="Node">
               <Project Name="CharacterNode.csd" Type="Node" />
             </Folder>

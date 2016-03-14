@@ -15,6 +15,8 @@ namespace resData {
 	extern int number_of_template;
 	extern const char * mapTemplate[];
 
+	extern const char * CharacterIcon[];
+
 	// HUD 리소스 파일 경로
 	extern const char * hudResource[];
 	extern const char * hudMinimap[];

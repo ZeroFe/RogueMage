@@ -33,6 +33,9 @@ const char * resData::mapTemplate[] = {
 	"Scene/GameScene/mapTemp14.csb",
 	"Scene/GameScene/mapTemp15.csb"
 };
+const char * resData::CharacterIcon[] = {
+	"char/Icon/disentem.png"
+};
 const char * resData::hudResource[] = {
 	"char/hud/background.png",
 	"char/hud/panel.png",

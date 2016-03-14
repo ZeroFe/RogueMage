@@ -38,6 +38,12 @@ private:
 	int attack;
 	int defense;
 
+	int currentHP;
+	int maxHP;
+
+	int currentMP;
+	int maxMP;
+
 	/*
 	각종 추가능력치(공격력, 방어력)
 	장비 추가 공격력, 장비 추가 방어력

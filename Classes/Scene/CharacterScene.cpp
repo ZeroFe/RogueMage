@@ -51,6 +51,14 @@ bool CharacterScene::init()
 	{
 		auto pCloneItem = CharacterPanel->clone();
 
+		// 캐릭터 아이콘 추가
+		auto Clone_bg = static_cast<Text *>(pCloneItem->getChildByName("bg"));
+		auto Character_Icon = Sprite::create(resData::CharacterIcon[0]);
+		Character_Icon->setAnchorPoint(Vec2(0, 1));
+		Character_Icon->setPosition(0, 144);
+		Clone_bg->addChild(Character_Icon);
+
+		auto Character_Select = static_cast<Button *>(pCloneItem->getChildByName("Select"));
 		auto Character_Name = static_cast<Text *>(pCloneItem->getChildByName("Name"));
 		auto Character_Path = static_cast<Text *>(pCloneItem->getChildByName("Path"));
 		auto Character_HP = static_cast<Text *>(pCloneItem->getChildByName("HP"));
@@ -59,9 +67,16 @@ bool CharacterScene::init()
 		//데이터는 짜피 다 읽어오고 그걸 표시하도록 바꿔야하는데 굳이 캐선창에서 표시
 		//안해도 될것같고 다른 거 먼저 작업을
 		//숫자도 출력되는 것만 확인
+
 		Character_Name->setString(StringUtils::toString(vecData.name));
 		Character_Path->setString(StringUtils::toString(vecData.path));
 		Character_HP->setString(StringUtils::toString(vecData.stat[0]));
+		Character_Select->addTouchEventListener([this, vecData](cocos2d::Ref* pSender, Widget::TouchEventType touchType) {
+			if (touchType == Widget::TouchEventType::ENDED)
+			{
+				goGameScene(pSender, vecData);
+			}
+		});
 		CharacterList->pushBackCustomItem(pCloneItem);
 	}
 
@@ -119,6 +134,13 @@ void CharacterScene::initCharacter()
 
 	}
 }
+
+// 캐릭터 정보를 받고 게임으로 넘어가는 함수
+void CharacterScene::goGameScene(cocos2d::Ref* pSender, Data data)
+{
+	log(data.name.c_str());
+}
+
 
 void CharacterScene::onEnter()
 {

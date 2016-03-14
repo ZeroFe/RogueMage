@@ -9,12 +9,20 @@ USING_NS_CC;
 
 class CharacterScene : public cocos2d::Layer
 {
+private:
+	struct Data
+	{
+		std::string name;
+		std::string path;
+		int stat[7];
+	};
+
+	std::vector<Data> vecChar;
+
 public:
 	static cocos2d::Scene* createScene();
 
 	virtual bool init();
-
-
 
 	virtual void onEnter();
 	virtual void onEnterTransitionDidFinish();
@@ -34,16 +42,7 @@ private:
 	CREATE_FUNC(CharacterScene);
 
 	void initCharacter();
-
-	struct Data
-	{
-		std::string name;
-		std::string path;
-		int stat[7];
-	};
-
-	std::vector<Data> vecChar;
-
+	void goGameScene(Ref* pSender, Data data);
 };
 
 #endif /* defined(__SceneTrans__CharSelectScene__) */

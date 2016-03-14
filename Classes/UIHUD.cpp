@@ -7,12 +7,12 @@ UI_HUD::UI_HUD() {
 	HUD_Background = Sprite::create(resData::hudResource[0]);
 	this->setAnchorPoint(Point(0, 1)); //초기 Anchor Point 설정
 	HUD->setPosition(Point(0, 0));
-	HUD->addChild(HUD_Background, 15);
+	HUD->addChild(HUD_Background, -1);
 
 	auto HUD_Panel = Sprite::create(resData::hudResource[1]);
 	HUD_Panel->setAnchorPoint(Point(0, 1));
 	HUD_Panel->setPosition(Point(0, 960));
-	HUD->addChild(HUD_Panel, 18);
+	HUD->addChild(HUD_Panel, 1);
 
 	setHpBar();
 	setMpBar();
@@ -36,7 +36,7 @@ void UI_HUD::setHpBar()
 	hpGage = Sprite::create(resData::hudResource[2]);
 	hpGage->setAnchorPoint(Point(0, 1));
 	hpGage->setPosition(Point(80, 940));
-	HUD->addChild(hpGage, 19);
+	HUD->addChild(hpGage, 2);
 }
 
 void UI_HUD::setMpBar()
@@ -44,7 +44,7 @@ void UI_HUD::setMpBar()
 	mpGage = Sprite::create(resData::hudResource[3]);
 	mpGage->setAnchorPoint(Point(0, 1));
 	mpGage->setPosition(Point(80, 890));
-	HUD->addChild(mpGage, 19);
+	HUD->addChild(mpGage, 2);
 }
 
 void UI_HUD::setStageBar()
@@ -52,25 +52,7 @@ void UI_HUD::setStageBar()
 	stageGage = Sprite::create(resData::hudResource[4]);
 	stageGage->setAnchorPoint(Point(0, 1));
 	stageGage->setPosition(Point(0, 720));
-	HUD->addChild(stageGage, 19);
-}
-
-// HP바 변경
-void UI_HUD::fixHpBar()
-{
-
-}
-
-// MP바 변경
-void UI_HUD::fixMpBar()
-{
-
-}
-
-// Stage바 변경
-void UI_HUD::fixStageBar()
-{
-
+	HUD->addChild(stageGage, 2);
 }
 
 // minimap 그리기
@@ -81,7 +63,7 @@ void UI_HUD::draw_minimap()
 	Point hudPos = Point(1105 - Global::currentPosX * 64, 840 - Global::currentPosY * 36);
 	minimap_room->setPosition(hudPos);
 	//rootNode->addChild(minimap_room, 0, 1);
-	HUD->addChild(minimap_room, 16, 1);
+	HUD->addChild(minimap_room, 0, 1);
 
 	//auto minimap_room_texture = minimap_room->getTexture();
 

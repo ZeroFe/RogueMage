@@ -8,8 +8,8 @@ using namespace pugi;
 
 Item::Item()
 {
-	room_pos = Point(0, 0);
-	pos = Point(0, 0);
+	room_pos = (0, 0);
+	pos = (0, 0);
 
 	atk = 0;
 	def = 0;

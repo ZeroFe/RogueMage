@@ -17,8 +17,16 @@ private:
 	Sprite	*stageGage;
 
 	// 캐릭터 특성, 추가 특성
+	Sprite	*CharAttr;
+	Sprite	*AddAttr1;
+	Sprite	*AddAttr2;
 
 	// 부적, 열쇠, 아이템
+	Label	*Charm;
+	Label	*Key;
+
+	Sprite	*Item1;
+	Sprite	*Item2;
 
 	// 미니맵
 	Node	*minimap_room;

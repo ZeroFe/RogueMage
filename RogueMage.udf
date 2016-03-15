@@ -28,14 +28,5 @@
         <LastRunType Value="Windows" />
       </Value>
     </Item>
-    <Item Key="TabsParamsKey">
-      <Value ctype="TabsInfo">
-        <OpenedDocuments>
-          <FilePathData Path="Scene/AchieveScene/Node/AttributeNode.csd" />
-          <FilePathData Path="Scene/AchieveScene/AchieveSceneLayer.csd" />
-        </OpenedDocuments>
-        <ActiveDocument Path="Scene/AchieveScene/AchieveSceneLayer.csd" />
-      </Value>
-    </Item>
   </Properties>
 </UserData>

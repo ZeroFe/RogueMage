@@ -74,7 +74,7 @@ bool GameScene::init() {
 	for (int i = 0; i < 8; i++) {
 		aimTexture[i] = attackSpotListBatchNode->getTexture();
 		aimSprite[i] = Sprite::createWithTexture(aimTexture[i]);
-		aimSprite[i]->setAnchorPoint(Point(-5, 0));
+		aimSprite[i]->setAnchorPoint(Point(-5.5, 0.5));
 		aimSprite[i]->setRotation(i * 45);
 		attackSpotListBatchNode->addChild(aimSprite[i]);
 		//aimSprite[i]->setOpacity(127);

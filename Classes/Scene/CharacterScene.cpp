@@ -51,10 +51,24 @@ bool CharacterScene::init()
 	{
 		auto pCloneItem = CharacterPanel->clone();
 
+		// 캐릭터 아이콘 추가
+		auto Character_Icon = Sprite::create(resData::CharIcon[0]);
+		Character_Icon->setAnchorPoint(Vec2(0,1));
+		Character_Icon->setPosition(Vec2(0, 144));
+		pCloneItem->addChild(Character_Icon);
+
+		auto Character_Play = static_cast<Button *>(pCloneItem->getChildByName("Play"));
 		auto Character_Name = static_cast<Text *>(pCloneItem->getChildByName("Name"));
 		auto Character_Path = static_cast<Text *>(pCloneItem->getChildByName("Path"));
 		auto Character_HP = static_cast<Text *>(pCloneItem->getChildByName("HP"));
 
+		// 버튼 TouchListener 추가
+		Character_Play->addTouchEventListener([this, vecData](cocos2d::Ref* pSender, Widget::TouchEventType touchType) {
+			if (touchType == Widget::TouchEventType::ENDED)
+			{
+				goGameScene(pSender, vecData);
+			}
+		});
 
 		//데이터는 짜피 다 읽어오고 그걸 표시하도록 바꿔야하는데 굳이 캐선창에서 표시
 		//안해도 될것같고 다른 거 먼저 작업을
@@ -118,6 +132,11 @@ void CharacterScene::initCharacter()
 		vecChar.push_back(data);
 
 	}
+}
+
+void CharacterScene::goGameScene(Ref* pSender, Data data)
+{
+
 }
 
 void CharacterScene::onEnter()

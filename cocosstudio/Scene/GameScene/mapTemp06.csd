@@ -14,7 +14,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition />
             <PreSize X="1.0000" Y="0.7333" />
-            <FileData Type="Normal" Path="Scene/GameScene/TileMap/06.tmx" Plist="" />
+            <FileData Type="Normal" Path="06.tmx" Plist="" />
           </AbstractNodeData>
         </Children>
       </ObjectData>

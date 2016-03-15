@@ -6,15 +6,15 @@
       <ObjectData Name="Scene" Tag="5" ctype="GameNodeObjectData">
         <Size X="1280.0000" Y="960.0000" />
         <Children>
-          <AbstractNodeData Name="gameMap" ActionTag="1335866071" Tag="10" IconVisible="False" TopMargin="256.0000" ctype="GameMapObjectData">
+          <AbstractNodeData Name="gameMap" ActionTag="1335866071" Tag="10" IconVisible="False" TopMargin="254.2395" BottomMargin="1.7605" ctype="GameMapObjectData">
             <Size X="1280.0000" Y="704.0000" />
             <AnchorPoint />
-            <Position />
+            <Position Y="1.7605" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition />
+            <PrePosition Y="0.0018" />
             <PreSize X="1.0000" Y="0.7333" />
-            <FileData Type="Normal" Path="Scene/GameScene/TileMap/04.tmx" Plist="" />
+            <FileData Type="Normal" Path="04.tmx" Plist="" />
           </AbstractNodeData>
         </Children>
       </ObjectData>

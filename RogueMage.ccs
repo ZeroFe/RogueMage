@@ -103,6 +103,21 @@
             <Project Name="StartSceneLayer.csd" Type="Layer" />
           </Folder>
         </Folder>
+        <TmxFile Name="01.tmx" />
+        <TmxFile Name="02.tmx" />
+        <TmxFile Name="03.tmx" />
+        <TmxFile Name="04.tmx" />
+        <TmxFile Name="05.tmx" />
+        <TmxFile Name="06.tmx" />
+        <TmxFile Name="07.tmx" />
+        <TmxFile Name="08.tmx" />
+        <TmxFile Name="09.tmx" />
+        <TmxFile Name="10.tmx" />
+        <TmxFile Name="11.tmx" />
+        <TmxFile Name="12.tmx" />
+        <TmxFile Name="13.tmx" />
+        <TmxFile Name="14.tmx" />
+        <TmxFile Name="15.tmx" />
         <TTF Name="ARCADECLASSIC.TTF" />
       </RootFolder>
     </Group>

@@ -33,6 +33,23 @@ const char * resData::mapTemplate[] = {
 	"Scene/GameScene/mapTemp14.csb",
 	"Scene/GameScene/mapTemp15.csb"
 };
+const char * resData::mapTemplate_tmx[] = {
+	"Scene/GameScene/TileMap/01.tmx",
+	"Scene/GameScene/TileMap/02.tmx",
+	"Scene/GameScene/TileMap/03.tmx",
+	"Scene/GameScene/TileMap/04.tmx",
+	"Scene/GameScene/TileMap/05.tmx",
+	"Scene/GameScene/TileMap/06.tmx",
+	"Scene/GameScene/TileMap/07.tmx",
+	"Scene/GameScene/TileMap/08.tmx",
+	"Scene/GameScene/TileMap/09.tmx",
+	"Scene/GameScene/TileMap/10.tmx",
+	"Scene/GameScene/TileMap/11.tmx",
+	"Scene/GameScene/TileMap/12.tmx",
+	"Scene/GameScene/TileMap/13.tmx",
+	"Scene/GameScene/TileMap/14.tmx",
+	"Scene/GameScene/TileMap/15.tmx"
+};
 const char * resData::hudResource[] = {
 	"char/hud/background.png",
 	"char/hud/panel.png",

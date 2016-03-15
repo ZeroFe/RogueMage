@@ -14,16 +14,7 @@ Scene* GameScene::createScene(){auto a=Scene::create();a->addChild(GameScene::cr
 
 bool GameScene::init() {
 	if (!Layer::init()){return false;}
-
-	//rootNode = CSLoader::createNode(Global::mapName);
-	log("GameScene : init");
-
-	srand(time(NULL));
-	rootNode = CSLoader::createNode(resData::mapTemplate[0]);
-	//임시맵용 하나만 불러온다
-	/*rootNode = CSLoader::createNode(Global::mapName); //임시로 막아놓음
-	srand(time(NULL));*/
-	rootNode = CSLoader::createNode(resData::mapTemplate[0]); //Debug : 첫번째 맵만 불러옴
+	rootNode = CSLoader::createNode(Global::mapName);
 	map = (TMXTiledMap *)rootNode->getChildByName("gameMap"); //cocos studio 에서 정의한 TileMap 이름
 	addChild(rootNode);
 
@@ -350,7 +341,7 @@ void GameScene::moveScene(int direction) {
 	strcpy_s(Global::mapName, 256, resData::mapTemplate[Global::mapTemplate[ccx][ccy]]);
 
 	//다음 장면을 붙여놓는다.
-	auto nextMap = TMXTiledMap::create("Scene/GameScene/TileMap/01.tmx"); //임시 디버그 (1)
+	auto nextMap = TMXTiledMap::create(resData::mapTemplate_tmx[Global::mapTemplate[ccx][ccy]]);
 	MoveBy *transAction;
 	log("00");
 	switch (direction) {

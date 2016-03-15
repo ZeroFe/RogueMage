@@ -21,4 +21,5 @@
   <object id="11" x="768" y="512" width="512" height="192"/>
   <object id="12" x="0" y="512" width="512" height="192"/>
  </objectgroup>
+ <objectgroup name="Damage"/>
 </map>

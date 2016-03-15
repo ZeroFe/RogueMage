@@ -41,4 +41,5 @@
   <object id="58" x="512" y="448" width="64" height="128"/>
   <object id="59" x="704" y="448" width="64" height="128"/>
  </objectgroup>
+ <objectgroup name="Wall"/>
 </map>

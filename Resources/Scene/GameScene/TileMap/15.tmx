@@ -33,4 +33,5 @@
   <object id="43" x="64" y="640" width="256" height="64"/>
   <object id="44" x="64" y="512" width="512" height="64"/>
  </objectgroup>
+ <objectgroup name="Damage"/>
 </map>

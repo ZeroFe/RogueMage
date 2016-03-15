@@ -15,4 +15,6 @@
   <object id="6" name="SpawnRigh" x="1214" y="320" width="64" height="64"/>
   <object id="7" name="start" x="608" y="320" width="64" height="64"/>
  </objectgroup>
+ <objectgroup name="Wall"/>
+ <objectgroup name="Damage"/>
 </map>

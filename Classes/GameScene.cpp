@@ -25,7 +25,7 @@ bool GameScene::init() {
 
 	//1. HUD 생성
 	HUD = new UI_HUD();
-	HUD->setPosition(Point(0, 960));
+	//HUD->setPosition(Point(0, 960));
 	HUD->draw_minimap();
 	this->addChild(HUD->getObject());//주의 : this임
 

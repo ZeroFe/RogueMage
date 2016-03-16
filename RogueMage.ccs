@@ -75,6 +75,16 @@
             <Project Name="mapTemp14.csd" Type="Scene" />
             <Project Name="mapTemp15.csd" Type="Scene" />
             <Project Name="Scene2.csd" Type="Scene" />
+            <Folder Name="UI">
+              <Project Name="UILayer.csd" Type="Layer" />
+              <Folder Name="Image">
+                <Image Name="Game_UI_Background.png" />
+                <Image Name="Game_UI_Panel.png" />
+                <Image Name="hpBar.png" />
+                <Image Name="mpBar.png" />
+                <Image Name="stageBar.png" />
+              </Folder>
+            </Folder>
           </Folder>
           <Folder Name="SelectScene">
             <Folder Name="Image">

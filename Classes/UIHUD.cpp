@@ -1,58 +1,52 @@
 #include "UIHUD.h"
+#include "cocostudio/CocoStudio.h"
+#include "ui/CocosGUI.h"
 #include "data_recources.h"
 
-UI_HUD::UI_HUD() {
-	HUD = Layer::create();
+#define HUD_ZORDER 15
 
-	HUD_Background = Sprite::create(resData::hudResource[0]);
-	this->setAnchorPoint(Point(0, 1)); //초기 Anchor Point 설정
-	HUD->setPosition(Point(0, 0));
-	HUD->addChild(HUD_Background, -1);
+UI_HUD::UI_HUD() 
+{
+	HUD = CSLoader::createNode("Scene/GameScene/UI/UILayer.csb");
 
-	auto HUD_Panel = Sprite::create(resData::hudResource[1]);
-	HUD_Panel->setAnchorPoint(Point(0, 1));
-	HUD_Panel->setPosition(Point(0, 960));
-	HUD->addChild(HUD_Panel, 1);
+	auto HUD_Background = static_cast<Sprite *>(HUD->getChildByName("UI_bg"));
+	HUD_Background->setLocalZOrder(HUD_ZORDER);
+	auto HUD_Panel = static_cast<Sprite *>(HUD->getChildByName("UI_panel"));
+	HUD_Panel->setLocalZOrder(HUD_ZORDER+3);
 
 	setHpBar();
 	setMpBar();
 	setStageBar();
 }
-
+/*
 void UI_HUD::setAnchorPoint(Point& position) {
 	HUD_Background->setAnchorPoint(position);
 }
-
-Layer* UI_HUD::getObject(void) {
+*/
+Node* UI_HUD::getObject(void) {
 	return HUD;
 }
-
+/*
 void UI_HUD::setPosition(Point& position) {
 	HUD_Background->setPosition(position);
 }
-
+*/
 void UI_HUD::setHpBar()
 {
-	hpGage = Sprite::create(resData::hudResource[2]);
-	hpGage->setAnchorPoint(Point(0, 1));
-	hpGage->setPosition(Point(80, 940));
-	HUD->addChild(hpGage, 2);
+	hpGage = static_cast<Sprite *>(HUD->getChildByName("HP"));
+	hpGage->setLocalZOrder(HUD_ZORDER+4);
 }
 
 void UI_HUD::setMpBar()
 {
-	mpGage = Sprite::create(resData::hudResource[3]);
-	mpGage->setAnchorPoint(Point(0, 1));
-	mpGage->setPosition(Point(80, 890));
-	HUD->addChild(mpGage, 2);
+	mpGage = static_cast<Sprite *>(HUD->getChildByName("MP"));
+	mpGage->setLocalZOrder(HUD_ZORDER + 4);
 }
 
 void UI_HUD::setStageBar()
 {
-	stageGage = Sprite::create(resData::hudResource[4]);
-	stageGage->setAnchorPoint(Point(0, 1));
-	stageGage->setPosition(Point(0, 720));
-	HUD->addChild(stageGage, 2);
+	stageGage = static_cast<Sprite *>(HUD->getChildByName("Stage"));
+	stageGage->setLocalZOrder(HUD_ZORDER + 4);
 }
 
 // minimap 그리기
@@ -63,7 +57,7 @@ void UI_HUD::draw_minimap()
 	Point hudPos = Point(1105 - Global::currentPosX * 64, 840 - Global::currentPosY * 36);
 	minimap_room->setPosition(hudPos);
 	//rootNode->addChild(minimap_room, 0, 1);
-	HUD->addChild(minimap_room, 0, 1);
+	HUD->addChild(minimap_room, HUD_ZORDER+1, 1);
 
 	//auto minimap_room_texture = minimap_room->getTexture();
 

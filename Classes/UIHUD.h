@@ -8,8 +8,7 @@ USING_NS_CC;
 class UI_HUD {
 private:
 	// 기본 배경
-	Layer	*HUD; //HUD Layer
-	Sprite	*HUD_Background;
+	Node	*HUD; //HUD Layer
 
 	// hp, mp, 게임 진행도
 	Sprite	*hpGage;
@@ -49,5 +48,5 @@ public:
 	void remove_minimap();
 
 	void hud_update(float dt);
-	Layer* getObject(void);
+	Node* getObject(void);
 };

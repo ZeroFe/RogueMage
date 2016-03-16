@@ -3,6 +3,18 @@
 #include "Global.h"
 #include "Skill/Basic/Rocket.h"
 
+Player::Player()
+{
+	fliping = false;
+	stz = true; //character 안정화
+	playerTexture = player->getTexture();
+	playerWalk = SpriteBatchNode::create(resData::recources[resData::PLAYER_SPRITE_WALK]);
+	playerWalk_texture2D = playerWalk->getTexture();
+
+	//능력치설정
+	setBaseAbility();
+}
+
 Player::Player(Sprite *pObj) {
 	player = pObj;
 	fliping = false;
@@ -13,6 +25,27 @@ Player::Player(Sprite *pObj) {
 	//능력치설정
 	attack = 100;
 	defense = 50;
+}
+
+void Player::setPlayerSprite(Sprite* pObj)
+{
+	player = pObj;
+}
+
+// Player 초기값 설정
+void Player::setBaseAbility()
+{
+	attack = 100;
+	defense = 50;
+
+	equip_attack = 0;
+	equip_defense = 0;
+
+	magic_attack = 0;
+	magic_defense = 0;
+
+	potion_attack = 0;
+	potion_defense = 0;
 }
 
 Sprite* Player::get() {

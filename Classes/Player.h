@@ -31,6 +31,7 @@ private:
 
 
 	//각종 공격 (Activity Private Func)
+	void setBaseAbility();
 	void basicAttackActivity(float dt);
 
 
@@ -68,7 +69,10 @@ public:
 
 	//Animation List도 하드코딩
 	Sprite* get();
+	Player();
 	Player(Sprite* player); //플레이어 오브젝트의 생성자이다. Sprite 객체를 외부에서 만들고 그 포인터만을 매개변수로 받는다.
+	void setPlayerSprite(Sprite* pObj);
+
 	void ActWalk(); //캐릭터를 걷는 모션을 재생한다. (매개 변수를 받으나 사실상 필요하지 않다. NULL 삽입해도 무방)
 	void ActIdle(); //캐릭터를 가만히 있는 모션을 재생한다. (매개 변수를 받으나 사실상 필요하지 않다.)
 	void ActFlip(int direction = LEFT); //캐릭터를 뒤집는 모션을 재생한다. (매개 변수를 받으나 사실상 필요하지 않다.)

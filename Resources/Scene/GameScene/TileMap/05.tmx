@@ -8,7 +8,7 @@
    eJydk7ENACAIBOnZgKlYwP3XsNGEfB4Ei49E4FBBFRElcrJnR5nvruuI8YzIg62QX/EYq8Mz4feteOwd0GZ1UJFz41+8jIXMimcD3k98tx+dc095MT/rw6S/OG/ZvLB/8/JtuC8dAg==
   </data>
  </layer>
- <objectgroup name="Spawnlist">
+ <objectgroup name="SpawnList">
   <object id="1" name="SpawnUp" x="608" y="0" width="64" height="64"/>
   <object id="4" name="SpawnLeft" x="0" y="320" width="64" height="64"/>
   <object id="5" name="SpawnDown" x="608" y="640" width="64" height="64"/>

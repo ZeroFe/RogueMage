@@ -11,8 +11,13 @@ EnemyObject::EnemyObject(string name, string resource_path, int hp, int mp, int 
 
 void EnemyObject::spawn(Vec2& position, Scene* s) {
 	s->addChild(sprite);
+	sprite->setOpacity(127);
 	sprite->setPosition(position);
 	auto spawn = Sprite::create("char/spawn.png");
+
+	s->addChild(spawn);
+	spawn->setPosition(position);
+
 	auto spawn_texture2D = spawn->getTexture();
 	Animation *anim = Animation::create();
 	anim->setDelayPerUnit(0.1f);
@@ -22,7 +27,12 @@ void EnemyObject::spawn(Vec2& position, Scene* s) {
 		}
 	}
 	Animate * animCC = Animate::create(anim);
-	sprite->runAction(animCC);
+	Sequence * cst = Sequence::create(animCC, CallFunc::create(CC_CALLBACK_0(EnemyObject::setAlpha, this)),NULL);
+	spawn->runAction(cst);
+}
+
+void EnemyObject::setAlpha() {
+	sprite->setOpacity(255);
 }
 
 void EnemyObject::setPosition(Vec2& point) {

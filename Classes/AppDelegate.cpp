@@ -4,16 +4,15 @@
 #include "Scene/StartScene.h"
 #include "GameScene.h"
 #include "RMAlgorithm/mapGenerator.h"
-
 USING_NS_CC;
 
 static cocos2d::Size designResolutionSize = cocos2d::Size(Global::screenSizeX, Global::screenSizeY);
 
 AppDelegate::AppDelegate() {
-	//log("%p", &Global::emenyMgr);
 }
 
 AppDelegate::~AppDelegate() {
+
 }
 
 //if you want a different context,just modify the value of glContextAttrs

@@ -5,7 +5,10 @@
 #include "Global.h"
 #include "Player.h"
 #include "UIHUD.h"
+#include <vector>
 #include <cmath>
+
+class EnemyObject;
 USING_NS_CC;
 class GameScene : public cocos2d::Layer
 {

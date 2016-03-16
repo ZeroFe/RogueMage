@@ -19,6 +19,7 @@ private:
 	Vec2 position;
 	Sprite *sprite; //积辫货 (skin)
 	string name;
+	void setAlpha();
 public:
 	EnemyObject(string name = "commonOBj", string resource_path = "char/enemy1.png", int hp = 100, int mp = 50, int speed=30);
 	void spawn(Vec2& position, Scene *scene); //利阑 家券 = spawn

@@ -3,6 +3,7 @@
 #include "Global.h"
 #include "data_recources.h"
 #include "SimpleAudioEngine.h"
+#include "EnemyObject.h"
 USING_NS_CC;
 using namespace CocosDenshion;
 
@@ -52,9 +53,16 @@ void Rocket::update2(float dt) {
 		this->arrow[i]->setOpacity(rand()%256);
 		this->arrow[i]->setPosition(this->arrow[i]->getPosition() + Vec2(vx[i], vy[i]));
 	}
+
+	//Collision Check
+	for (std::vector<EnemyObject *>::iterator a = Global::enemyList.begin(); a != Global::enemyList.end(); ++a) {
+		(*a)->sendDamage();
+	}
+
+
+
 	lifecycleTime -= Global::fps;
 	if (lifecycleTime < 0) {
-		log("stopped");
 		this->unschedule(schedule_selector(Rocket::update2));
 		for (int i = 0; i < 8; i++)
 			ob->removeChild(arrow[i]);
@@ -63,6 +71,5 @@ void Rocket::update2(float dt) {
 		//ob->addChild(this->arrow[i]);
 		this->removeFromParentAndCleanup(true);
 		this->removeAllChildrenWithCleanup(true);
-		log("clean?");
 	}
 }

@@ -76,17 +76,20 @@ bool GameScene::init() {
 
 
 	//6. 맵에 따라 이벤트 및 적을 배치해 놓는다.
-	//디버그 사항 : 현재는 맵이 하나이므로 모든 경우에 똑같은 적을 똑같이 배치해 놓는다.
 	//적 list 는 vector 로 관리되고 enemy class에는 맵에 따른 초기 위치, 몹의 종류 등등을 정의해 놓는다....
-	//Vector<Enemy *> enemy;
+	//Global::emenyMgr;
+	int mapSelector = Global::mapTemplate[Global::currentPosX][Global::currentPosY]; //map 의 종류 (currentPos) (0~14 일 것이다)
+	switch (mapSelector) {
+		//맵에 따라 적이 어디서 나오는지를 정의할 수 있다.
+	case -9999:
+		break;
+	default:
+		EnemyObject *e1 = new EnemyObject(); //정의된 기본값으로 적을 생성
+		e1->spawn(Vec2(230+rand()%300, 300+rand()%300), (Scene *)this); //적을 소환
+		Global::enemyList.push_back(e1);
+		break;
+	}
 
-	//적추가 (수동)
-	//Enemy *e1 = new Enemy();
-	//Enemy *e2 = new Enemy();
-	//Enemy *e3 = new Enemy();
-	//enemy.pushBack(e1);
-	//enemy.pushBack(e2);
-	//enemy.pushBack(e3);
 	
 
 	this->schedule(schedule_selector(GameScene::enterFrame)); //지속적인 판단 (약 1/60초에 1번 실행됨)
@@ -214,9 +217,6 @@ void GameScene::onMouseDown(Event *ev) {
 	double angle = atan2(diffY, diffX) * 180 / M_PI;
 
 	playerObj->basicAttack((Scene*)this, Vec2(playerSprite->getPositionX() + playerObj->colMove * 30, playerSprite->getPositionY() + playerSprite->getContentSize().height / 2), angle);
-	EnemyObject enemy1;
-	Vec2 ppot = playerSprite->getPosition();
-	enemy1.spawn(ppot, (Scene*)this);
 }
 
 void GameScene::onKeyPressed(EventKeyboard::KeyCode keyCode, Event * event) {

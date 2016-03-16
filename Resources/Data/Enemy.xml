@@ -1,0 +1,16 @@
+<Enemies>
+    <Enemy>
+      <Name>Punk</Name>
+      <Sprite>where</Sprite>
+      <Num>1</Num>
+        <STAT HP="100" MP="100" MRegen="30"/>
+        <STAT ATK="50" DEF="50" SPD="30" ASPD="100"/>
+   </Enemy>
+   <Enemy>
+      <Name>Fucker</Name>
+      <Sprite>where</Sprite>
+      <Num>2</Num>
+      <STAT HP="10" MP="1010" MRegen="111"/>
+      <STAT ATK="60" DEF="10" SPD="40" ASPD="100"/>
+   </Enemy>
+</Enemies>

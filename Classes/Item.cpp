@@ -32,7 +32,7 @@ void Item::setDataSet()
 
 	xml_parse_result result = xmlDoc.load_file("../Resources/Data/Item.xml");
 
-	Data *data;
+	Data *data = new Data;
 
 	if (!result)
 	{

@@ -77,7 +77,7 @@ public:
 	void ActIdle(); //캐릭터를 가만히 있는 모션을 재생한다. (매개 변수를 받으나 사실상 필요하지 않다.)
 	void ActFlip(int direction = LEFT); //캐릭터를 뒤집는 모션을 재생한다. (매개 변수를 받으나 사실상 필요하지 않다.)
 
-	void sendDamage(Vector<Enemy *> enemys); //적에게 데미지를 보낸다.
+	void sendDamage(); //적에게 데미지를 보낸다.
 	void receiveDamage(double joule); //피해를 입는다.
 
 

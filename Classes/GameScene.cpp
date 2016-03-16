@@ -19,6 +19,7 @@ bool GameScene::init() {
 	addChild(rootNode);
 
 	//메타데이터를 가져온다.
+	log("%s", Global::mapName);
 	objects = map->getObjectGroup("SpawnList");
 	Wall = map->getObjectGroup("Wall");
 	Damage = map->getObjectGroup("Damage");

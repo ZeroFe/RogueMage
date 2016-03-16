@@ -13,7 +13,8 @@ UI_HUD::UI_HUD()
 	HUD_Background->setLocalZOrder(HUD_ZORDER);
 	auto HUD_Panel = static_cast<Sprite *>(HUD->getChildByName("UI_panel"));
 	HUD_Panel->setLocalZOrder(HUD_ZORDER+3);
-
+	HUD->setPosition(Vec2(0,704));
+	HUD->setOpacity(127);
 	setHpBar();
 	setMpBar();
 	setStageBar();
@@ -54,7 +55,7 @@ void UI_HUD::draw_minimap()
 {
 	minimap_room = Node::create();
 	//auto minimap_room = SpriteBatchNode::create(resData::hudMinimap[0], 50);
-	Point hudPos = Point(1105 - Global::currentPosX * 64, 840 - Global::currentPosY * 36);
+	Point hudPos = Point(1105 - Global::currentPosX * 64, Global::currentPosY * 36);
 	minimap_room->setPosition(hudPos);
 	//rootNode->addChild(minimap_room, 0, 1);
 	HUD->addChild(minimap_room, HUD_ZORDER+1, 1);
